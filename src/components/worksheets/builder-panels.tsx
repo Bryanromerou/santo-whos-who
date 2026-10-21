@@ -16,7 +16,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { matchesSearch, pluralize } from "@/lib/text";
 import { cn } from "@/lib/utils";
 import { moveItem } from "@/lib/worksheet/paginate";
-import { DEFAULT_SETTINGS, LIMITS, PAPER_SIZES, type WorksheetSettings } from "@/lib/worksheet/settings";
+import { DEFAULT_SETTINGS, LIMITS, PAPER_SIZES, PHOTO_FIT_LABELS, type PhotoFit, type WorksheetSettings } from "@/lib/worksheet/settings";
 
 export type PickerSaint = { id: string; name: string; country: string; birthYear: number | null; searchText: string };
 export type PickerCollection = { id: string; name: string; saintIds: string[] };
@@ -283,6 +283,29 @@ export function SettingsPanel({ settings, onChange }: { settings: WorksheetSetti
       <RangeField label="Espacio entre viñetas" unit="pt" value={settings.bulletSpacingPt} limits={LIMITS.bulletSpacingPt} onChange={(v) => set("bulletSpacingPt", v)} />
       <RangeField label="Márgenes" unit="in" value={settings.marginIn} limits={LIMITS.marginIn} onChange={(v) => set("marginIn", v)} digits={2} />
       <RangeField label="Ancho de la foto" unit="%" value={settings.imageWidthPct} limits={LIMITS.imageWidthPct} onChange={(v) => set("imageWidthPct", v)} disabled={!settings.showPortrait} />
+
+      <div className={cn("space-y-2", !settings.showPortrait && "opacity-50")}>
+        <Label htmlFor="photoFit">Encuadre de las fotos</Label>
+        <Select value={settings.photoFit} onValueChange={(v) => set("photoFit", v as PhotoFit)} disabled={!settings.showPortrait}>
+          <SelectTrigger id="photoFit" className="w-full">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {(Object.keys(PHOTO_FIT_LABELS) as PhotoFit[]).map((k) => (
+              <SelectItem key={k} value={k}>
+                {PHOTO_FIT_LABELS[k]}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <p className="text-xs text-muted-foreground">
+          {settings.photoFit === "contain"
+            ? "Se ve la foto entera; si su forma no es 3:4 queda espacio en blanco alrededor."
+            : settings.photoFit === "cover"
+              ? "Todas llenan el recuadro; los bordes que sobran se recortan."
+              : "Usa el encuadre elegido en cada santo (por defecto, recortar para llenar)."}
+        </p>
+      </div>
 
       <div className="space-y-3">
         <ToggleField id="showPortrait" label="Mostrar retrato" checked={settings.showPortrait} onChange={(v) => set("showPortrait", v)} />

@@ -6,6 +6,13 @@ export const PAPER_SIZES = {
 } as const;
 export type PaperSize = keyof typeof PAPER_SIZES;
 
+export const PHOTO_FIT_LABELS = {
+  saint: "Según cada santo",
+  contain: "Mostrar completas (sin recortar)",
+  cover: "Recortar para llenar",
+} as const;
+export type PhotoFit = keyof typeof PHOTO_FIT_LABELS;
+
 export const PER_PAGE_OPTIONS = [1, 2, 4] as const;
 export type PerPage = (typeof PER_PAGE_OPTIONS)[number];
 
@@ -24,6 +31,8 @@ export const worksheetSettingsSchema = z.object({
   bulletSpacingPt: z.number().min(LIMITS.bulletSpacingPt.min).max(LIMITS.bulletSpacingPt.max).default(3),
   imageWidthPct: z.number().min(LIMITS.imageWidthPct.min).max(LIMITS.imageWidthPct.max).default(28),
   showPortrait: z.boolean().default(true),
+  /** "saint" = each saint's own crop; "contain" = whole photo everywhere; "cover" = fill the box everywhere. */
+  photoFit: z.enum(["saint", "contain", "cover"]).default("saint"),
   showCountry: z.boolean().default(true),
   showPageNumbers: z.boolean().default(true),
 });

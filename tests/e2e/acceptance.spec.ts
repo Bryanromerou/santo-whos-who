@@ -293,3 +293,25 @@ test("bulk portrait import: exact names map automatically; near names and duplic
   expect(dominant.r).toBeGreaterThan(150);
   expect(dominant.b).toBeLessThan(120);
 });
+
+test("photo framing setting applies to every card in preview, print view and PDF", async ({ page }) => {
+  await page.goto(`/crear-fichas?ids=${CARLO.id}`);
+  await page.waitForLoadState("networkidle");
+  const previewImg = page.locator(".ws-portrait img").first();
+  await expect(previewImg).toHaveCSS("object-fit", "cover");
+
+  await page.getByLabel("Encuadre de las fotos").click();
+  await page.getByRole("option", { name: "Mostrar completas (sin recortar)" }).click();
+  await expect(previewImg).toHaveCSS("object-fit", "contain");
+  await page.waitForTimeout(800); // settings autosave (debounced)
+
+  // The print view (used by «Imprimir» and the PDF) reads the same saved settings.
+  await page.goto("/imprimir");
+  await page.waitForSelector("html[data-ws-ready='true']");
+  await expect(page.locator(".ws-portrait img").first()).toHaveCSS("object-fit", "contain");
+
+  const draft = (await (await page.request.get("/api/worksheet")).json()).config;
+  expect(draft.settings.photoFit).toBe("contain");
+  const pdf = await page.request.post("/api/pdf", { data: draft });
+  expect(pdf.status()).toBe(200);
+});

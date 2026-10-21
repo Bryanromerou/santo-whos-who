@@ -98,3 +98,23 @@ describe("accent-insensitive search", () => {
     expect(slugify("Santa Teresa de Ávila")).toBe("santa-teresa-de-avila");
   });
 });
+
+describe("worksheet-wide photo fit", () => {
+  const p = { src: "/x.jpg", focalX: 20, focalY: 70, zoom: 1.6, fit: "cover" as const };
+  it("keeps each saint's crop by default", async () => {
+    const { effectivePortrait } = await import("@/lib/worksheet/card-data");
+    expect(effectivePortrait(p, "saint")).toEqual(p);
+    expect(effectivePortrait(null, "contain")).toBeNull();
+  });
+  it("'contain' shows the whole photo with no zoom or offset", async () => {
+    const { effectivePortrait } = await import("@/lib/worksheet/card-data");
+    expect(effectivePortrait(p, "contain")).toEqual({ ...p, fit: "contain", zoom: 1, focalX: 50, focalY: 50 });
+  });
+  it("'cover' fills the box but keeps the saint's chosen crop position", async () => {
+    const { effectivePortrait } = await import("@/lib/worksheet/card-data");
+    expect(effectivePortrait({ ...p, fit: "contain" }, "cover")).toEqual({ ...p, fit: "cover" });
+  });
+  it("older saved settings without photoFit default to per-saint", () => {
+    expect(coerceConfig({ saintIds: [], settings: { ...DEFAULT_SETTINGS, photoFit: undefined } }).settings.photoFit).toBe("saint");
+  });
+});

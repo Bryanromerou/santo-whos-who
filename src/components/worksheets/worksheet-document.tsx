@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import type { WorksheetSaint } from "@/lib/worksheet/card-data";
+import { effectivePortrait, type WorksheetSaint } from "@/lib/worksheet/card-data";
 import type { WorksheetPage } from "@/lib/worksheet/paginate";
 import { PAPER_SIZES, type WorksheetSettings } from "@/lib/worksheet/settings";
 import { PortraitFrame } from "./portrait-frame";
@@ -24,7 +24,7 @@ export function SaintCard({ saint, settings, overflow }: { saint: WorksheetSaint
       <div className="ws-card-body" data-no-portrait={settings.showPortrait ? undefined : ""}>
         {settings.showPortrait && (
           <div className="ws-portrait-col" data-ws-measure="">
-            <PortraitFrame portrait={saint.portrait} name={saint.name} />
+            <PortraitFrame portrait={effectivePortrait(saint.portrait, settings.photoFit)} name={saint.name} />
           </div>
         )}
         <div className="ws-info" data-ws-measure="">

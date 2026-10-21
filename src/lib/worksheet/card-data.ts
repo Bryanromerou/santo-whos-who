@@ -39,3 +39,18 @@ export function toWorksheetSaint(
     portrait: portraitSrc ? { ...s.portrait, src: portraitSrc } : null,
   };
 }
+
+/**
+ * Applies the worksheet-wide photo setting on top of the saint's own crop.
+ *  - "saint":   keep the saint's fit, zoom and focal point
+ *  - "contain": show the whole photo (zoom/position reset so nothing is cut)
+ *  - "cover":   fill the box, keeping the saint's zoom/position as the crop
+ */
+export function effectivePortrait(
+  portrait: WorksheetSaint["portrait"],
+  photoFit: "saint" | "contain" | "cover",
+): WorksheetSaint["portrait"] {
+  if (!portrait || photoFit === "saint") return portrait;
+  if (photoFit === "contain") return { ...portrait, fit: "contain", zoom: 1, focalX: 50, focalY: 50 };
+  return { ...portrait, fit: "cover" };
+}

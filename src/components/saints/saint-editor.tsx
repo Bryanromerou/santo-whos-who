@@ -19,7 +19,7 @@ import type { SaintRecord } from "@/db/repositories/saints";
 import { useUnsavedGuard, UNSAVED_MESSAGE } from "@/hooks/use-unsaved-guard";
 import { api, ApiError } from "@/lib/client-api";
 import { ageDisplay, birthDisplay, type WorksheetSaint } from "@/lib/worksheet/card-data";
-import type { WorksheetSettings } from "@/lib/worksheet/settings";
+import { PHOTO_FIT_LABELS, type WorksheetSettings } from "@/lib/worksheet/settings";
 import { CharacteristicsEditor } from "./characteristics-editor";
 import { PortraitEditor } from "./portrait-editor";
 import { emptyForm, formToInput, recordToForm, saintFormSchema, type SaintFormValues } from "./saint-form";
@@ -305,7 +305,13 @@ export function SaintEditor({ saint: initial, portraitUrl: initialPortraitUrl, c
             />
           </Section>
           <Section title="Vista previa de la ficha" description="Mismo diseño que la impresión, a tamaño real de media página.">
-            <CardPreview saint={preview} settings={{ ...worksheetSettings, perPage: 2 }} onOverflowChange={setOverflow} />
+            <CardPreview saint={preview} settings={{ ...worksheetSettings, perPage: 2, photoFit: "saint" }} onOverflowChange={setOverflow} />
+            {portraitUrl && worksheetSettings.photoFit !== "saint" && (
+              <p className="mt-2 text-xs text-muted-foreground">
+                En Crear Fichas está activo «{PHOTO_FIT_LABELS[worksheetSettings.photoFit]}», que se aplica a todas las fotos. Este encuadre se usa al
+                elegir «{PHOTO_FIT_LABELS.saint}».
+              </p>
+            )}
             {overflow && (
               <p className="mt-2 text-xs text-destructive" role="status">
                 Con la configuración actual ({worksheetSettings.fontSizePt} pt) esta ficha no cabe en media página. Acorta el texto, o en Crear Fichas reduce la letra o usa una ficha por página.
