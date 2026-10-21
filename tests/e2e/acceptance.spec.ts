@@ -315,3 +315,55 @@ test("photo framing setting applies to every card in preview, print view and PDF
   const pdf = await page.request.post("/api/pdf", { data: draft });
   expect(pdf.status()).toBe(200);
 });
+
+test("import modal: shows the JSON format, adds a second file's saints and merges them into an existing collection", async ({ page }) => {
+  const before = await libraryExport(page);
+  const youth = before.collections.find((c: { id: string }) => c.id === library.collections[2].id);
+  const extraFile = path.join(OUT, "mas-santos.json");
+  const extra = {
+    schemaVersion: 1,
+    format: "santos-studio-library",
+    language: "es",
+    source: { document: "Segundo archivo de prueba" },
+    saints: ["Uno", "Dos"].map((n) => ({
+      id: `santo-extra-${n.toLowerCase()}`,
+      name: `Santo Extra ${n}`,
+      birthYear: null,
+      birthYearDisplay: "aprox. 1900",
+      ageAtDeath: null,
+      ageAtDeathDisplay: "",
+      country: "Chile",
+      portraitPath: null,
+      isMartyr: false,
+      categories: [],
+      patronages: [],
+      canonizationYear: null,
+      characteristics: [{ id: "c1", text: `Viñeta de prueba ${n}.`, type: "biography" }],
+      sources: [],
+      reviewStatus: "needs_review",
+    })),
+    collections: [{ id: youth.id, name: youth.name, saintIds: ["santo-extra-uno", "santo-extra-dos"] }],
+  };
+  fs.writeFileSync(extraFile, JSON.stringify(extra));
+
+  await page.goto("/santos");
+  await page.waitForLoadState("networkidle");
+  await page.getByRole("button", { name: "Importar JSON" }).click();
+  const dialog = page.getByRole("dialog", { name: "Importar santos desde un archivo JSON" });
+  await expect(dialog.getByText("¿Qué archivo necesito?")).toBeVisible();
+  await dialog.getByRole("tab", { name: "Formato del JSON" }).click();
+  await expect(dialog.getByTestId("json-example")).toContainText('"format": "santos-studio-library"');
+  await dialog.getByRole("tab", { name: "Subir archivo" }).click();
+
+  await dialog.getByTestId("import-file-input").setInputFiles(extraFile);
+  await expect(dialog.getByText("2 santos nuevos")).toBeVisible();
+  await expect(dialog.getByText("2 santos se añadirán a 1 colección existente (no se quita a nadie)")).toBeVisible();
+  await dialog.getByRole("button", { name: "Importar", exact: true }).click();
+  await expect(dialog.getByTestId("import-summary")).toContainText("2 santos importados");
+  await dialog.getByRole("button", { name: "Listo" }).click();
+  await expect(dialog).toBeHidden();
+  await expect(page.getByTestId("saint-row")).toHaveCount(before.saints.length + 2);
+
+  const after = await libraryExport(page);
+  expect(after.collections.find((c: { id: string }) => c.id === youth.id).saintIds).toEqual([...youth.saintIds, "santo-extra-uno", "santo-extra-dos"]);
+});

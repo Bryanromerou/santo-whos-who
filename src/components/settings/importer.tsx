@@ -18,7 +18,7 @@ import { pluralize } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
 const MODES: { value: ImportMode; label: string; help: string }[] = [
-  { value: "skip", label: "Saltar existentes", help: "Agrega solo los santos y colecciones nuevos. No modifica nada de lo que ya tienes. (Recomendado)" },
+  { value: "skip", label: "Saltar existentes", help: "Agrega los santos y colecciones nuevos, y suma los santos nuevos a las colecciones que ya existen. No modifica ni borra nada de lo que ya tienes. (Recomendado)" },
   { value: "update", label: "Actualizar existentes", help: "Agrega los nuevos y sobrescribe los textos de los que tengan el mismo id. Los retratos que ya subiste se conservan." },
   { value: "replace", label: "Reemplazar biblioteca", help: "Borra TODOS los santos y colecciones actuales y deja solo lo que trae el archivo. Pide confirmación." },
 ];
@@ -26,7 +26,7 @@ const MODES: { value: ImportMode; label: string; help: string }[] = [
 type Loaded = { name: string; data: unknown; bytes: number };
 type ImportResponse = { summary: string; counts: Record<string, number> };
 
-export function Importer({ seedAvailable, autoSeed }: { seedAvailable: boolean; autoSeed: boolean }) {
+export function Importer({ seedAvailable, autoSeed, onClose }: { seedAvailable: boolean; autoSeed: boolean; onClose?: () => void }) {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const [loaded, setLoaded] = useState<Loaded | null>(null);
@@ -112,7 +112,7 @@ export function Importer({ seedAvailable, autoSeed }: { seedAvailable: boolean; 
   }
 
   const canImport = !!report?.ok && !checking && !importing && !done;
-  const nothingToDo = report?.ok && report.plan.saintsCreate + report.plan.saintsUpdate + report.plan.collectionsCreate + report.plan.collectionsUpdate === 0;
+  const nothingToDo = report?.ok && report.plan.saintsCreate + report.plan.saintsUpdate + report.plan.collectionsCreate + report.plan.collectionsUpdate + report.plan.membershipsAdded === 0;
 
   return (
     <div className="space-y-6">
@@ -213,9 +213,15 @@ export function Importer({ seedAvailable, autoSeed }: { seedAvailable: boolean; 
           </AlertTitle>
           <AlertDescription>
             <div className="mt-2 flex flex-wrap gap-2">
-              <Button size="sm" asChild>
-                <Link href="/santos">Ver biblioteca</Link>
-              </Button>
+              {onClose ? (
+                <Button size="sm" onClick={onClose}>
+                  Listo
+                </Button>
+              ) : (
+                <Button size="sm" asChild>
+                  <Link href="/santos">Ver biblioteca</Link>
+                </Button>
+              )}
               <Button size="sm" variant="outline" asChild>
                 <Link href="/colecciones">Ver colecciones</Link>
               </Button>
@@ -303,7 +309,12 @@ export function ReportView({ report }: { report: ImportReport }) {
             <li>{pluralize(p.saintsCreate, "santo nuevo", "santos nuevos")}</li>
             {p.saintsUpdate > 0 && <li>{pluralize(p.saintsUpdate, "santo actualizado", "santos actualizados")}</li>}
             {p.saintsSkip > 0 && <li>{pluralize(p.saintsSkip, "santo ya existe y se saltará", "santos ya existen y se saltarán")}</li>}
-            <li>{pluralize(p.collectionsCreate, "colección nueva", "colecciones nuevas")}{p.collectionsUpdate ? `, ${p.collectionsUpdate} actualizada(s)` : ""}{p.collectionsSkip ? `, ${p.collectionsSkip} ya existente(s) se saltará(n)` : ""}</li>
+            <li>{pluralize(p.collectionsCreate, "colección nueva", "colecciones nuevas")}{p.collectionsUpdate ? `, ${p.collectionsUpdate} actualizada(s)` : ""}{p.collectionsSkip ? `, ${p.collectionsSkip} ya existente(s) sin cambios` : ""}</li>
+            {p.membershipsAdded > 0 && (
+              <li>
+                {pluralize(p.membershipsAdded, "santo se añadirá", "santos se añadirán")} a {pluralize(p.collectionsMerge, "colección existente", "colecciones existentes")} (no se quita a nadie)
+              </li>
+            )}
           </ul>
           <p className="mt-3 text-xs text-muted-foreground">
             Estado de revisión: {pluralize(pending, "santo pendiente", "santos pendientes")} de revisión histórica. Los textos se importan tal cual; no se marcan como verificados.

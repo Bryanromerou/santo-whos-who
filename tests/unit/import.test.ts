@@ -107,3 +107,30 @@ describe("importing the 43-saint library", () => {
     closeDb();
   });
 });
+
+describe("adding a second file with more saints", () => {
+  it("default mode adds new saints and appends them to existing collections without removing anyone", async () => {
+    freshDb();
+    const base = loadFixture();
+    await importLibrary(base, "skip");
+    const target = base.collections[2];
+    const before = listCollections().find((c) => c.id === target.id)!.saintIds;
+
+    const extra = clone(base);
+    extra.saints = [
+      { ...clone(base.saints[0]), id: "santo-nuevo-1", name: "Santo Nuevo Uno", characteristics: [{ id: "n1", text: "Texto nuevo.", type: "biography" }] },
+      { ...clone(base.saints[0]), id: "santo-nuevo-2", name: "Santo Nuevo Dos", characteristics: [{ id: "n2", text: "Otro texto.", type: "virtue" }] },
+    ];
+    // Same collection id, listing only the new saints (plus one already there).
+    extra.collections = [{ id: target.id, name: target.name, saintIds: ["santo-nuevo-1", before[0], "santo-nuevo-2"] }];
+
+    const { report } = validateLibrary(extra, "skip");
+    expect(report.ok).toBe(true);
+    expect(report.plan).toMatchObject({ saintsCreate: 2, collectionsMerge: 1, membershipsAdded: 2, collectionsCreate: 0 });
+
+    const result = await importLibrary(extra, "skip");
+    expect(result.summary).toBe("2 santos importados · 2 características · 0 colecciones · 2 santos añadidos a 1 colección existente");
+    expect(countSaints()).toBe(base.saints.length + 2);
+    expect(listCollections().find((c) => c.id === target.id)!.saintIds).toEqual([...before, "santo-nuevo-1", "santo-nuevo-2"]);
+  });
+});

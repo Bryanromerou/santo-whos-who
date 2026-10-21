@@ -88,3 +88,14 @@ describe("cross-reference validation", () => {
     expect(report.warnings.some((w) => w.includes("se importará sin foto"))).toBe(true);
   });
 });
+
+describe("format example shown in the import modal", () => {
+  it("is a valid library file the importer accepts", async () => {
+    const { EXAMPLE_LIBRARY, EXAMPLE_JSON, SAINT_FIELDS } = await import("@/lib/imports/example");
+    const { report } = validateLibrary(JSON.parse(EXAMPLE_JSON), "skip");
+    expect(report.errors).toEqual([]);
+    expect(report.ok).toBe(true);
+    // Every saint key in the example is documented, and vice versa.
+    expect(Object.keys(EXAMPLE_LIBRARY.saints[0]).sort()).toEqual(SAINT_FIELDS.map((f) => f.field).sort());
+  });
+});

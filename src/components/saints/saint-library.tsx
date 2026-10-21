@@ -23,6 +23,7 @@ import {
   X,
 } from "lucide-react";
 import { NameDialog } from "@/components/collections/name-dialog";
+import { ImportJsonDialog } from "@/components/settings/import-json-dialog";
 import { ConfirmDialog } from "@/components/layout/confirm-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -183,11 +184,14 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
           </p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" asChild>
-            <Link href="/configuracion/importar">
-              <Upload aria-hidden /> Importar
-            </Link>
-          </Button>
+          <ImportJsonDialog
+            seedAvailable={seedAvailable}
+            trigger={
+              <Button variant="outline">
+                <Upload aria-hidden /> Importar JSON
+              </Button>
+            }
+          />
           <Button variant="outline" asChild>
             <Link href="/santos/importar-retratos">
               <Images aria-hidden /> Importar retratos
@@ -513,11 +517,14 @@ function EmptyLibrary({ seedAvailable }: { seedAvailable: boolean }) {
         </div>
       )}
       <div className="mt-6 flex gap-2">
-        <Button variant={seedAvailable ? "outline" : "default"} asChild>
-          <Link href="/configuracion/importar">
-            <Upload aria-hidden /> Importar JSON
-          </Link>
-        </Button>
+        <ImportJsonDialog
+          seedAvailable={seedAvailable}
+          trigger={
+            <Button variant={seedAvailable ? "outline" : "default"}>
+              <Upload aria-hidden /> Importar JSON
+            </Button>
+          }
+        />
         <Button variant="outline" asChild>
           <Link href="/santos/nuevo">
             <Plus aria-hidden /> Agregar santo

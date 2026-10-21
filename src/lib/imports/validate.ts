@@ -1,6 +1,6 @@
 import type { z } from "zod";
 import { getDb, type Db } from "@/db/client";
-import { collections, saints } from "@/db/schema";
+import { collectionSaints, collections, saints } from "@/db/schema";
 import { libraryFileSchema, type LibraryFile, type LibrarySource } from "@/lib/schema/library";
 import { isValidPortraitPath, portraitFileExists } from "@/lib/images/storage";
 import { normalizeForSearch } from "@/lib/text";
@@ -23,6 +23,9 @@ export type ImportReport = {
     collectionsUpdate: number;
     collectionsSkip: number;
     collectionsDelete: number;
+    /** "Saltar existentes": existing collections that receive new members (nobody is removed). */
+    collectionsMerge: number;
+    membershipsAdded: number;
   };
   existingSaints: { id: string; name: string }[];
   existingCollections: { id: string; name: string }[];
@@ -185,6 +188,25 @@ export function analyzeLibrary(data: LibraryFile, mode: ImportMode, opts: Analyz
   const nNew = data.saints.length - existingSaints.length;
   const nNewCollections = data.collections.length - existingCollections.length;
 
+  // In skip mode, existing collections keep their members and gain the file's new ones.
+  let collectionsMerge = 0;
+  let membershipsAdded = 0;
+  if (mode === "skip" && existingCollections.length) {
+    const current = new Map<string, Set<string>>();
+    for (const m of db.select().from(collectionSaints).all()) {
+      if (!current.has(m.collectionId)) current.set(m.collectionId, new Set());
+      current.get(m.collectionId)!.add(m.saintId);
+    }
+    for (const c of data.collections) {
+      if (!dbCollectionIds.has(c.id)) continue;
+      const added = c.saintIds.filter((id) => !current.get(c.id)?.has(id)).length;
+      if (added) {
+        collectionsMerge++;
+        membershipsAdded += added;
+      }
+    }
+  }
+
   const plan: ImportReport["plan"] = {
     mode,
     saintsCreate: mode === "replace" ? data.saints.length : nNew,
@@ -193,8 +215,10 @@ export function analyzeLibrary(data: LibraryFile, mode: ImportMode, opts: Analyz
     saintsDelete: mode === "replace" ? dbSaints.length : 0,
     collectionsCreate: mode === "replace" ? data.collections.length : nNewCollections,
     collectionsUpdate: mode === "update" ? existingCollections.length : 0,
-    collectionsSkip: mode === "skip" ? existingCollections.length : 0,
+    collectionsSkip: mode === "skip" ? existingCollections.length - collectionsMerge : 0,
     collectionsDelete: mode === "replace" ? dbCollections.length : 0,
+    collectionsMerge,
+    membershipsAdded,
   };
 
   return {
@@ -229,7 +253,7 @@ export function failedReport(errors: string[], mode: ImportMode): ImportReport {
     errors,
     warnings: [],
     stats: { saints: 0, characteristics: 0, collections: 0, memberships: 0 },
-    plan: { mode, saintsCreate: 0, saintsUpdate: 0, saintsSkip: 0, saintsDelete: 0, collectionsCreate: 0, collectionsUpdate: 0, collectionsSkip: 0, collectionsDelete: 0 },
+    plan: { mode, saintsCreate: 0, saintsUpdate: 0, saintsSkip: 0, saintsDelete: 0, collectionsCreate: 0, collectionsUpdate: 0, collectionsSkip: 0, collectionsDelete: 0, collectionsMerge: 0, membershipsAdded: 0 },
     existingSaints: [],
     existingCollections: [],
     saintsPreview: [],

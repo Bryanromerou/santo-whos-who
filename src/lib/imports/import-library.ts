@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import sharp from "sharp";
 import { getDb, type Db } from "@/db/client";
-import { collectionExists, insertCollection, writeMembers } from "@/db/repositories/collections";
+import { collectionExists, getCollection, insertCollection, writeMembers } from "@/db/repositories/collections";
 import { getSetting, setSetting, SETTING_KEYS } from "@/db/repositories/settings";
 import { insertSaint, nextSortOrder, nowIso, saintExists, scalarColumns, writeSaintChildren, type SaintData } from "@/db/repositories/saints";
 import { collections, portraits, saints } from "@/db/schema";
@@ -23,6 +23,8 @@ export type ImportResult = {
     collectionsCreated: number;
     collectionsUpdated: number;
     collectionsSkipped: number;
+    collectionsMerged: number;
+    membershipsAdded: number;
   };
   summary: string;
 };
@@ -96,6 +98,8 @@ export async function importLibrary(
     collectionsCreated: 0,
     collectionsUpdated: 0,
     collectionsSkipped: 0,
+    collectionsMerged: 0,
+    membershipsAdded: 0,
   };
 
   db.transaction((tx) => {
@@ -141,7 +145,17 @@ export async function importLibrary(
     for (const c of data.collections) {
       const exists = collectionExists(c.id, tx);
       if (exists && mode === "skip") {
-        counts.collectionsSkipped++;
+        // Keep everyone already in the collection; append the file's new members in file order.
+        const current = getCollection(c.id, tx)!.saintIds;
+        const additions = c.saintIds.filter((id) => !current.includes(id));
+        if (additions.length) {
+          writeMembers(tx, c.id, [...current, ...additions]);
+          tx.update(collections).set({ updatedAt: nowIso() }).where(eq(collections.id, c.id)).run();
+          counts.collectionsMerged++;
+          counts.membershipsAdded += additions.length;
+        } else {
+          counts.collectionsSkipped++;
+        }
         continue;
       }
       if (exists && mode === "update") {
@@ -168,6 +182,11 @@ export async function importLibrary(
     pluralize(counts.characteristics, "característica", "características"),
     pluralize(importedCollections, "colección", "colecciones"),
   ];
+  if (counts.membershipsAdded) {
+    parts.push(
+      `${pluralize(counts.membershipsAdded, "santo añadido", "santos añadidos")} a ${pluralize(counts.collectionsMerged, "colección existente", "colecciones existentes")}`,
+    );
+  }
   if (counts.saintsSkipped) parts.push(`${pluralize(counts.saintsSkipped, "santo existente saltado", "santos existentes saltados")}`);
   return { report, counts, summary: parts.join(" · ") };
 }
