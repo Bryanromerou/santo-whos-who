@@ -1,0 +1,2350 @@
+{
+  "schemaVersion": 1,
+  "format": "santos-studio-library",
+  "language": "es",
+  "source": {
+    "document": "Fichas_de_43_Santos_para_Jovenes.docx",
+    "notes": "Transcripción de 43 fichas previas; texto conservado, fechas aproximadas y tradiciones respetadas. Los retratos no estaban incluidos en la fuente. Revisar datos históricos antes de publicación.",
+    "factCheckedIndividually": false
+  },
+  "saints": [
+    {
+      "id": "san-jose-de-cupertino",
+      "name": "San José de Cupertino",
+      "birthYear": 1603,
+      "birthYearDisplay": "1603",
+      "ageAtDeath": 60,
+      "ageAtDeathDisplay": "60 años",
+      "country": "Italia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original"
+      ],
+      "patronages": [
+        "estudiantes que presentan exámenes",
+        "aviadores"
+      ],
+      "canonizationYear": 1767,
+      "characteristics": [
+        {
+          "id": "san-jose-de-cupertino-c1",
+          "text": "Nació en una familia humilde y encontró grandes dificultades para estudiar.",
+          "type": "biography"
+        },
+        {
+          "id": "san-jose-de-cupertino-c2",
+          "text": "Ingresó en la familia franciscana y llegó a ser sacerdote pese a los obstáculos de su formación.",
+          "type": "biography"
+        },
+        {
+          "id": "san-jose-de-cupertino-c3",
+          "text": "Según numerosos testimonios de su época, experimentaba éxtasis y levitaciones durante la oración.",
+          "type": "miracle"
+        },
+        {
+          "id": "san-jose-de-cupertino-c4",
+          "text": "Vivió con gran sencillez, obediencia y amor a la Eucaristía.",
+          "type": "biography"
+        },
+        {
+          "id": "san-jose-de-cupertino-c5",
+          "text": "Es invocado como patrono de los estudiantes que presentan exámenes y de los aviadores.",
+          "type": "patronage"
+        },
+        {
+          "id": "san-jose-de-cupertino-c6",
+          "text": "Fue canonizado en 1767; su historia recuerda que las dificultades académicas no impiden la santidad.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-josefina-bakhita",
+      "name": "Santa Josefina Bakhita",
+      "birthYear": 1869,
+      "birthYearDisplay": "aprox. 1869",
+      "ageAtDeath": 78,
+      "ageAtDeathDisplay": "aprox. 78 años",
+      "country": "Sudán",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original"
+      ],
+      "patronages": [],
+      "canonizationYear": 2000,
+      "characteristics": [
+        {
+          "id": "santa-josefina-bakhita-c1",
+          "text": "Fue secuestrada y esclavizada cuando era niña; después recuperó su libertad.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-josefina-bakhita-c2",
+          "text": "En Italia conoció la fe católica y recibió el bautismo en 1890.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-josefina-bakhita-c3",
+          "text": "Ingresó en las Hermanas Canosianas y sirvió durante décadas con humildad.",
+          "type": "virtue"
+        },
+        {
+          "id": "santa-josefina-bakhita-c4",
+          "text": "Fue conocida por su bondad, serenidad y capacidad de perdonar a quienes le hicieron daño.",
+          "type": "virtue"
+        },
+        {
+          "id": "santa-josefina-bakhita-c5",
+          "text": "Es una figura de esperanza para las víctimas de la trata de personas y de la esclavitud.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-josefina-bakhita-c6",
+          "text": "Fue canonizada en 2000 por San Juan Pablo II.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-jacinta-marto",
+      "name": "Santa Jacinta Marto",
+      "birthYear": 1910,
+      "birthYearDisplay": "1910",
+      "ageAtDeath": 9,
+      "ageAtDeathDisplay": "9 años",
+      "country": "Portugal",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original",
+        "santos-jovenes"
+      ],
+      "patronages": [],
+      "canonizationYear": 2017,
+      "characteristics": [
+        {
+          "id": "santa-jacinta-marto-c1",
+          "text": "Junto con su hermano Francisco y su prima Lucía, fue una de las niñas vinculadas a las apariciones de Fátima de 1917.",
+          "type": "miracle"
+        },
+        {
+          "id": "santa-jacinta-marto-c2",
+          "text": "Tras aquellas experiencias, dedicó especial atención a rezar por los pecadores y por la paz.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-jacinta-marto-c3",
+          "text": "Ofrecía pequeños sacrificios cotidianos como expresión de amor a Dios.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-jacinta-marto-c4",
+          "text": "Sufrió una enfermedad durante la pandemia de gripe y murió antes de cumplir diez años.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-jacinta-marto-c5",
+          "text": "Fue canonizada en 2017 junto con su hermano Francisco.",
+          "type": "canonization"
+        },
+        {
+          "id": "santa-jacinta-marto-c6",
+          "text": "Su vida muestra que también los niños pueden vivir una fe profunda y generosa.",
+          "type": "biography"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-catalina-de-siena",
+      "name": "Santa Catalina de Siena",
+      "birthYear": 1347,
+      "birthYearDisplay": "1347",
+      "ageAtDeath": 33,
+      "ageAtDeathDisplay": "33 años",
+      "country": "Italia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original"
+      ],
+      "patronages": [
+        "Italia",
+        "Europa"
+      ],
+      "canonizationYear": 1461,
+      "characteristics": [
+        {
+          "id": "santa-catalina-de-siena-c1",
+          "text": "Desde joven dedicó su vida a la oración, a los pobres y a los enfermos.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-catalina-de-siena-c2",
+          "text": "Fue laica dominica y escribió cartas a personajes religiosos y políticos de su tiempo.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-catalina-de-siena-c3",
+          "text": "Insistió en la reconciliación y en la reforma espiritual de la Iglesia.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-catalina-de-siena-c4",
+          "text": "Intervino con valentía para animar al papa a regresar de Aviñón a Roma.",
+          "type": "virtue"
+        },
+        {
+          "id": "santa-catalina-de-siena-c5",
+          "text": "Es Doctora de la Iglesia y copatrona de Italia y de Europa.",
+          "type": "patronage"
+        },
+        {
+          "id": "santa-catalina-de-siena-c6",
+          "text": "Fue canonizada en 1461; dejó el libro espiritual conocido como «El diálogo».",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-francisco-javier",
+      "name": "San Francisco Javier",
+      "birthYear": 1506,
+      "birthYearDisplay": "1506",
+      "ageAtDeath": 46,
+      "ageAtDeathDisplay": "46 años",
+      "country": "España (Navarra)",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original"
+      ],
+      "patronages": [
+        "misiones"
+      ],
+      "canonizationYear": 1622,
+      "characteristics": [
+        {
+          "id": "san-francisco-javier-c1",
+          "text": "Fue uno de los primeros compañeros de San Ignacio de Loyola y participó en el origen de la Compañía de Jesús.",
+          "type": "biography"
+        },
+        {
+          "id": "san-francisco-javier-c2",
+          "text": "Viajó como misionero a la India, al sudeste asiático y a Japón.",
+          "type": "biography"
+        },
+        {
+          "id": "san-francisco-javier-c3",
+          "text": "Se esforzó por aprender idiomas y enseñar el Evangelio en culturas diferentes.",
+          "type": "biography"
+        },
+        {
+          "id": "san-francisco-javier-c4",
+          "text": "Bautizó y acompañó a numerosas comunidades cristianas en Asia.",
+          "type": "biography"
+        },
+        {
+          "id": "san-francisco-javier-c5",
+          "text": "Murió en una isla cercana a China mientras esperaba entrar en el continente.",
+          "type": "biography"
+        },
+        {
+          "id": "san-francisco-javier-c6",
+          "text": "Es patrono de las misiones, junto con Santa Teresita del Niño Jesús; fue canonizado en 1622.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-francisca-javiera-cabrini",
+      "name": "Santa Francisca Javiera Cabrini",
+      "birthYear": 1850,
+      "birthYearDisplay": "1850",
+      "ageAtDeath": 67,
+      "ageAtDeathDisplay": "67 años",
+      "country": "Italia; misión en EE. UU.",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original"
+      ],
+      "patronages": [
+        "migrantes"
+      ],
+      "canonizationYear": 1946,
+      "characteristics": [
+        {
+          "id": "santa-francisca-javiera-cabrini-c1",
+          "text": "Fundó las Misioneras del Sagrado Corazón de Jesús para servir a quienes más lo necesitaban.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-francisca-javiera-cabrini-c2",
+          "text": "Viajó a Estados Unidos y acompañó especialmente a familias migrantes italianas.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-francisca-javiera-cabrini-c3",
+          "text": "Abrió escuelas, hospitales y obras de asistencia para migrantes y huérfanos.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-francisca-javiera-cabrini-c4",
+          "text": "Aunque temía al agua, cruzó el océano numerosas veces para sostener sus misiones.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-francisca-javiera-cabrini-c5",
+          "text": "Es patrona de los migrantes por su servicio incansable.",
+          "type": "patronage"
+        },
+        {
+          "id": "santa-francisca-javiera-cabrini-c6",
+          "text": "Fue canonizada en 1946 y se convirtió en la primera ciudadana estadounidense canonizada.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-teresa-benedicta-de-la-cruz",
+      "name": "Santa Teresa Benedicta de la Cruz",
+      "birthYear": 1891,
+      "birthYearDisplay": "1891",
+      "ageAtDeath": 50,
+      "ageAtDeathDisplay": "50 años",
+      "country": "Actual Polonia (entonces Alemania)",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "lista-original",
+        "martires"
+      ],
+      "patronages": [
+        "Europa"
+      ],
+      "canonizationYear": 1998,
+      "characteristics": [
+        {
+          "id": "santa-teresa-benedicta-de-la-cruz-c1",
+          "text": "Nació como Edith Stein en una familia judía y destacó como filósofa.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-benedicta-de-la-cruz-c2",
+          "text": "Después de una búsqueda intelectual y espiritual, recibió el bautismo católico en 1922.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-benedicta-de-la-cruz-c3",
+          "text": "Fue profesora, escritora y defensora de la dignidad de la persona.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-benedicta-de-la-cruz-c4",
+          "text": "Ingresó en el Carmelo y tomó el nombre religioso de Teresa Benedicta de la Cruz.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-benedicta-de-la-cruz-c5",
+          "text": "Fue asesinada en Auschwitz en 1942, durante la persecución nazi; la Iglesia la venera como mártir.",
+          "type": "martyrdom"
+        },
+        {
+          "id": "santa-teresa-benedicta-de-la-cruz-c6",
+          "text": "Fue canonizada en 1998 y es copatrona de Europa.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-juan-bosco",
+      "name": "San Juan Bosco",
+      "birthYear": 1815,
+      "birthYearDisplay": "1815",
+      "ageAtDeath": 72,
+      "ageAtDeathDisplay": "72 años",
+      "country": "Italia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original",
+        "educadores-y-guias"
+      ],
+      "patronages": [],
+      "canonizationYear": 1934,
+      "characteristics": [
+        {
+          "id": "san-juan-bosco-c1",
+          "text": "Fue sacerdote y dedicó su vida a acompañar a jóvenes pobres y en situación de abandono.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-bosco-c2",
+          "text": "Organizó oratorios con juegos, formación, trabajo y catequesis para muchachos.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-bosco-c3",
+          "text": "Impulsó un método educativo basado en la razón, la religión y el amor cercano.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-bosco-c4",
+          "text": "Fundó los Salesianos, dedicados especialmente a la educación juvenil.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-bosco-c5",
+          "text": "Colaboró con Santa María Dominga Mazzarello en la obra educativa para niñas y jóvenes.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-bosco-c6",
+          "text": "Es conocido como padre y maestro de la juventud; fue canonizado en 1934.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-hildegarda-de-bingen",
+      "name": "Santa Hildegarda de Bingen",
+      "birthYear": 1098,
+      "birthYearDisplay": "1098",
+      "ageAtDeath": 81,
+      "ageAtDeathDisplay": "aprox. 81 años",
+      "country": "Actual Alemania",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original"
+      ],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santa-hildegarda-de-bingen-c1",
+          "text": "Desde niña vivió en un ambiente monástico y llegó a ser abadesa benedictina.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-hildegarda-de-bingen-c2",
+          "text": "Escribió obras sobre espiritualidad, naturaleza y cuidados de la salud en el contexto de su tiempo.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-hildegarda-de-bingen-c3",
+          "text": "Compuso música religiosa que todavía se interpreta.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-hildegarda-de-bingen-c4",
+          "text": "Relató experiencias místicas y ofreció consejos a líderes religiosos y civiles.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-hildegarda-de-bingen-c5",
+          "text": "Fundó comunidades religiosas y defendió con valentía sus convicciones.",
+          "type": "virtue"
+        },
+        {
+          "id": "santa-hildegarda-de-bingen-c6",
+          "text": "Fue proclamada Doctora de la Iglesia en 2012.",
+          "type": "biography"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-gema-galgani",
+      "name": "Santa Gema Galgani",
+      "birthYear": 1878,
+      "birthYearDisplay": "1878",
+      "ageAtDeath": 25,
+      "ageAtDeathDisplay": "25 años",
+      "country": "Italia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original",
+        "santos-jovenes"
+      ],
+      "patronages": [],
+      "canonizationYear": 1940,
+      "characteristics": [
+        {
+          "id": "santa-gema-galgani-c1",
+          "text": "Desde joven conoció enfermedades y pérdidas familiares, pero mantuvo una intensa vida de oración.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-gema-galgani-c2",
+          "text": "Deseó ingresar en la vida religiosa, aunque su salud se lo impidió.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-gema-galgani-c3",
+          "text": "Según testimonios de su entorno, experimentó visiones y los estigmas de la Pasión de Cristo.",
+          "type": "miracle"
+        },
+        {
+          "id": "santa-gema-galgani-c4",
+          "text": "Tenía una profunda devoción a Jesús crucificado y buscaba ofrecer sus sufrimientos con amor.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-gema-galgani-c5",
+          "text": "Sus cartas y experiencias espirituales fueron difundidas después de su muerte.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-gema-galgani-c6",
+          "text": "Fue canonizada en 1940; es recordada por su confianza en Dios en medio del dolor.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-jose-sanchez-del-rio",
+      "name": "San José Sánchez del Río",
+      "birthYear": 1913,
+      "birthYearDisplay": "1913",
+      "ageAtDeath": 14,
+      "ageAtDeathDisplay": "14 años",
+      "country": "México",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "lista-original",
+        "santos-jovenes",
+        "martires"
+      ],
+      "patronages": [],
+      "canonizationYear": 2016,
+      "characteristics": [
+        {
+          "id": "san-jose-sanchez-del-rio-c1",
+          "text": "Siendo adolescente participó en la Guerra Cristera, en un contexto de persecución religiosa.",
+          "type": "biography"
+        },
+        {
+          "id": "san-jose-sanchez-del-rio-c2",
+          "text": "Fue capturado y presionado para que renunciara a su fe católica.",
+          "type": "martyrdom"
+        },
+        {
+          "id": "san-jose-sanchez-del-rio-c3",
+          "text": "Se mantuvo firme en su fe aun ante amenazas y torturas.",
+          "type": "biography"
+        },
+        {
+          "id": "san-jose-sanchez-del-rio-c4",
+          "text": "Murió mártir en 1928, antes de cumplir quince años.",
+          "type": "martyrdom"
+        },
+        {
+          "id": "san-jose-sanchez-del-rio-c5",
+          "text": "Su testimonio está unido al grito «¡Viva Cristo Rey!».",
+          "type": "biography"
+        },
+        {
+          "id": "san-jose-sanchez-del-rio-c6",
+          "text": "Fue canonizado en 2016 y es un modelo de valentía para los adolescentes.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-maria-goretti",
+      "name": "Santa María Goretti",
+      "birthYear": 1890,
+      "birthYearDisplay": "1890",
+      "ageAtDeath": 11,
+      "ageAtDeathDisplay": "11 años",
+      "country": "Italia",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "lista-original",
+        "santos-jovenes",
+        "martires"
+      ],
+      "patronages": [
+        "jóvenes",
+        "víctimas de agresión sexual"
+      ],
+      "canonizationYear": 1950,
+      "characteristics": [
+        {
+          "id": "santa-maria-goretti-c1",
+          "text": "Creció en una familia campesina y ayudó desde pequeña en las tareas del hogar.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-maria-goretti-c2",
+          "text": "Murió después de resistirse a una agresión sexual, siendo todavía una niña.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-maria-goretti-c3",
+          "text": "Antes de morir expresó que perdonaba a su agresor.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-maria-goretti-c4",
+          "text": "Su historia es recordada por su fortaleza, dignidad y capacidad de perdonar.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-maria-goretti-c5",
+          "text": "Es invocada como patrona de los jóvenes y de las víctimas de agresión sexual.",
+          "type": "patronage"
+        },
+        {
+          "id": "santa-maria-goretti-c6",
+          "text": "Fue canonizada en 1950, con su madre presente en la ceremonia.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-laura-montoya",
+      "name": "Santa Laura Montoya",
+      "birthYear": 1874,
+      "birthYearDisplay": "1874",
+      "ageAtDeath": 75,
+      "ageAtDeathDisplay": "75 años",
+      "country": "Colombia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original",
+        "educadores-y-guias"
+      ],
+      "patronages": [],
+      "canonizationYear": 2013,
+      "characteristics": [
+        {
+          "id": "santa-laura-montoya-c1",
+          "text": "Sufrió pobreza y dificultades familiares desde niña y llegó a dedicarse a la enseñanza.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-laura-montoya-c2",
+          "text": "Fundó una congregación misionera para servir a comunidades indígenas.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-laura-montoya-c3",
+          "text": "Defendió la dignidad de las personas indígenas y procuró conocer sus culturas.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-laura-montoya-c4",
+          "text": "Dedicó gran parte de su vida a la educación, la catequesis y el servicio a comunidades marginadas.",
+          "type": "virtue"
+        },
+        {
+          "id": "santa-laura-montoya-c5",
+          "text": "Siguió escribiendo y orientando su obra incluso durante años de enfermedad.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-laura-montoya-c6",
+          "text": "Fue canonizada en 2013 y es reconocida como la primera santa nacida en Colombia.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-teresa-de-calcuta",
+      "name": "Santa Teresa de Calcuta",
+      "birthYear": 1910,
+      "birthYearDisplay": "1910",
+      "ageAtDeath": 87,
+      "ageAtDeathDisplay": "87 años",
+      "country": "Actual Macedonia del Norte; misión en India",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original"
+      ],
+      "patronages": [],
+      "canonizationYear": 2016,
+      "characteristics": [
+        {
+          "id": "santa-teresa-de-calcuta-c1",
+          "text": "Desde joven sintió vocación religiosa y llegó a trabajar como maestra en Calcuta.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-de-calcuta-c2",
+          "text": "Fundó las Misioneras de la Caridad para servir a las personas más pobres y abandonadas.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-de-calcuta-c3",
+          "text": "Cuidó a enfermos, moribundos y personas sin hogar.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-de-calcuta-c4",
+          "text": "Sostenía que las pequeñas acciones hechas con amor tienen un gran valor.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-de-calcuta-c5",
+          "text": "Recibió el Premio Nobel de la Paz en 1979.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-de-calcuta-c6",
+          "text": "Fue canonizada en 2016; la Iglesia reconoció milagros atribuidos a su intercesión.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-oscar-arnulfo-romero",
+      "name": "San Óscar Arnulfo Romero",
+      "birthYear": 1917,
+      "birthYearDisplay": "1917",
+      "ageAtDeath": 62,
+      "ageAtDeathDisplay": "62 años",
+      "country": "El Salvador",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "lista-original",
+        "martires"
+      ],
+      "patronages": [],
+      "canonizationYear": 2018,
+      "characteristics": [
+        {
+          "id": "san-oscar-arnulfo-romero-c1",
+          "text": "Fue arzobispo de San Salvador y denunció las injusticias y la violencia contra la población.",
+          "type": "biography"
+        },
+        {
+          "id": "san-oscar-arnulfo-romero-c2",
+          "text": "Defendió la dignidad humana, especialmente la de las personas pobres y perseguidas.",
+          "type": "biography"
+        },
+        {
+          "id": "san-oscar-arnulfo-romero-c3",
+          "text": "Utilizó sus homilías para llamar a la conversión, la justicia y la paz.",
+          "type": "biography"
+        },
+        {
+          "id": "san-oscar-arnulfo-romero-c4",
+          "text": "Recibió amenazas por defender públicamente a las víctimas de la represión.",
+          "type": "biography"
+        },
+        {
+          "id": "san-oscar-arnulfo-romero-c5",
+          "text": "Fue asesinado mientras celebraba la Misa en 1980 y es venerado como mártir.",
+          "type": "martyrdom"
+        },
+        {
+          "id": "san-oscar-arnulfo-romero-c6",
+          "text": "Fue canonizado en 2018; su testimonio anima a defender a quien no tiene voz.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-andres-kim-taegon",
+      "name": "San Andrés Kim Taegon",
+      "birthYear": 1821,
+      "birthYearDisplay": "1821",
+      "ageAtDeath": 25,
+      "ageAtDeathDisplay": "25 años",
+      "country": "Corea",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "lista-original",
+        "santos-jovenes",
+        "martires"
+      ],
+      "patronages": [],
+      "canonizationYear": 1984,
+      "characteristics": [
+        {
+          "id": "san-andres-kim-taegon-c1",
+          "text": "Fue el primer sacerdote católico nacido en Corea.",
+          "type": "biography"
+        },
+        {
+          "id": "san-andres-kim-taegon-c2",
+          "text": "Se formó para el sacerdocio en una época en que practicar el cristianismo implicaba grave peligro.",
+          "type": "biography"
+        },
+        {
+          "id": "san-andres-kim-taegon-c3",
+          "text": "Ayudó a mantener el contacto entre comunidades católicas perseguidas.",
+          "type": "biography"
+        },
+        {
+          "id": "san-andres-kim-taegon-c4",
+          "text": "Fue arrestado y ejecutado por su fe en 1846.",
+          "type": "biography"
+        },
+        {
+          "id": "san-andres-kim-taegon-c5",
+          "text": "Es recordado junto con numerosos mártires coreanos como ejemplo de firmeza cristiana.",
+          "type": "biography"
+        },
+        {
+          "id": "san-andres-kim-taegon-c6",
+          "text": "Fue canonizado en 1984 con otros mártires de Corea.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-juan-pablo-ii",
+      "name": "San Juan Pablo II",
+      "birthYear": 1920,
+      "birthYearDisplay": "1920",
+      "ageAtDeath": 84,
+      "ageAtDeathDisplay": "84 años",
+      "country": "Polonia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original",
+        "educadores-y-guias"
+      ],
+      "patronages": [],
+      "canonizationYear": 2014,
+      "characteristics": [
+        {
+          "id": "san-juan-pablo-ii-c1",
+          "text": "De joven disfrutaba del teatro, el estudio, el senderismo y la vida con sus amigos.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-pablo-ii-c2",
+          "text": "Vivió la ocupación nazi de Polonia y se preparó para el sacerdocio en secreto.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-pablo-ii-c3",
+          "text": "Como papa, viajó por el mundo y alentó a los jóvenes a no tener miedo de seguir a Cristo.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-pablo-ii-c4",
+          "text": "Impulsó las Jornadas Mundiales de la Juventud como encuentros internacionales de fe.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-pablo-ii-c5",
+          "text": "Defendió la dignidad humana y promovió el diálogo y la libertad religiosa.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-pablo-ii-c6",
+          "text": "Fue canonizado en 2014 y sigue siendo una figura muy cercana a la pastoral juvenil.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-teresa-de-jesus",
+      "name": "Santa Teresa de Jesús",
+      "birthYear": 1515,
+      "birthYearDisplay": "1515",
+      "ageAtDeath": 67,
+      "ageAtDeathDisplay": "67 años",
+      "country": "España",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original"
+      ],
+      "patronages": [],
+      "canonizationYear": 1970,
+      "characteristics": [
+        {
+          "id": "santa-teresa-de-jesus-c1",
+          "text": "Ingresó en el Carmelo y vivió una profunda búsqueda de amistad con Dios a través de la oración.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-de-jesus-c2",
+          "text": "Reformó comunidades carmelitas para favorecer la sencillez, la fraternidad y la contemplación.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-de-jesus-c3",
+          "text": "Trabajó junto a San Juan de la Cruz en la reforma carmelitana.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-de-jesus-c4",
+          "text": "Escribió obras espirituales como «El libro de la vida» y «Las moradas».",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-de-jesus-c5",
+          "text": "Describía la oración como un trato de amistad con quien sabemos que nos ama.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-de-jesus-c6",
+          "text": "Fue canonizada en 1622 y proclamada Doctora de la Iglesia en 1970.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-juana-de-arco",
+      "name": "Santa Juana de Arco",
+      "birthYear": 1412,
+      "birthYearDisplay": "aprox. 1412",
+      "ageAtDeath": 19,
+      "ageAtDeathDisplay": "19 años",
+      "country": "Francia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original",
+        "santos-jovenes"
+      ],
+      "patronages": [
+        "Francia"
+      ],
+      "canonizationYear": 1920,
+      "characteristics": [
+        {
+          "id": "santa-juana-de-arco-c1",
+          "text": "Desde joven afirmó recibir inspiración divina para ayudar a su país.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-juana-de-arco-c2",
+          "text": "Participó en acontecimientos militares decisivos de la Guerra de los Cien Años.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-juana-de-arco-c3",
+          "text": "Fue capturada, sometida a juicio y condenada a morir en la hoguera.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-juana-de-arco-c4",
+          "text": "Murió en 1431 con apenas diecinueve años; posteriormente se anuló la sentencia contra ella.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-juana-de-arco-c5",
+          "text": "Su valentía y fidelidad a su conciencia la convirtieron en una figura histórica singular.",
+          "type": "virtue"
+        },
+        {
+          "id": "santa-juana-de-arco-c6",
+          "text": "Fue canonizada en 1920 y es una de las patronas de Francia.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-carlo-acutis",
+      "name": "San Carlo Acutis",
+      "birthYear": 1991,
+      "birthYearDisplay": "1991",
+      "ageAtDeath": 15,
+      "ageAtDeathDisplay": "15 años",
+      "country": "Reino Unido; creció en Italia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original",
+        "santos-jovenes"
+      ],
+      "patronages": [],
+      "canonizationYear": 2025,
+      "characteristics": [
+        {
+          "id": "san-carlo-acutis-c1",
+          "text": "Fue un adolescente que disfrutaba de la informática, el deporte y compartir con sus amigos.",
+          "type": "biography"
+        },
+        {
+          "id": "san-carlo-acutis-c2",
+          "text": "Tenía una profunda devoción a la Eucaristía y procuraba asistir frecuentemente a Misa.",
+          "type": "biography"
+        },
+        {
+          "id": "san-carlo-acutis-c3",
+          "text": "Creó una exposición digital sobre milagros eucarísticos.",
+          "type": "miracle"
+        },
+        {
+          "id": "san-carlo-acutis-c4",
+          "text": "Ayudaba a personas necesitadas y defendía a compañeros que sufrían rechazo.",
+          "type": "biography"
+        },
+        {
+          "id": "san-carlo-acutis-c5",
+          "text": "Murió de leucemia en 2006, ofreciendo sus sufrimientos a Dios.",
+          "type": "biography"
+        },
+        {
+          "id": "san-carlo-acutis-c6",
+          "text": "Fue canonizado en 2025; es un modelo contemporáneo de fe y uso positivo de la tecnología.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-agustin-de-hipona",
+      "name": "San Agustín de Hipona",
+      "birthYear": 354,
+      "birthYearDisplay": "354",
+      "ageAtDeath": 75,
+      "ageAtDeathDisplay": "75 años",
+      "country": "Actual Argelia (Imperio romano)",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original"
+      ],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "san-agustin-de-hipona-c1",
+          "text": "Durante su juventud buscó respuestas sobre la felicidad, la verdad y el sentido de la vida.",
+          "type": "biography"
+        },
+        {
+          "id": "san-agustin-de-hipona-c2",
+          "text": "Su madre, Santa Mónica, oró durante años por su conversión.",
+          "type": "biography"
+        },
+        {
+          "id": "san-agustin-de-hipona-c3",
+          "text": "Fue bautizado a los 32 años, después de una profunda búsqueda espiritual.",
+          "type": "biography"
+        },
+        {
+          "id": "san-agustin-de-hipona-c4",
+          "text": "Llegó a ser obispo de Hipona y uno de los grandes pensadores cristianos.",
+          "type": "biography"
+        },
+        {
+          "id": "san-agustin-de-hipona-c5",
+          "text": "Escribió «Las confesiones» y «La ciudad de Dios».",
+          "type": "biography"
+        },
+        {
+          "id": "san-agustin-de-hipona-c6",
+          "text": "Es Doctor de la Iglesia y patrono de teólogos y estudiosos de la fe.",
+          "type": "patronage"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-monica",
+      "name": "Santa Mónica",
+      "birthYear": 332,
+      "birthYearDisplay": "aprox. 332",
+      "ageAtDeath": 55,
+      "ageAtDeathDisplay": "aprox. 55 años",
+      "country": "Actual Argelia (Imperio romano)",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original"
+      ],
+      "patronages": [
+        "madres",
+        "familias que oran por la conversión de sus seres queridos"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santa-monica-c1",
+          "text": "Fue una mujer cristiana conocida por su perseverancia en la oración.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-monica-c2",
+          "text": "Es la madre de San Agustín, por cuya conversión rezó durante muchos años.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-monica-c3",
+          "text": "Trató de responder con paciencia y caridad a las dificultades familiares.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-monica-c4",
+          "text": "Acompañó a su hijo en su camino hacia la fe y alcanzó a verlo bautizado.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-monica-c5",
+          "text": "Murió en Ostia, cerca de Roma, poco después de la conversión de Agustín.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-monica-c6",
+          "text": "Es invocada como patrona de las madres y de quienes oran por familiares alejados de la fe.",
+          "type": "patronage"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-juan-diego-cuauhtlatoatzin",
+      "name": "San Juan Diego Cuauhtlatoatzin",
+      "birthYear": 1474,
+      "birthYearDisplay": "1474",
+      "ageAtDeath": 74,
+      "ageAtDeathDisplay": "aprox. 74 años",
+      "country": "México",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original"
+      ],
+      "patronages": [],
+      "canonizationYear": 2002,
+      "characteristics": [
+        {
+          "id": "san-juan-diego-cuauhtlatoatzin-c1",
+          "text": "Fue un indígena del valle de México que recibió el bautismo ya en edad adulta.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-diego-cuauhtlatoatzin-c2",
+          "text": "Según la tradición guadalupana, la Virgen María se le apareció en el Tepeyac en 1531.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-diego-cuauhtlatoatzin-c3",
+          "text": "Fue encargado de llevar al obispo el mensaje de construir un santuario.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-diego-cuauhtlatoatzin-c4",
+          "text": "La tradición cuenta que presentó rosas y la imagen de la Virgen apareció en su tilma.",
+          "type": "miracle"
+        },
+        {
+          "id": "san-juan-diego-cuauhtlatoatzin-c5",
+          "text": "Vivió después una vida sencilla de oración y servicio cerca del santuario.",
+          "type": "virtue"
+        },
+        {
+          "id": "san-juan-diego-cuauhtlatoatzin-c6",
+          "text": "Fue canonizado en 2002 y es una figura de gran importancia para la fe en México.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-pedro-de-san-jose-de-betancur",
+      "name": "San Pedro de San José de Betancur",
+      "birthYear": 1626,
+      "birthYearDisplay": "1626",
+      "ageAtDeath": 41,
+      "ageAtDeathDisplay": "41 años",
+      "country": "España (Canarias); misión en Guatemala",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original"
+      ],
+      "patronages": [],
+      "canonizationYear": 2002,
+      "characteristics": [
+        {
+          "id": "san-pedro-de-san-jose-de-betancur-c1",
+          "text": "Nació en Tenerife y viajó a Guatemala movido por su deseo de servir a Dios.",
+          "type": "biography"
+        },
+        {
+          "id": "san-pedro-de-san-jose-de-betancur-c2",
+          "text": "Dedicó su vida a los enfermos, los pobres y las personas sin hogar.",
+          "type": "biography"
+        },
+        {
+          "id": "san-pedro-de-san-jose-de-betancur-c3",
+          "text": "Creó una obra de caridad que dio origen a la familia betlemita.",
+          "type": "biography"
+        },
+        {
+          "id": "san-pedro-de-san-jose-de-betancur-c4",
+          "text": "Impulsó la educación y la atención a quienes no recibían ayuda suficiente.",
+          "type": "biography"
+        },
+        {
+          "id": "san-pedro-de-san-jose-de-betancur-c5",
+          "text": "Es conocido afectuosamente como «Santo Hermano Pedro».",
+          "type": "biography"
+        },
+        {
+          "id": "san-pedro-de-san-jose-de-betancur-c6",
+          "text": "Fue canonizado en 2002 y es considerado el primer santo de Centroamérica.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-nicolas-de-tolentino",
+      "name": "San Nicolás de Tolentino",
+      "birthYear": 1245,
+      "birthYearDisplay": "1245",
+      "ageAtDeath": 60,
+      "ageAtDeathDisplay": "aprox. 60 años",
+      "country": "Italia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original"
+      ],
+      "patronages": [
+        "almas del purgatorio"
+      ],
+      "canonizationYear": 1446,
+      "characteristics": [
+        {
+          "id": "san-nicolas-de-tolentino-c1",
+          "text": "Ingresó en la Orden de San Agustín y dedicó su vida al sacerdocio.",
+          "type": "biography"
+        },
+        {
+          "id": "san-nicolas-de-tolentino-c2",
+          "text": "Fue un confesor paciente y un predicador cercano a las personas necesitadas.",
+          "type": "biography"
+        },
+        {
+          "id": "san-nicolas-de-tolentino-c3",
+          "text": "Cuidó de enfermos y pobres en la ciudad de Tolentino.",
+          "type": "biography"
+        },
+        {
+          "id": "san-nicolas-de-tolentino-c4",
+          "text": "Tuvo una especial devoción por orar por las almas del purgatorio; se le considera su patrono.",
+          "type": "patronage"
+        },
+        {
+          "id": "san-nicolas-de-tolentino-c5",
+          "text": "La tradición le atribuye curaciones relacionadas con los «panecillos de San Nicolás».",
+          "type": "miracle"
+        },
+        {
+          "id": "san-nicolas-de-tolentino-c6",
+          "text": "Fue canonizado en 1446 y es un ejemplo de unión entre oración y servicio.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-francisco-de-asis",
+      "name": "San Francisco de Asís",
+      "birthYear": null,
+      "birthYearDisplay": "aprox. 1181–1182",
+      "ageAtDeath": null,
+      "ageAtDeathDisplay": "aprox. 44–45 años",
+      "country": "Italia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "lista-original"
+      ],
+      "patronages": [
+        "ecología"
+      ],
+      "canonizationYear": 1228,
+      "characteristics": [
+        {
+          "id": "san-francisco-de-asis-c1",
+          "text": "Pasó de una juventud acomodada a una vida de pobreza voluntaria y seguimiento de Jesús.",
+          "type": "biography"
+        },
+        {
+          "id": "san-francisco-de-asis-c2",
+          "text": "Fundó la familia franciscana, inspirada en la sencillez, la fraternidad y el Evangelio.",
+          "type": "biography"
+        },
+        {
+          "id": "san-francisco-de-asis-c3",
+          "text": "Abrazó a personas excluidas y mostró especial cercanía a los enfermos y necesitados.",
+          "type": "biography"
+        },
+        {
+          "id": "san-francisco-de-asis-c4",
+          "text": "Se le atribuye haber recibido los estigmas de Cristo en los últimos años de su vida.",
+          "type": "miracle"
+        },
+        {
+          "id": "san-francisco-de-asis-c5",
+          "text": "Es patrono de la ecología y es recordado por su amor a la creación y a los animales.",
+          "type": "patronage"
+        },
+        {
+          "id": "san-francisco-de-asis-c6",
+          "text": "Fue canonizado en 1228, solo dos años después de su muerte.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-felipe-neri",
+      "name": "San Felipe Neri",
+      "birthYear": 1515,
+      "birthYearDisplay": "1515",
+      "ageAtDeath": 79,
+      "ageAtDeathDisplay": "79 años",
+      "country": "Italia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-adicionales",
+        "educadores-y-guias"
+      ],
+      "patronages": [
+        "Roma"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "san-felipe-neri-c1",
+          "text": "Se dedicó a acompañar a jóvenes y adultos en las calles de Roma.",
+          "type": "biography"
+        },
+        {
+          "id": "san-felipe-neri-c2",
+          "text": "Organizó encuentros de oración, música, conversación y ayuda a personas pobres.",
+          "type": "biography"
+        },
+        {
+          "id": "san-felipe-neri-c3",
+          "text": "Creó el Oratorio, una comunidad en la que la amistad apoyaba el crecimiento espiritual.",
+          "type": "biography"
+        },
+        {
+          "id": "san-felipe-neri-c4",
+          "text": "Era famoso por su sentido del humor, su alegría y su sencillez.",
+          "type": "virtue"
+        },
+        {
+          "id": "san-felipe-neri-c5",
+          "text": "Fue consejero espiritual de personas de todas las edades y condiciones.",
+          "type": "biography"
+        },
+        {
+          "id": "san-felipe-neri-c6",
+          "text": "Es recordado como «el santo de la alegría» y patrono de la ciudad de Roma.",
+          "type": "patronage"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-jose-de-calasanz",
+      "name": "San José de Calasanz",
+      "birthYear": 1557,
+      "birthYearDisplay": "1557",
+      "ageAtDeath": 90,
+      "ageAtDeathDisplay": "90 años",
+      "country": "España",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-adicionales",
+        "educadores-y-guias"
+      ],
+      "patronages": [
+        "escuelas populares cristianas"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "san-jose-de-calasanz-c1",
+          "text": "Vio que muchos niños pobres de Roma no tenían acceso a la escuela.",
+          "type": "biography"
+        },
+        {
+          "id": "san-jose-de-calasanz-c2",
+          "text": "Abrió escuelas gratuitas y defendió el derecho a la educación de quienes menos tenían.",
+          "type": "biography"
+        },
+        {
+          "id": "san-jose-de-calasanz-c3",
+          "text": "Fundó los Escolapios, dedicados a la formación integral de niños y jóvenes.",
+          "type": "biography"
+        },
+        {
+          "id": "san-jose-de-calasanz-c4",
+          "text": "Quiso unir conocimientos académicos con valores humanos y cristianos.",
+          "type": "biography"
+        },
+        {
+          "id": "san-jose-de-calasanz-c5",
+          "text": "Perseveró incluso cuando su obra atravesó conflictos y dificultades.",
+          "type": "biography"
+        },
+        {
+          "id": "san-jose-de-calasanz-c6",
+          "text": "Es patrono de las escuelas populares cristianas y un gran modelo para educadores.",
+          "type": "patronage"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-maria-dominga-mazzarello",
+      "name": "Santa María Dominga Mazzarello",
+      "birthYear": 1837,
+      "birthYearDisplay": "1837",
+      "ageAtDeath": 44,
+      "ageAtDeathDisplay": "44 años",
+      "country": "Italia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-adicionales",
+        "educadores-y-guias"
+      ],
+      "patronages": [],
+      "canonizationYear": 1951,
+      "characteristics": [
+        {
+          "id": "santa-maria-dominga-mazzarello-c1",
+          "text": "Desde joven trabajó con muchachas y se preocupó por su educación y su futuro.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-maria-dominga-mazzarello-c2",
+          "text": "Aprendió costura y ayudó a convertir ese oficio en una oportunidad de formación para otras jóvenes.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-maria-dominga-mazzarello-c3",
+          "text": "Colaboró con San Juan Bosco en el proyecto educativo salesiano.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-maria-dominga-mazzarello-c4",
+          "text": "Fue cofundadora de las Hijas de María Auxiliadora.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-maria-dominga-mazzarello-c5",
+          "text": "Enseñaba con cercanía, alegría, sencillez y atención a cada persona.",
+          "type": "virtue"
+        },
+        {
+          "id": "santa-maria-dominga-mazzarello-c6",
+          "text": "Fue canonizada en 1951; su legado se mantiene en escuelas y obras juveniles de muchos países.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-juan-bautista-de-la-salle",
+      "name": "San Juan Bautista de La Salle",
+      "birthYear": 1651,
+      "birthYearDisplay": "1651",
+      "ageAtDeath": 67,
+      "ageAtDeathDisplay": "67 años",
+      "country": "Francia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-adicionales",
+        "educadores-y-guias"
+      ],
+      "patronages": [
+        "educadores cristianos"
+      ],
+      "canonizationYear": 1900,
+      "characteristics": [
+        {
+          "id": "san-juan-bautista-de-la-salle-c1",
+          "text": "Dedicó su vida a mejorar la educación de niños y jóvenes de familias humildes.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-bautista-de-la-salle-c2",
+          "text": "Fundó los Hermanos de las Escuelas Cristianas, dedicados a la enseñanza.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-bautista-de-la-salle-c3",
+          "text": "Promovió la formación de los maestros y una enseñanza accesible a los alumnos.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-bautista-de-la-salle-c4",
+          "text": "Fomentó el aprendizaje en grupos y en la lengua que los niños comprendían.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-bautista-de-la-salle-c5",
+          "text": "Dejó atrás privilegios personales para servir a su misión educativa.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-bautista-de-la-salle-c6",
+          "text": "Es patrono de los educadores cristianos; fue canonizado en 1900.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-angela-de-merici",
+      "name": "Santa Ángela de Mérici",
+      "birthYear": 1474,
+      "birthYearDisplay": "1474",
+      "ageAtDeath": 65,
+      "ageAtDeathDisplay": "65 años",
+      "country": "Italia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-adicionales",
+        "educadores-y-guias"
+      ],
+      "patronages": [],
+      "canonizationYear": 1807,
+      "characteristics": [
+        {
+          "id": "santa-angela-de-merici-c1",
+          "text": "Desde joven vivió pérdidas familiares y desarrolló una profunda vida de oración.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-angela-de-merici-c2",
+          "text": "Se preocupó por la formación cristiana y la dignidad de las niñas y mujeres.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-angela-de-merici-c3",
+          "text": "Fundó la Compañía de Santa Úrsula en 1535, una nueva forma de vida consagrada para mujeres.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-angela-de-merici-c4",
+          "text": "Su ejemplo inspiró después múltiples obras educativas de las ursulinas.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-angela-de-merici-c5",
+          "text": "Defendía que la atención y el trato personal eran esenciales en la formación.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-angela-de-merici-c6",
+          "text": "Fue canonizada en 1807; es un referente de acompañamiento y liderazgo femenino.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-luis-gonzaga",
+      "name": "San Luis Gonzaga",
+      "birthYear": 1568,
+      "birthYearDisplay": "1568",
+      "ageAtDeath": 23,
+      "ageAtDeathDisplay": "23 años",
+      "country": "Italia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-adicionales",
+        "santos-jovenes",
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [
+        "juventud católica"
+      ],
+      "canonizationYear": 1726,
+      "characteristics": [
+        {
+          "id": "san-luis-gonzaga-c1",
+          "text": "Nació en una familia noble, pero renunció a riquezas y privilegios para seguir su vocación.",
+          "type": "biography"
+        },
+        {
+          "id": "san-luis-gonzaga-c2",
+          "text": "Ingresó en la Compañía de Jesús siendo joven.",
+          "type": "biography"
+        },
+        {
+          "id": "san-luis-gonzaga-c3",
+          "text": "Dedicó su tiempo a la oración, al estudio y al cuidado de los enfermos.",
+          "type": "biography"
+        },
+        {
+          "id": "san-luis-gonzaga-c4",
+          "text": "Durante una epidemia atendió a personas enfermas y contrajo una enfermedad mortal.",
+          "type": "biography"
+        },
+        {
+          "id": "san-luis-gonzaga-c5",
+          "text": "Es reconocido como patrono de la juventud católica.",
+          "type": "patronage"
+        },
+        {
+          "id": "san-luis-gonzaga-c6",
+          "text": "Fue canonizado en 1726; muestra cómo elegir el servicio en lugar del prestigio.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-domingo-savio",
+      "name": "Santo Domingo Savio",
+      "birthYear": 1842,
+      "birthYearDisplay": "1842",
+      "ageAtDeath": 14,
+      "ageAtDeathDisplay": "14 años",
+      "country": "Italia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-adicionales",
+        "santos-jovenes"
+      ],
+      "patronages": [],
+      "canonizationYear": 1954,
+      "characteristics": [
+        {
+          "id": "santo-domingo-savio-c1",
+          "text": "Fue alumno de San Juan Bosco en el Oratorio salesiano.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-domingo-savio-c2",
+          "text": "Deseaba ser santo a través de la alegría, el estudio y el cumplimiento de sus deberes.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-domingo-savio-c3",
+          "text": "Procuraba evitar peleas y reconciliar a sus compañeros.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-domingo-savio-c4",
+          "text": "Participó en la Compañía de la Inmaculada, dedicada a la oración y a ayudar a otros.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-domingo-savio-c5",
+          "text": "Murió a los catorce años después de una enfermedad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-domingo-savio-c6",
+          "text": "Fue canonizado en 1954 y es un modelo para adolescentes y estudiantes.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-estanislao-de-kostka",
+      "name": "San Estanislao de Kostka",
+      "birthYear": 1550,
+      "birthYearDisplay": "1550",
+      "ageAtDeath": 17,
+      "ageAtDeathDisplay": "17 años",
+      "country": "Polonia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-adicionales",
+        "santos-jovenes"
+      ],
+      "patronages": [],
+      "canonizationYear": 1726,
+      "characteristics": [
+        {
+          "id": "san-estanislao-de-kostka-c1",
+          "text": "Nació en una familia noble que inicialmente se oponía a su vocación religiosa.",
+          "type": "biography"
+        },
+        {
+          "id": "san-estanislao-de-kostka-c2",
+          "text": "Estudió en Viena y perseveró en su deseo de ser jesuita.",
+          "type": "biography"
+        },
+        {
+          "id": "san-estanislao-de-kostka-c3",
+          "text": "Viajó con gran determinación para poder ingresar en la Compañía de Jesús.",
+          "type": "biography"
+        },
+        {
+          "id": "san-estanislao-de-kostka-c4",
+          "text": "Murió mientras era novicio, siendo todavía adolescente.",
+          "type": "biography"
+        },
+        {
+          "id": "san-estanislao-de-kostka-c5",
+          "text": "Es un ejemplo de discernimiento vocacional y fidelidad a la conciencia.",
+          "type": "biography"
+        },
+        {
+          "id": "san-estanislao-de-kostka-c6",
+          "text": "Fue canonizado en 1726; suele ser invocado por estudiantes y novicios.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-gabriel-de-la-dolorosa",
+      "name": "San Gabriel de la Dolorosa",
+      "birthYear": 1838,
+      "birthYearDisplay": "1838",
+      "ageAtDeath": 23,
+      "ageAtDeathDisplay": "23 años",
+      "country": "Italia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-adicionales",
+        "santos-jovenes"
+      ],
+      "patronages": [],
+      "canonizationYear": 1920,
+      "characteristics": [
+        {
+          "id": "san-gabriel-de-la-dolorosa-c1",
+          "text": "De joven disfrutaba de las reuniones sociales, el baile y la vida con sus amigos.",
+          "type": "biography"
+        },
+        {
+          "id": "san-gabriel-de-la-dolorosa-c2",
+          "text": "Después de una experiencia de conversión decidió entrar en la congregación pasionista.",
+          "type": "biography"
+        },
+        {
+          "id": "san-gabriel-de-la-dolorosa-c3",
+          "text": "Tomó el nombre de Gabriel de la Virgen Dolorosa.",
+          "type": "biography"
+        },
+        {
+          "id": "san-gabriel-de-la-dolorosa-c4",
+          "text": "Vivió su vocación con alegría, humildad y una devoción especial a la Virgen María.",
+          "type": "virtue"
+        },
+        {
+          "id": "san-gabriel-de-la-dolorosa-c5",
+          "text": "Murió de tuberculosis antes de ser ordenado sacerdote.",
+          "type": "biography"
+        },
+        {
+          "id": "san-gabriel-de-la-dolorosa-c6",
+          "text": "Fue canonizado en 1920 y es especialmente venerado como modelo de santidad juvenil.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-pier-giorgio-frassati",
+      "name": "San Pier Giorgio Frassati",
+      "birthYear": 1901,
+      "birthYearDisplay": "1901",
+      "ageAtDeath": 24,
+      "ageAtDeathDisplay": "24 años",
+      "country": "Italia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-adicionales",
+        "santos-jovenes"
+      ],
+      "patronages": [],
+      "canonizationYear": 2025,
+      "characteristics": [
+        {
+          "id": "san-pier-giorgio-frassati-c1",
+          "text": "Fue universitario y disfrutaba de la montaña, el deporte y la amistad.",
+          "type": "biography"
+        },
+        {
+          "id": "san-pier-giorgio-frassati-c2",
+          "text": "Participó activamente en grupos católicos y en iniciativas sociales.",
+          "type": "biography"
+        },
+        {
+          "id": "san-pier-giorgio-frassati-c3",
+          "text": "Visitaba a personas enfermas y compartía recursos con familias pobres.",
+          "type": "biography"
+        },
+        {
+          "id": "san-pier-giorgio-frassati-c4",
+          "text": "Fue miembro de la Tercera Orden Dominicana y vivió una intensa vida de oración.",
+          "type": "biography"
+        },
+        {
+          "id": "san-pier-giorgio-frassati-c5",
+          "text": "Murió muy joven, probablemente por una poliomielitis contraída en su servicio a enfermos.",
+          "type": "virtue"
+        },
+        {
+          "id": "san-pier-giorgio-frassati-c6",
+          "text": "Fue canonizado en 2025 junto con San Carlo Acutis; es un modelo de alegría y compromiso.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-teresa-de-los-andes",
+      "name": "Santa Teresa de los Andes",
+      "birthYear": 1900,
+      "birthYearDisplay": "1900",
+      "ageAtDeath": 19,
+      "ageAtDeathDisplay": "19 años",
+      "country": "Chile",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-adicionales",
+        "santos-jovenes"
+      ],
+      "patronages": [],
+      "canonizationYear": 1993,
+      "characteristics": [
+        {
+          "id": "santa-teresa-de-los-andes-c1",
+          "text": "Su nombre de nacimiento fue Juana Fernández Solar.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-de-los-andes-c2",
+          "text": "Fue una joven alegre, aficionada al deporte y cercana a su familia y amistades.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-de-los-andes-c3",
+          "text": "Desde adolescente escribió cartas y diarios sobre su amistad con Jesús.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-de-los-andes-c4",
+          "text": "Ingresó en el Carmelo de Los Andes y tomó el nombre de Teresa de Jesús.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-de-los-andes-c5",
+          "text": "Murió poco después de entrar en la vida religiosa, tras una enfermedad.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresa-de-los-andes-c6",
+          "text": "Fue canonizada en 1993 y es un ejemplo de santidad juvenil en América Latina.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-teresita-del-nino-jesus",
+      "name": "Santa Teresita del Niño Jesús",
+      "birthYear": 1873,
+      "birthYearDisplay": "1873",
+      "ageAtDeath": 24,
+      "ageAtDeathDisplay": "24 años",
+      "country": "Francia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-adicionales",
+        "santos-jovenes"
+      ],
+      "patronages": [
+        "misiones"
+      ],
+      "canonizationYear": 1997,
+      "characteristics": [
+        {
+          "id": "santa-teresita-del-nino-jesus-c1",
+          "text": "Entró en el Carmelo de Lisieux cuando era adolescente.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresita-del-nino-jesus-c2",
+          "text": "Enseñó el «caminito» de la santidad: hacer las cosas pequeñas con un amor grande.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresita-del-nino-jesus-c3",
+          "text": "Dejó escritos autobiográficos conocidos como «Historia de un alma».",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresita-del-nino-jesus-c4",
+          "text": "Vivió pruebas espirituales y una enfermedad grave, sin abandonar su confianza en Dios.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-teresita-del-nino-jesus-c5",
+          "text": "Es patrona de las misiones junto con San Francisco Javier.",
+          "type": "patronage"
+        },
+        {
+          "id": "santa-teresita-del-nino-jesus-c6",
+          "text": "Fue canonizada en 1925 y proclamada Doctora de la Iglesia en 1997.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-francisco-marto",
+      "name": "San Francisco Marto",
+      "birthYear": 1908,
+      "birthYearDisplay": "1908",
+      "ageAtDeath": 10,
+      "ageAtDeathDisplay": "10 años",
+      "country": "Portugal",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-adicionales",
+        "santos-jovenes"
+      ],
+      "patronages": [],
+      "canonizationYear": 2017,
+      "characteristics": [
+        {
+          "id": "san-francisco-marto-c1",
+          "text": "Junto con su hermana Jacinta y su prima Lucía, fue uno de los niños de Fátima.",
+          "type": "biography"
+        },
+        {
+          "id": "san-francisco-marto-c2",
+          "text": "Era recordado como un niño reservado, amable y dado a la oración.",
+          "type": "biography"
+        },
+        {
+          "id": "san-francisco-marto-c3",
+          "text": "Después de las experiencias de 1917 dedicó mucho tiempo a rezar en silencio.",
+          "type": "biography"
+        },
+        {
+          "id": "san-francisco-marto-c4",
+          "text": "Murió durante la pandemia de gripe de 1918–1919.",
+          "type": "biography"
+        },
+        {
+          "id": "san-francisco-marto-c5",
+          "text": "Fue canonizado en 2017 junto con Santa Jacinta Marto.",
+          "type": "canonization"
+        },
+        {
+          "id": "san-francisco-marto-c6",
+          "text": "Su historia enseña que la vida interior y la oración también son caminos para los niños.",
+          "type": "biography"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-kizito-de-uganda",
+      "name": "San Kizito de Uganda",
+      "birthYear": 1872,
+      "birthYearDisplay": "aprox. 1872",
+      "ageAtDeath": null,
+      "ageAtDeathDisplay": "aprox. 13–14 años",
+      "country": "Uganda",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "santos-adicionales",
+        "santos-jovenes",
+        "martires"
+      ],
+      "patronages": [],
+      "canonizationYear": 1964,
+      "characteristics": [
+        {
+          "id": "san-kizito-de-uganda-c1",
+          "text": "Fue uno de los más jóvenes entre los mártires cristianos de Uganda.",
+          "type": "biography"
+        },
+        {
+          "id": "san-kizito-de-uganda-c2",
+          "text": "Servía en la corte real cuando comenzaron las persecuciones contra los cristianos.",
+          "type": "biography"
+        },
+        {
+          "id": "san-kizito-de-uganda-c3",
+          "text": "Aprendió la fe católica en comunidad con otros jóvenes creyentes.",
+          "type": "biography"
+        },
+        {
+          "id": "san-kizito-de-uganda-c4",
+          "text": "Rechazó renunciar a su fe pese a las amenazas.",
+          "type": "biography"
+        },
+        {
+          "id": "san-kizito-de-uganda-c5",
+          "text": "Fue ejecutado en 1886 junto con otros cristianos y es venerado como mártir.",
+          "type": "martyrdom"
+        },
+        {
+          "id": "san-kizito-de-uganda-c6",
+          "text": "Fue canonizado en 1964 dentro del grupo de los mártires de Uganda.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-pedro-calungsod",
+      "name": "San Pedro Calungsod",
+      "birthYear": 1654,
+      "birthYearDisplay": "aprox. 1654",
+      "ageAtDeath": 17,
+      "ageAtDeathDisplay": "aprox. 17 años",
+      "country": "Filipinas",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "santos-adicionales",
+        "santos-jovenes",
+        "martires"
+      ],
+      "patronages": [],
+      "canonizationYear": 2012,
+      "characteristics": [
+        {
+          "id": "san-pedro-calungsod-c1",
+          "text": "Fue catequista laico siendo todavía adolescente.",
+          "type": "biography"
+        },
+        {
+          "id": "san-pedro-calungsod-c2",
+          "text": "Acompañó a misioneros jesuitas desde Filipinas hasta las islas Marianas.",
+          "type": "biography"
+        },
+        {
+          "id": "san-pedro-calungsod-c3",
+          "text": "Enseñó la fe y sirvió a las comunidades locales en medio de tensiones y peligros.",
+          "type": "biography"
+        },
+        {
+          "id": "san-pedro-calungsod-c4",
+          "text": "Cuando atacaron al padre Diego Luis de San Vitores, decidió no abandonarlo.",
+          "type": "biography"
+        },
+        {
+          "id": "san-pedro-calungsod-c5",
+          "text": "Murió mártir en Guam en 1672.",
+          "type": "martyrdom"
+        },
+        {
+          "id": "san-pedro-calungsod-c6",
+          "text": "Fue canonizado en 2012 y es un ejemplo de misión y fidelidad para los jóvenes.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "san-juan-berchmans",
+      "name": "San Juan Berchmans",
+      "birthYear": 1599,
+      "birthYearDisplay": "1599",
+      "ageAtDeath": 22,
+      "ageAtDeathDisplay": "22 años",
+      "country": "Bélgica",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-adicionales",
+        "santos-jovenes"
+      ],
+      "patronages": [
+        "monaguillos",
+        "estudiantes"
+      ],
+      "canonizationYear": 1888,
+      "characteristics": [
+        {
+          "id": "san-juan-berchmans-c1",
+          "text": "Fue un estudiante jesuita que deseaba vivir una santidad sencilla y cotidiana.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-berchmans-c2",
+          "text": "Se destacó por su alegría, su estudio y la atención a sus compañeros.",
+          "type": "virtue"
+        },
+        {
+          "id": "san-juan-berchmans-c3",
+          "text": "Creía que cumplir con amor los deberes ordinarios era un camino hacia Dios.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-berchmans-c4",
+          "text": "Murió en Roma antes de llegar a ser sacerdote.",
+          "type": "biography"
+        },
+        {
+          "id": "san-juan-berchmans-c5",
+          "text": "Es venerado como patrono de los monaguillos y de los estudiantes.",
+          "type": "patronage"
+        },
+        {
+          "id": "san-juan-berchmans-c6",
+          "text": "Fue canonizado en 1888.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santa-kateri-tekakwitha",
+      "name": "Santa Kateri Tekakwitha",
+      "birthYear": 1656,
+      "birthYearDisplay": "1656",
+      "ageAtDeath": 24,
+      "ageAtDeathDisplay": "24 años",
+      "country": "Actual Estados Unidos / Canadá",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-adicionales",
+        "santos-jovenes"
+      ],
+      "patronages": [],
+      "canonizationYear": 2012,
+      "characteristics": [
+        {
+          "id": "santa-kateri-tekakwitha-c1",
+          "text": "Fue una joven indígena mohawk que vivió en el noreste de América del Norte.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-kateri-tekakwitha-c2",
+          "text": "Una enfermedad de la niñez afectó su vista y dejó marcas en su rostro.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-kateri-tekakwitha-c3",
+          "text": "Recibió el bautismo siendo joven y enfrentó oposición por su fe.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-kateri-tekakwitha-c4",
+          "text": "Vivió una profunda vida de oración y de servicio dentro de su comunidad.",
+          "type": "virtue"
+        },
+        {
+          "id": "santa-kateri-tekakwitha-c5",
+          "text": "Es considerada un ejemplo de fidelidad, sencillez y respeto a la creación.",
+          "type": "biography"
+        },
+        {
+          "id": "santa-kateri-tekakwitha-c6",
+          "text": "Fue canonizada en 2012 y es la primera mujer indígena de América del Norte canonizada.",
+          "type": "canonization"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    }
+  ],
+  "collections": [
+    {
+      "id": "lista-original",
+      "name": "Tu lista original",
+      "saintIds": [
+        "san-jose-de-cupertino",
+        "santa-josefina-bakhita",
+        "santa-jacinta-marto",
+        "santa-catalina-de-siena",
+        "san-francisco-javier",
+        "santa-francisca-javiera-cabrini",
+        "santa-teresa-benedicta-de-la-cruz",
+        "san-juan-bosco",
+        "santa-hildegarda-de-bingen",
+        "santa-gema-galgani",
+        "san-jose-sanchez-del-rio",
+        "santa-maria-goretti",
+        "santa-laura-montoya",
+        "santa-teresa-de-calcuta",
+        "san-oscar-arnulfo-romero",
+        "san-andres-kim-taegon",
+        "san-juan-pablo-ii",
+        "santa-teresa-de-jesus",
+        "santa-juana-de-arco",
+        "san-carlo-acutis",
+        "san-agustin-de-hipona",
+        "santa-monica",
+        "san-juan-diego-cuauhtlatoatzin",
+        "san-pedro-de-san-jose-de-betancur",
+        "san-nicolas-de-tolentino",
+        "san-francisco-de-asis"
+      ]
+    },
+    {
+      "id": "santos-adicionales",
+      "name": "Santos adicionales",
+      "saintIds": [
+        "san-felipe-neri",
+        "san-jose-de-calasanz",
+        "santa-maria-dominga-mazzarello",
+        "san-juan-bautista-de-la-salle",
+        "santa-angela-de-merici",
+        "san-luis-gonzaga",
+        "santo-domingo-savio",
+        "san-estanislao-de-kostka",
+        "san-gabriel-de-la-dolorosa",
+        "san-pier-giorgio-frassati",
+        "santa-teresa-de-los-andes",
+        "santa-teresita-del-nino-jesus",
+        "san-francisco-marto",
+        "san-kizito-de-uganda",
+        "san-pedro-calungsod",
+        "san-juan-berchmans",
+        "santa-kateri-tekakwitha"
+      ]
+    },
+    {
+      "id": "santos-jovenes",
+      "name": "Santos jóvenes",
+      "saintIds": [
+        "santa-jacinta-marto",
+        "santa-gema-galgani",
+        "san-jose-sanchez-del-rio",
+        "santa-maria-goretti",
+        "san-andres-kim-taegon",
+        "santa-juana-de-arco",
+        "san-carlo-acutis",
+        "san-luis-gonzaga",
+        "santo-domingo-savio",
+        "san-estanislao-de-kostka",
+        "san-gabriel-de-la-dolorosa",
+        "san-pier-giorgio-frassati",
+        "santa-teresa-de-los-andes",
+        "santa-teresita-del-nino-jesus",
+        "san-francisco-marto",
+        "san-kizito-de-uganda",
+        "san-pedro-calungsod",
+        "san-juan-berchmans",
+        "santa-kateri-tekakwitha"
+      ]
+    },
+    {
+      "id": "martires",
+      "name": "Santos mártires",
+      "saintIds": [
+        "santa-teresa-benedicta-de-la-cruz",
+        "san-jose-sanchez-del-rio",
+        "santa-maria-goretti",
+        "san-oscar-arnulfo-romero",
+        "san-andres-kim-taegon",
+        "san-kizito-de-uganda",
+        "san-pedro-calungsod"
+      ]
+    },
+    {
+      "id": "educadores-y-guias",
+      "name": "Educadores y guías",
+      "saintIds": [
+        "san-juan-bosco",
+        "santa-laura-montoya",
+        "san-juan-pablo-ii",
+        "san-felipe-neri",
+        "san-jose-de-calasanz",
+        "santa-maria-dominga-mazzarello",
+        "san-juan-bautista-de-la-salle",
+        "santa-angela-de-merici"
+      ]
+    },
+    {
+      "id": "patronos-de-la-juventud",
+      "name": "Patronos de la juventud",
+      "saintIds": [
+        "san-luis-gonzaga"
+      ]
+    }
+  ]
+}

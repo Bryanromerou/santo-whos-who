@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Santos Studio local data (SQLite database, uploaded portraits). Never commit.
+/data/*
+!/data/.gitkeep
+/.e2e-data/
+/test-results/
+/playwright-report/
+/blob-report/
+
+# Local source photos and documents (not part of the app)
+/images/

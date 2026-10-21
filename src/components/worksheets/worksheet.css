@@ -1,0 +1,252 @@
+/*
+ * Santos Studio worksheet stylesheet.
+ * Shared verbatim by the builder preview, the editor preview, native printing
+ * (/imprimir) and server-side PDF export. Physical units only (in / pt) so the
+ * on-screen preview and the printed page have identical geometry.
+ */
+.ws-doc {
+  --ws-page-w: 8.5in;
+  --ws-page-h: 11in;
+  --ws-margin: 0.5in;
+  --ws-gap: 0.28in;
+  --ws-font: 10.5pt;
+  --ws-bullet-gap: 3pt;
+  --ws-img-w: 28%;
+  --ws-line: #1c1c1c;
+  --ws-soft: #b8b8b8;
+  font-family: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-feature-settings: "cv11", "ss01";
+  color: #111;
+  line-height: 1.32;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  text-rendering: optimizeLegibility;
+}
+.ws-doc *,
+.ws-doc *::before,
+.ws-doc *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Page ---------- */
+.ws-page {
+  position: relative;
+  width: var(--ws-page-w);
+  height: var(--ws-page-h);
+  padding: var(--ws-margin);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.ws-slots {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  gap: var(--ws-gap);
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+.ws-slots[data-per-page="2"] {
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+.ws-slots[data-per-page="4"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: calc(var(--ws-gap) * 0.8);
+}
+.ws-slot {
+  min-height: 0;
+  min-width: 0;
+}
+.ws-page-number {
+  flex: none;
+  height: 0.3in;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 8pt;
+  color: #555;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Saint card (bordered table) ---------- */
+.ws-card {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1.2pt solid var(--ws-line);
+  background: #fff;
+  overflow: hidden;
+  font-size: var(--ws-font);
+}
+.ws-card-name {
+  flex: none;
+  margin: 0;
+  padding: 0.5em 0.8em 0.45em;
+  border-bottom: 1pt solid var(--ws-line);
+  text-align: center;
+  font-family: "Source Serif 4 Variable", "Source Serif 4", Georgia, "Times New Roman", serif;
+  font-weight: 650;
+  font-size: 1.55em;
+  line-height: 1.15;
+  letter-spacing: 0.003em;
+  overflow-wrap: anywhere;
+}
+.ws-card-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: var(--ws-img-w) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+}
+.ws-card-body[data-no-portrait] {
+  grid-template-columns: minmax(0, 1fr);
+}
+.ws-portrait-col {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0.7em;
+  border-right: 1pt solid var(--ws-line);
+}
+.ws-portrait {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #fff;
+  border: 0.75pt solid var(--ws-soft);
+}
+.ws-portrait img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.ws-portrait-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  border-style: dashed;
+  color: #8a8a8a;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+/* ---------- Info column ---------- */
+.ws-info {
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.ws-facts {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  border-bottom: 1pt solid var(--ws-line);
+}
+.ws-fact {
+  min-width: 0;
+  padding: 0.42em 0.8em 0.45em;
+}
+.ws-fact + .ws-fact {
+  border-left: 1pt solid var(--ws-line);
+}
+.ws-country {
+  padding: 0.42em 0.8em 0.45em;
+  border-bottom: 1pt solid var(--ws-line);
+}
+.ws-label {
+  display: block;
+  margin-bottom: 0.12em;
+  font-size: 0.72em;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #474747;
+}
+.ws-value {
+  display: block;
+  font-size: 1.02em;
+  overflow-wrap: anywhere;
+}
+.ws-chars {
+  padding: 0.5em 0.8em 0.6em;
+}
+.ws-chars ul {
+  margin: 0.3em 0 0;
+  padding-left: 1.15em;
+  list-style: disc outside;
+}
+.ws-chars li {
+  padding-left: 0.1em;
+  overflow-wrap: anywhere;
+}
+.ws-chars li + li {
+  margin-top: var(--ws-bullet-gap);
+}
+.ws-chars li::marker {
+  color: #333;
+}
+
+/* 4-per-page: tighter chrome so small cards stay readable. */
+.ws-slots[data-per-page="4"] .ws-card-name {
+  font-size: 1.3em;
+}
+.ws-slots[data-per-page="4"] .ws-portrait-col {
+  padding: 0.5em;
+}
+
+/* Preview-only overflow marker (never printed: export is blocked while it shows). */
+.ws-card[data-overflow="true"] {
+  outline: 3px solid #dc2626;
+  outline-offset: -3px;
+}
+@media print {
+  .ws-card[data-overflow="true"] {
+    outline: none;
+  }
+}
+
+/* ---------- Print-only view (/imprimir) ---------- */
+@media screen {
+  .ws-print-root {
+    min-height: 100vh;
+    background: #1b2130; /* dark navy surround (matches the app); pages stay white */
+    padding: 24px 0;
+  }
+  .ws-print-root .ws-page {
+    margin: 0 auto 24px;
+    box-shadow: 0 2px 12px rgb(0 0 0 / 0.5);
+  }
+}
+@media print {
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+  }
+  .ws-page {
+    break-after: page;
+    break-inside: avoid;
+  }
+  .ws-page:last-child {
+    break-after: auto;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Builder preview: separated pages with a soft shadow (screen only). */
+@media screen {
+  .ws-preview-page {
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgb(0 0 0 / 0.45);
+  }
+}

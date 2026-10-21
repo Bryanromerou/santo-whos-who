@@ -1,0 +1,2343 @@
+{
+  "schemaVersion": 1,
+  "format": "santos-studio-library",
+  "language": "es",
+  "source": {
+    "document": "DATOS DE PRUEBA — generado por scripts/make-test-fixture.ts",
+    "notes": "No contiene biografías reales. Solo para pruebas automáticas.",
+    "factCheckedIndividually": false
+  },
+  "saints": [
+    {
+      "id": "jose-sanchez-del-rio",
+      "name": "San José Sánchez del Río",
+      "birthYear": 1913,
+      "birthYearDisplay": "1913",
+      "ageAtDeath": 14,
+      "ageAtDeathDisplay": "14 años",
+      "country": "México",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "santos-jovenes",
+        "santos-martires",
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": 1950,
+      "characteristics": [
+        {
+          "id": "jose-sanchez-del-rio-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "jose-sanchez-del-rio-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "jose-sanchez-del-rio-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "jose-sanchez-del-rio-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "jose-sanchez-del-rio-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "jose-sanchez-del-rio-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "reviewed"
+    },
+    {
+      "id": "carlo-acutis",
+      "name": "San Carlo Acutis",
+      "birthYear": 1991,
+      "birthYearDisplay": "1991",
+      "ageAtDeath": 15,
+      "ageAtDeathDisplay": "15 años",
+      "country": "Italia (nacido en Londres)",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-jovenes",
+        "educadores-y-guias"
+      ],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "carlo-acutis-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "carlo-acutis-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "carlo-acutis-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "carlo-acutis-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "carlo-acutis-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "carlo-acutis-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-03",
+      "name": "Santa Inés (prueba)",
+      "birthYear": null,
+      "birthYearDisplay": "c. 291 (aprox.)",
+      "ageAtDeath": null,
+      "ageAtDeathDisplay": "aprox. 12–13 años",
+      "country": "Imperio romano",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "santos-martires"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-03-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-03-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-03-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-03-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-03-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-03-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-04",
+      "name": "Santo de prueba 04",
+      "birthYear": 1809,
+      "birthYearDisplay": "1809",
+      "ageAtDeath": 23,
+      "ageAtDeathDisplay": "23 años",
+      "country": "Colombia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-jovenes",
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [],
+      "canonizationYear": 1953,
+      "characteristics": [
+        {
+          "id": "santo-prueba-04-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-04-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-04-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-04-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-04-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-04-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-05",
+      "name": "Santo de prueba 05",
+      "birthYear": 1812,
+      "birthYearDisplay": "1812",
+      "ageAtDeath": 24,
+      "ageAtDeathDisplay": "24 años",
+      "country": "Polonia",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "santos-jovenes",
+        "santos-martires"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-05-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-05-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-05-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-05-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-05-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-05-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-06",
+      "name": "Santo de prueba 06",
+      "birthYear": 1815,
+      "birthYearDisplay": "c. 1815",
+      "ageAtDeath": 25,
+      "ageAtDeathDisplay": "25 años",
+      "country": "Filipinas",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-jovenes"
+      ],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-06-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-06-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-06-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-06-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-06-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-06-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-07",
+      "name": "Santo de prueba 07",
+      "birthYear": 1818,
+      "birthYearDisplay": "1818",
+      "ageAtDeath": 26,
+      "ageAtDeathDisplay": "26 años",
+      "country": "España",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-jovenes",
+        "educadores-y-guias",
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": 1956,
+      "characteristics": [
+        {
+          "id": "santo-prueba-07-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-07-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-07-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-07-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-07-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-07-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-08",
+      "name": "Santo de prueba 08",
+      "birthYear": 1821,
+      "birthYearDisplay": "1821",
+      "ageAtDeath": 27,
+      "ageAtDeathDisplay": "27 años",
+      "country": "Perú",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-jovenes"
+      ],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-08-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-08-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-08-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-08-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-08-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-08-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "reviewed"
+    },
+    {
+      "id": "santo-prueba-09",
+      "name": "Santo de prueba 09",
+      "birthYear": 1824,
+      "birthYearDisplay": "1824",
+      "ageAtDeath": 28,
+      "ageAtDeathDisplay": "28 años",
+      "country": "Francia",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "santos-jovenes",
+        "santos-martires"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-09-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-09-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-09-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-09-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-09-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-09-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-10",
+      "name": "Santo de prueba 10",
+      "birthYear": 1827,
+      "birthYearDisplay": "1827",
+      "ageAtDeath": 29,
+      "ageAtDeathDisplay": "29 años",
+      "country": "Colombia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "santos-jovenes",
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [],
+      "canonizationYear": 1959,
+      "characteristics": [
+        {
+          "id": "santo-prueba-10-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-10-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-10-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-10-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-10-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-10-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-11",
+      "name": "Santo de prueba 11",
+      "birthYear": 1830,
+      "birthYearDisplay": "c. 1830",
+      "ageAtDeath": 30,
+      "ageAtDeathDisplay": "30 años",
+      "country": "Polonia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-11-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-11-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-11-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-11-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-11-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-11-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-12",
+      "name": "Santo de prueba 12",
+      "birthYear": 1833,
+      "birthYearDisplay": "1833",
+      "ageAtDeath": 31,
+      "ageAtDeathDisplay": "31 años",
+      "country": "Filipinas",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "educadores-y-guias"
+      ],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-12-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-12-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-12-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-12-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-12-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-12-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-13",
+      "name": "Santo de prueba 13",
+      "birthYear": 1836,
+      "birthYearDisplay": "1836",
+      "ageAtDeath": 32,
+      "ageAtDeathDisplay": "32 años",
+      "country": "España",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "santos-martires",
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": 1962,
+      "characteristics": [
+        {
+          "id": "santo-prueba-13-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-13-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-13-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-13-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-13-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-13-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-14",
+      "name": "Santo de prueba 14",
+      "birthYear": 1839,
+      "birthYearDisplay": "1839",
+      "ageAtDeath": 33,
+      "ageAtDeathDisplay": "33 años",
+      "country": "Perú",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-14-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-14-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-14-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-14-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-14-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-14-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-15",
+      "name": "Santo de prueba 15",
+      "birthYear": 1842,
+      "birthYearDisplay": "1842",
+      "ageAtDeath": 34,
+      "ageAtDeathDisplay": "34 años",
+      "country": "Francia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-15-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-15-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-15-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-15-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-15-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-15-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "reviewed"
+    },
+    {
+      "id": "santo-prueba-16",
+      "name": "Santo de prueba 16",
+      "birthYear": 1845,
+      "birthYearDisplay": "c. 1845",
+      "ageAtDeath": 35,
+      "ageAtDeathDisplay": "35 años",
+      "country": "Colombia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [],
+      "canonizationYear": 1965,
+      "characteristics": [
+        {
+          "id": "santo-prueba-16-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-16-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-16-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-16-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-16-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-16-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-17",
+      "name": "Santo de prueba 17",
+      "birthYear": 1848,
+      "birthYearDisplay": "1848",
+      "ageAtDeath": 36,
+      "ageAtDeathDisplay": "36 años",
+      "country": "Polonia",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "santos-martires",
+        "educadores-y-guias"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-17-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-17-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-17-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-17-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-17-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-17-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-18",
+      "name": "Santo de prueba 18",
+      "birthYear": 1851,
+      "birthYearDisplay": "1851",
+      "ageAtDeath": 37,
+      "ageAtDeathDisplay": "37 años",
+      "country": "Filipinas",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-18-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-18-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-18-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-18-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-18-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-18-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-19",
+      "name": "Santo de prueba 19",
+      "birthYear": 1854,
+      "birthYearDisplay": "1854",
+      "ageAtDeath": 38,
+      "ageAtDeathDisplay": "38 años",
+      "country": "España",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": 1968,
+      "characteristics": [
+        {
+          "id": "santo-prueba-19-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-19-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-19-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-19-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-19-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-19-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-20",
+      "name": "Santo de prueba 20",
+      "birthYear": 1857,
+      "birthYearDisplay": "1857",
+      "ageAtDeath": 39,
+      "ageAtDeathDisplay": "39 años",
+      "country": "Perú",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-20-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-20-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-20-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-20-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-20-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-20-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-21",
+      "name": "Santo de prueba 21",
+      "birthYear": 1860,
+      "birthYearDisplay": "c. 1860",
+      "ageAtDeath": 40,
+      "ageAtDeathDisplay": "40 años",
+      "country": "Francia",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "santos-martires"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-21-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-21-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-21-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-21-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-21-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-21-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-22",
+      "name": "Santo de prueba 22",
+      "birthYear": 1863,
+      "birthYearDisplay": "1863",
+      "ageAtDeath": 41,
+      "ageAtDeathDisplay": "41 años",
+      "country": "Colombia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "educadores-y-guias",
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [],
+      "canonizationYear": 1971,
+      "characteristics": [
+        {
+          "id": "santo-prueba-22-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-22-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-22-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-22-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-22-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-22-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "reviewed"
+    },
+    {
+      "id": "santo-prueba-23",
+      "name": "Santo de prueba 23",
+      "birthYear": 1866,
+      "birthYearDisplay": "1866",
+      "ageAtDeath": 42,
+      "ageAtDeathDisplay": "42 años",
+      "country": "Polonia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-23-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-23-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-23-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-23-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-23-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-23-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-24",
+      "name": "Santo de prueba 24",
+      "birthYear": 1869,
+      "birthYearDisplay": "1869",
+      "ageAtDeath": 43,
+      "ageAtDeathDisplay": "43 años",
+      "country": "Filipinas",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-24-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-24-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-24-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-24-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-24-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-24-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-25",
+      "name": "Santo de prueba 25",
+      "birthYear": 1872,
+      "birthYearDisplay": "1872",
+      "ageAtDeath": 44,
+      "ageAtDeathDisplay": "44 años",
+      "country": "España",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "santos-martires",
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": 1974,
+      "characteristics": [
+        {
+          "id": "santo-prueba-25-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-25-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-25-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-25-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-25-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-25-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-26",
+      "name": "Santo de prueba 26",
+      "birthYear": 1875,
+      "birthYearDisplay": "c. 1875",
+      "ageAtDeath": 45,
+      "ageAtDeathDisplay": "45 años",
+      "country": "Perú",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-26-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-26-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-26-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-26-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-26-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-26-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-27",
+      "name": "Santo de prueba 27",
+      "birthYear": 1878,
+      "birthYearDisplay": "1878",
+      "ageAtDeath": 46,
+      "ageAtDeathDisplay": "46 años",
+      "country": "Francia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "educadores-y-guias"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-27-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-27-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-27-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-27-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-27-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-27-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-28",
+      "name": "Santo de prueba 28",
+      "birthYear": 1881,
+      "birthYearDisplay": "1881",
+      "ageAtDeath": 47,
+      "ageAtDeathDisplay": "47 años",
+      "country": "Colombia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [],
+      "canonizationYear": 1977,
+      "characteristics": [
+        {
+          "id": "santo-prueba-28-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-28-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-28-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-28-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-28-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-28-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-29",
+      "name": "Santo de prueba 29",
+      "birthYear": 1884,
+      "birthYearDisplay": "1884",
+      "ageAtDeath": 48,
+      "ageAtDeathDisplay": "48 años",
+      "country": "Polonia",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "santos-martires"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-29-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-29-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-29-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-29-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-29-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-29-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "reviewed"
+    },
+    {
+      "id": "santo-prueba-30",
+      "name": "Santo de prueba 30",
+      "birthYear": 1887,
+      "birthYearDisplay": "1887",
+      "ageAtDeath": 49,
+      "ageAtDeathDisplay": "49 años",
+      "country": "Filipinas",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-30-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-30-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-30-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-30-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-30-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-30-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-31",
+      "name": "Santo de prueba 31",
+      "birthYear": 1890,
+      "birthYearDisplay": "c. 1890",
+      "ageAtDeath": 50,
+      "ageAtDeathDisplay": "50 años",
+      "country": "España",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": 1980,
+      "characteristics": [
+        {
+          "id": "santo-prueba-31-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-31-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-31-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-31-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-31-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-31-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-32",
+      "name": "Santo de prueba 32",
+      "birthYear": 1893,
+      "birthYearDisplay": "1893",
+      "ageAtDeath": 51,
+      "ageAtDeathDisplay": "51 años",
+      "country": "Perú",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "educadores-y-guias"
+      ],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-32-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-32-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-32-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-32-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-32-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-32-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-33",
+      "name": "Santo de prueba 33",
+      "birthYear": 1896,
+      "birthYearDisplay": "1896",
+      "ageAtDeath": 52,
+      "ageAtDeathDisplay": "52 años",
+      "country": "Francia",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "santos-martires"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-33-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-33-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-33-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-33-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-33-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-33-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-34",
+      "name": "Santo de prueba 34",
+      "birthYear": 1899,
+      "birthYearDisplay": "1899",
+      "ageAtDeath": 53,
+      "ageAtDeathDisplay": "53 años",
+      "country": "Colombia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [],
+      "canonizationYear": 1983,
+      "characteristics": [
+        {
+          "id": "santo-prueba-34-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-34-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-34-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-34-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-34-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-34-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-35",
+      "name": "Santo de prueba 35",
+      "birthYear": 1902,
+      "birthYearDisplay": "1902",
+      "ageAtDeath": 54,
+      "ageAtDeathDisplay": "54 años",
+      "country": "Polonia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-35-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-35-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-35-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-35-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-35-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-35-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-36",
+      "name": "Santo de prueba 36",
+      "birthYear": 1905,
+      "birthYearDisplay": "c. 1905",
+      "ageAtDeath": 55,
+      "ageAtDeathDisplay": "55 años",
+      "country": "Filipinas",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-36-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-36-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-36-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-36-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-36-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-36-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "reviewed"
+    },
+    {
+      "id": "santo-prueba-37",
+      "name": "Santo de prueba 37",
+      "birthYear": 1908,
+      "birthYearDisplay": "1908",
+      "ageAtDeath": 56,
+      "ageAtDeathDisplay": "56 años",
+      "country": "España",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "santos-martires",
+        "educadores-y-guias",
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": 1986,
+      "characteristics": [
+        {
+          "id": "santo-prueba-37-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-37-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-37-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-37-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-37-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-37-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-38",
+      "name": "Santo de prueba 38",
+      "birthYear": 1911,
+      "birthYearDisplay": "1911",
+      "ageAtDeath": 57,
+      "ageAtDeathDisplay": "57 años",
+      "country": "Perú",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-38-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-38-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-38-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-38-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-38-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-38-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-39",
+      "name": "Santo de prueba 39",
+      "birthYear": 1914,
+      "birthYearDisplay": "1914",
+      "ageAtDeath": 58,
+      "ageAtDeathDisplay": "58 años",
+      "country": "Francia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-39-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-39-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-39-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-39-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-39-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-39-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-40",
+      "name": "Santo de prueba 40",
+      "birthYear": 1917,
+      "birthYearDisplay": "1917",
+      "ageAtDeath": 59,
+      "ageAtDeathDisplay": "59 años",
+      "country": "Colombia",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [],
+      "canonizationYear": 1989,
+      "characteristics": [
+        {
+          "id": "santo-prueba-40-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-40-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-40-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-40-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-40-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-40-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-41",
+      "name": "Santo de prueba 41",
+      "birthYear": 1920,
+      "birthYearDisplay": "c. 1920",
+      "ageAtDeath": 60,
+      "ageAtDeathDisplay": "60 años",
+      "country": "Polonia",
+      "portraitPath": null,
+      "isMartyr": true,
+      "categories": [
+        "santos-martires"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-41-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-41-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-41-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-41-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-41-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-41-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-42",
+      "name": "Santo de prueba 42",
+      "birthYear": 1923,
+      "birthYearDisplay": "1923",
+      "ageAtDeath": 61,
+      "ageAtDeathDisplay": "61 años",
+      "country": "Filipinas",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "educadores-y-guias"
+      ],
+      "patronages": [],
+      "canonizationYear": null,
+      "characteristics": [
+        {
+          "id": "santo-prueba-42-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-42-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-42-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-42-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-42-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-42-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "needs_review"
+    },
+    {
+      "id": "santo-prueba-43",
+      "name": "Santo de prueba 43",
+      "birthYear": 1926,
+      "birthYearDisplay": "1926",
+      "ageAtDeath": 62,
+      "ageAtDeathDisplay": "62 años",
+      "country": "España",
+      "portraitPath": null,
+      "isMartyr": false,
+      "categories": [
+        "patronos-de-la-juventud"
+      ],
+      "patronages": [
+        "Jóvenes",
+        "Estudiantes"
+      ],
+      "canonizationYear": 1992,
+      "characteristics": [
+        {
+          "id": "santo-prueba-43-c1",
+          "text": "Texto de prueba sobre su infancia: creció en una familia sencilla y participó con entusiasmo en la vida de su parroquia y de su comunidad.",
+          "type": "biography"
+        },
+        {
+          "id": "santo-prueba-43-c2",
+          "text": "Texto de prueba sobre sus virtudes: se le recuerda por su paciencia, su alegría y su cercanía con los más pobres, los enfermos y los olvidados.",
+          "type": "virtue"
+        },
+        {
+          "id": "santo-prueba-43-c3",
+          "text": "Según testimonios recogidos en el proceso, se le atribuye una curación inexplicable; la tradición cuenta que muchos acudían a pedir su intercesión.",
+          "type": "miracle"
+        },
+        {
+          "id": "santo-prueba-43-c4",
+          "text": "Texto de prueba sobre su patronazgo: es invocado como patrono de estudiantes, catequistas y grupos juveniles en distintos países de habla hispana.",
+          "type": "patronage"
+        },
+        {
+          "id": "santo-prueba-43-c5",
+          "text": "Texto de prueba sobre su canonización: el proceso concluyó tras el reconocimiento de un milagro atribuido a su intercesión, según la Iglesia.",
+          "type": "canonization"
+        },
+        {
+          "id": "santo-prueba-43-c6",
+          "text": "Texto de prueba sobre su legado: su ejemplo sigue inspirando a jóvenes de todo el mundo a vivir la fe con valentía, servicio y sencillez.",
+          "type": "legacy"
+        }
+      ],
+      "sources": [],
+      "reviewStatus": "reviewed"
+    }
+  ],
+  "collections": [
+    {
+      "id": "originales-26",
+      "name": "Santos originales (26)",
+      "saintIds": [
+        "jose-sanchez-del-rio",
+        "carlo-acutis",
+        "santo-prueba-03",
+        "santo-prueba-04",
+        "santo-prueba-05",
+        "santo-prueba-06",
+        "santo-prueba-07",
+        "santo-prueba-08",
+        "santo-prueba-09",
+        "santo-prueba-10",
+        "santo-prueba-11",
+        "santo-prueba-12",
+        "santo-prueba-13",
+        "santo-prueba-14",
+        "santo-prueba-15",
+        "santo-prueba-16",
+        "santo-prueba-17",
+        "santo-prueba-18",
+        "santo-prueba-19",
+        "santo-prueba-20",
+        "santo-prueba-21",
+        "santo-prueba-22",
+        "santo-prueba-23",
+        "santo-prueba-24",
+        "santo-prueba-25",
+        "santo-prueba-26"
+      ]
+    },
+    {
+      "id": "adicionales-17",
+      "name": "Santos adicionales (17)",
+      "saintIds": [
+        "santo-prueba-27",
+        "santo-prueba-28",
+        "santo-prueba-29",
+        "santo-prueba-30",
+        "santo-prueba-31",
+        "santo-prueba-32",
+        "santo-prueba-33",
+        "santo-prueba-34",
+        "santo-prueba-35",
+        "santo-prueba-36",
+        "santo-prueba-37",
+        "santo-prueba-38",
+        "santo-prueba-39",
+        "santo-prueba-40",
+        "santo-prueba-41",
+        "santo-prueba-42",
+        "santo-prueba-43"
+      ]
+    },
+    {
+      "id": "santos-jovenes",
+      "name": "Santos jóvenes",
+      "saintIds": [
+        "jose-sanchez-del-rio",
+        "carlo-acutis",
+        "santo-prueba-04",
+        "santo-prueba-05",
+        "santo-prueba-06",
+        "santo-prueba-07",
+        "santo-prueba-08",
+        "santo-prueba-09",
+        "santo-prueba-10"
+      ]
+    },
+    {
+      "id": "santos-martires",
+      "name": "Santos mártires",
+      "saintIds": [
+        "jose-sanchez-del-rio",
+        "santo-prueba-03",
+        "santo-prueba-05",
+        "santo-prueba-09",
+        "santo-prueba-13",
+        "santo-prueba-17",
+        "santo-prueba-21",
+        "santo-prueba-25",
+        "santo-prueba-29",
+        "santo-prueba-33",
+        "santo-prueba-37",
+        "santo-prueba-41"
+      ]
+    },
+    {
+      "id": "educadores-y-guias",
+      "name": "Educadores y guías",
+      "saintIds": [
+        "carlo-acutis",
+        "santo-prueba-07",
+        "santo-prueba-12",
+        "santo-prueba-17",
+        "santo-prueba-22",
+        "santo-prueba-27",
+        "santo-prueba-32",
+        "santo-prueba-37",
+        "santo-prueba-42"
+      ]
+    },
+    {
+      "id": "patronos-juventud",
+      "name": "Patronos de la juventud",
+      "saintIds": [
+        "jose-sanchez-del-rio",
+        "santo-prueba-04",
+        "santo-prueba-07",
+        "santo-prueba-10",
+        "santo-prueba-13",
+        "santo-prueba-16",
+        "santo-prueba-19",
+        "santo-prueba-22",
+        "santo-prueba-25",
+        "santo-prueba-28",
+        "santo-prueba-31",
+        "santo-prueba-34",
+        "santo-prueba-37",
+        "santo-prueba-40",
+        "santo-prueba-43"
+      ]
+    }
+  ]
+}
