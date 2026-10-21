@@ -1,0 +1,875 @@
+{
+  "common": {
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "deleteEllipsis": "Eliminar…",
+    "edit": "Editar",
+    "duplicate": "Duplicar",
+    "rename": "Renombrar",
+    "renameEllipsis": "Renombrar…",
+    "create": "Crear",
+    "done": "Listo",
+    "reset": "Restablecer",
+    "search": "Buscar…",
+    "noResults": "Sin resultados.",
+    "saving": "Guardando…",
+    "library": "Biblioteca",
+    "settings": "Configuración",
+    "collections": "Colecciones",
+    "printWorksheet": "Crear ficha",
+    "printWorksheets": "Crear fichas",
+    "saints": "{count, plural, one {# santo} other {# santos}}",
+    "selected": "{count, plural, one {# seleccionado} other {# seleccionados}}",
+    "characteristics": "{count, plural, one {# característica} other {# características}}",
+    "collectionsCount": "{count, plural, one {# colección} other {# colecciones}}",
+    "pages": "{count, plural, one {# página} other {# páginas}}",
+    "moveUp": "Subir {name}",
+    "moveDown": "Bajar {name}",
+    "dragItem": "Arrastrar {name}",
+    "addItem": "Añadir {name}",
+    "moreActionsFor": "Más acciones para {name}",
+    "serverOffline": "No se pudo conectar con el servidor local. ¿Está corriendo «npm run dev»?",
+    "typeToConfirm": "Escribe <strong>{word}</strong> para confirmar",
+    "unsavedLeave": "Tienes cambios sin guardar. ¿Salir de todos modos y perderlos?",
+    "nameDialog": {
+      "label": "Nombre",
+      "required": "Escribe un nombre."
+    },
+    "errorPage": {
+      "title": "Algo salió mal",
+      "fallback": "Error inesperado al cargar esta página.",
+      "retry": "Reintentar"
+    },
+    "notFound": {
+      "title": "No encontrado",
+      "description": "Esta página o registro no existe o fue eliminado.",
+      "back": "Volver a la biblioteca"
+    }
+  },
+  "nav": {
+    "ariaLabel": "Principal",
+    "library": "Biblioteca de Santos",
+    "builder": "Crear Fichas",
+    "collections": "Colecciones",
+    "settings": "Configuración",
+    "short": {
+      "library": "Biblioteca",
+      "builder": "Crear",
+      "collections": "Colecciones",
+      "settings": "Configuración"
+    }
+  },
+  "meta": {
+    "description": "Biblioteca de santos y fichas imprimibles para el grupo juvenil.",
+    "library": "Biblioteca de Santos",
+    "newSaint": "Nuevo santo",
+    "saint": "Santo",
+    "collections": "Colecciones",
+    "collection": "Colección",
+    "builder": "Crear Fichas",
+    "settings": "Configuración",
+    "importJson": "Importar JSON",
+    "importPortraits": "Importar retratos",
+    "print": "Fichas para imprimir"
+  },
+  "library": {
+    "title": "Biblioteca de Santos",
+    "loading": "Cargando biblioteca",
+    "pendingReview": "{count, plural, one {# pendiente de revisión histórica} other {# pendientes de revisión histórica}}",
+    "importJson": "Importar JSON",
+    "importPortraits": "Importar retratos",
+    "newSaint": "Nuevo santo",
+    "searchPlaceholder": "Buscar por nombre, país, patronazgo o característica…",
+    "searchLabel": "Buscar santos",
+    "filterCollection": "Filtrar por colección",
+    "allCollections": "Todas las colecciones",
+    "filterReview": "Filtrar por revisión",
+    "filterCategory": "Filtrar por categoría",
+    "clearFilters": "Limpiar filtros",
+    "addToCollection": "Añadir a colección",
+    "addTo": "Añadir a…",
+    "newCollectionEllipsis": "Nueva colección…",
+    "clearSelection": "Quitar selección",
+    "noMatches": "Ningún santo coincide con los filtros.",
+    "noResultsFor": "No hay resultados para «{query}».",
+    "tryOtherFilter": "Prueba con otra categoría o colección.",
+    "selectAllVisible": "Seleccionar todos los visibles",
+    "selectSaint": "Seleccionar {name}",
+    "editSaint": "Editar {name}",
+    "columns": {
+      "portrait": "Retrato",
+      "name": "Nombre",
+      "country": "País",
+      "birth": "Nacimiento",
+      "age": "Edad al morir",
+      "categories": "Categorías",
+      "actions": "Acciones"
+    },
+    "showing": "Mostrando {count, plural, one {# santo} other {# santos}} de {total}.",
+    "newCollection": "Nueva colección",
+    "newCollectionDescription": "Se creará con {count, plural, one {# santo seleccionado} other {# santos seleccionados}}.",
+    "createCollection": "Crear colección",
+    "portraitMissing": "Falta el archivo del retrato",
+    "noPortrait": "Sin retrato",
+    "review": {
+      "any": "Cualquier revisión",
+      "pending": "Pendientes de revisión",
+      "reviewed": "Revisados",
+      "menu": "Revisión",
+      "pendingOf": "{pending} de {total} pendientes",
+      "allReviewed": "Todos ya están revisados",
+      "markReviewedEllipsis": "Marcar como revisados…",
+      "markReviewed": "Marcar como revisados",
+      "markPending": "Marcar como pendientes",
+      "badge": "Revisión pendiente",
+      "badgeTooltip": "Los datos históricos aún no se han verificado.",
+      "confirmTitle": "¿Marcar {count, plural, one {# santo como revisado} other {# santos como revisados}}?",
+      "confirmBody": "Confirma que comprobaste sus datos históricos (fechas, edad, país y características) con una fuente confiable.",
+      "confirmUndo": "Puedes volver a marcarlos como pendientes en cualquier momento."
+    },
+    "delete": {
+      "title": "¿Eliminar a {name}?",
+      "body": "Se borrarán sus características y su retrato (si ningún otro santo lo usa).",
+      "collections": "También se quitará de {count, plural, one {# colección} other {# colecciones}}.",
+      "warning": "Esta acción no se puede deshacer. Considera descargar un respaldo antes."
+    },
+    "toast": {
+      "addedTo": "Añadidos a «{name}»",
+      "totalSaints": "{count, plural, one {# santo en total} other {# santos en total}}",
+      "collectionUpdateFailed": "No se pudo actualizar la colección",
+      "collectionCreated": "Colección «{name}» creada",
+      "markedReviewed": "{count, plural, one {# santo marcado como revisado} other {# santos marcados como revisados}}",
+      "markedPending": "{count, plural, one {# santo marcado como pendiente} other {# santos marcados como pendientes}}",
+      "reviewFailed": "No se pudo cambiar el estado de revisión",
+      "copyCreated": "Copia creada",
+      "duplicateFailed": "No se pudo duplicar",
+      "deleted": "«{name}» eliminado",
+      "deleteFailed": "No se pudo eliminar"
+    },
+    "empty": {
+      "title": "Tu biblioteca está vacía",
+      "description": "Importa tu archivo de santos en formato JSON para empezar, o agrega un santo a mano. Todo se guarda en este equipo.",
+      "seedFound": "Se encontró santos_studio_43_santos.json",
+      "seedLocation": "Está en la carpeta <code>seed/</code>. Revisa la vista previa antes de importar.",
+      "reviewAndImport": "Revisar e importar",
+      "addSaint": "Agregar santo"
+    }
+  },
+  "editor": {
+    "newSaint": "Nuevo santo",
+    "unsaved": "Cambios sin guardar",
+    "savedAt": "Guardado a las {time}",
+    "discard": "Descartar",
+    "saveErrorTitle": "No se guardaron los cambios",
+    "saveErrorKept": "Tus ediciones siguen en el formulario.",
+    "review": {
+      "title": "Pendiente de revisión histórica",
+      "body": "Los datos importados no han sido verificados. Cuando compruebes fechas, edad, país y características con una fuente confiable, márcalo como revisado.",
+      "mark": "Marcar como revisado",
+      "markAndSave": "Marcar como revisado y guardar cambios"
+    },
+    "sections": {
+      "basics": "Datos básicos",
+      "characteristics": "Características",
+      "characteristicsHelp": "Lista ordenada que se imprime como viñetas. Arrastra o usa las flechas para reordenar.",
+      "classification": "Clasificación",
+      "sources": "Fuentes",
+      "sourcesHelp": "Referencias para la revisión histórica (opcional). No se imprimen.",
+      "portrait": "Retrato",
+      "preview": "Vista previa de la ficha",
+      "previewHelp": "Mismo diseño que la impresión, a tamaño real de media página."
+    },
+    "fields": {
+      "name": "Nombre",
+      "birthYear": "Año de nacimiento (número)",
+      "birthYearDisplay": "Año de nacimiento (texto mostrado)",
+      "ageAtDeath": "Edad al morir (número)",
+      "ageAtDeathDisplay": "Edad al morir (texto mostrado)",
+      "country": "País de origen",
+      "canonizationYear": "Año de canonización",
+      "reviewStatus": "Estado de revisión",
+      "isMartyr": "Mártir",
+      "categories": "Categorías",
+      "patronages": "Patronazgos",
+      "sources": "Fuentes"
+    },
+    "hints": {
+      "birthYear": "Vacío si se desconoce.",
+      "birthYearDisplay": "Se imprime tal cual: «aprox. 1181–1182».",
+      "ageAtDeathDisplay": "Ej.: «14 años», «aprox. 13–14 años».",
+      "canonizationYear": "Opcional. Si está vacío no se muestra.",
+      "categories": "Escribe y pulsa Enter",
+      "source": "URL o referencia bibliográfica"
+    },
+    "reviewStatus": {
+      "needs_review": "Pendiente de revisión",
+      "reviewed": "Revisado"
+    },
+    "inCollections": "En colecciones: {names}",
+    "addPatronage": "Añadir patronazgo",
+    "addSource": "Añadir fuente",
+    "listItem": "{label} {n}",
+    "removeListItem": "Quitar {label} {n}",
+    "photoFitNotice": "En Crear Fichas está activo «{active}», que se aplica a todas las fotos. Este encuadre se usa al elegir «{saint}».",
+    "overflow": "Con la configuración actual ({size} pt) esta ficha no cabe en media página. Acorta el texto, o en Crear Fichas reduce la letra o usa una ficha por página.",
+    "delete": {
+      "title": "¿Eliminar a {name}?",
+      "body": "Se borrarán sus características{collections, plural, =0 {} one { y se quitará de # colección} other { y se quitará de # colecciones}}.",
+      "warning": "Esta acción no se puede deshacer."
+    },
+    "toast": {
+      "created": "Santo creado",
+      "saved": "Cambios guardados",
+      "saveFailed": "No se pudo guardar",
+      "checkFields": "Revisa los campos marcados",
+      "invalidData": "Hay datos que no son válidos.",
+      "copyCreated": "Copia creada",
+      "duplicateFailed": "No se pudo duplicar",
+      "deleted": "«{name}» eliminado",
+      "deleteFailed": "No se pudo eliminar"
+    },
+    "characteristics": {
+      "count": "{count, plural, one {# característica} other {# características}} · se recomiendan entre 5 y 8 para una ficha clara (no es obligatorio).",
+      "attributionTip": "Al describir milagros o experiencias espirituales, conserva la atribución («según testimonios», «la tradición cuenta», «se le atribuye»).",
+      "drag": "Arrastrar característica {n}",
+      "text": "Texto de la característica {n}",
+      "type": "Tipo de la característica {n}",
+      "moveUp": "Subir característica {n}",
+      "moveDown": "Bajar característica {n}",
+      "remove": "Eliminar característica {n}",
+      "missingAttribution": "Este texto describe un milagro sin atribución. Considera indicar la fuente (p. ej. «según testimonios»).",
+      "add": "Añadir característica",
+      "types": {
+        "biography": "Biografía",
+        "virtue": "Virtud",
+        "miracle": "Milagro (atribuido)",
+        "patronage": "Patronazgo",
+        "martyrdom": "Martirio",
+        "canonization": "Canonización",
+        "legacy": "Legado",
+        "other": "Otro"
+      }
+    },
+    "tags": {
+      "remove": "Quitar {name}",
+      "suggested": "Categorías sugeridas"
+    }
+  },
+  "portraits": {
+    "page": {
+      "back": "Biblioteca",
+      "title": "Importar retratos",
+      "description": "Elige una carpeta o varias imágenes. Cada archivo se asigna al santo con el mismo nombre (sin importar acentos ni mayúsculas). Los nombres parecidos y las imágenes repetidas se revisan antes de importar."
+    },
+    "editor": {
+      "unsupportedTitle": "Formato no admitido",
+      "unsupportedBody": "Sube una imagen JPG, PNG o WebP.",
+      "tooLargeTitle": "Imagen demasiado grande",
+      "tooLargeBody": "El límite es {mb} MB.",
+      "replaced": "Retrato reemplazado",
+      "uploaded": "Retrato subido",
+      "uploadFailed": "No se pudo subir la imagen",
+      "removed": "Retrato quitado",
+      "removeFailed": "No se pudo quitar el retrato",
+      "dragToMove": "Arrastra para mover el encuadre",
+      "currentAlt": "Retrato actual",
+      "fileMissing": "No se encontró el archivo",
+      "placeholder": "Espacio para foto",
+      "processing": "Procesando",
+      "saveFirst": "Guarda el santo por primera vez para poder subir su retrato.",
+      "replace": "Reemplazar imagen…",
+      "upload": "Subir imagen…",
+      "remove": "Quitar retrato",
+      "help": "JPG, PNG o WebP · máx. {mb} MB. Se guarda de inmediato en este equipo, sin metadatos (EXIF).",
+      "framing": "Encuadre (se guarda con «Guardar»)",
+      "cover": "Recortar para llenar",
+      "contain": "Imagen completa",
+      "zoom": "Zoom",
+      "horizontal": "Posición horizontal",
+      "vertical": "Posición vertical",
+      "resetFraming": "Restablecer encuadre",
+      "removeTitle": "¿Quitar el retrato?",
+      "removeBody": "La ficha mostrará «Espacio para foto». El archivo se borra si ningún otro santo lo usa."
+    },
+    "importer": {
+      "noImages": "No se encontraron imágenes",
+      "supportedFormats": "Formatos admitidos: JPG, PNG, WebP, GIF.",
+      "unreadable": "El navegador no puede leer este formato. Conviértelo a JPG o PNG.",
+      "convertFailed": "No se pudo convertir la imagen.",
+      "imported": "{count, plural, one {# retrato importado} other {# retratos importados}}",
+      "importedWithErrors": "{count, plural, one {# retrato importado} other {# retratos importados}} · {failed} con error",
+      "checkErrors": "Revisa los errores en la lista.",
+      "dropHint": "Arrastra aquí la carpeta de retratos (por ejemplo images/Saints) o varias imágenes",
+      "chooseFolder": "Elegir carpeta…",
+      "chooseImages": "Elegir imágenes…",
+      "scanning": "Analizando imágenes…",
+      "summary": {
+        "exact": "{count, plural, one {# coincidencia exacta} other {# coincidencias exactas}}",
+        "fuzzy": "{count, plural, one {# parecida} other {# parecidas}}",
+        "none": "{count} sin coincidencia",
+        "groups": "{count, plural, one {# santo con varias imágenes} other {# santos con varias imágenes}}",
+        "ignored": "{count, plural, one {# archivo ignorado} other {# archivos ignorados}} (no son imágenes)"
+      },
+      "replaceExisting": "Reemplazar retratos existentes",
+      "existingSkipped": "{count, plural, one {# santo ya tiene retrato y se saltará} other {# santos ya tienen retrato y se saltarán}}",
+      "reviewCount": "Revisar {count}",
+      "importing": "Importando… {done}/{total}",
+      "importButton": "Importar {count, plural, one {# retrato} other {# retratos}}",
+      "viewLibrary": "Ver la biblioteca",
+      "columns": {
+        "preview": "Vista previa",
+        "file": "Archivo",
+        "saint": "Santo",
+        "status": "Estado"
+      },
+      "identicalTo": "Idéntica a «{name}»",
+      "saintFor": "Santo para {file}",
+      "unassigned": "— Sin asignar —",
+      "status": {
+        "uploading": "Subiendo…",
+        "done": "Importado",
+        "noMatch": "Sin coincidencia — asígnalo a mano o se omitirá",
+        "fuzzy": "Parecido ({percent} %) — por revisar",
+        "otherChosen": "Otra imagen elegida para este santo",
+        "skipped": "Omitida",
+        "hasPortrait": "Ya tiene retrato — se saltará",
+        "exact": "Coincidencia exacta",
+        "assigned": "Asignada",
+        "willReplace": " · reemplazará el actual"
+      }
+    },
+    "review": {
+      "title": "Revisar coincidencias",
+      "description": "Las coincidencias exactas ya están asignadas. Confirma estos casos antes de importar.",
+      "groupsTitle": "Varias imágenes para el mismo santo",
+      "exactName": "Nombre exacto",
+      "similarName": "Nombre parecido ({percent} %)",
+      "kb": "{kb, number} KB",
+      "identicalTo": "idéntica a «{name}»",
+      "none": "Ninguna (no cambiar el retrato)",
+      "fuzzyTitle": "Nombres parecidos (no idénticos)",
+      "fuzzyQuestion": "«{file}» → ¿<strong>{saint}</strong>?",
+      "similarity": "({percent} % parecido)",
+      "assignFile": "Asignar {file}",
+      "skipImage": "Omitir esta imagen",
+      "assignTo": "Asignar a {name}",
+      "nothing": "No hay nada que revisar."
+    }
+  },
+  "collections": {
+    "title": "Colecciones",
+    "subtitle": "Grupos de santos para preparar fichas. Editar un santo actualiza todas sus colecciones.",
+    "new": "Nueva colección",
+    "renameTitle": "Renombrar colección",
+    "empty": {
+      "title": "Todavía no hay colecciones",
+      "description": "Crea una, o importa tu archivo JSON: trae las colecciones preparadas."
+    },
+    "printWith": "Crear fichas con esta colección",
+    "editMembers": "Editar santos y orden",
+    "autosave": "Los cambios se guardan automáticamente",
+    "printOrder": "{count, plural, one {# santo} other {# santos}} en orden de impresión",
+    "emptyMembers": "Añade santos desde la lista de la derecha.",
+    "addSaints": "Añadir santos",
+    "searchToAdd": "Buscar santos para añadir",
+    "allInCollection": "Todos los santos ya están en la colección.",
+    "removeFrom": "Quitar {name} de la colección",
+    "delete": {
+      "title": "¿Eliminar la colección «{name}»?",
+      "body": "Solo se borra la colección; los santos siguen en la biblioteca.",
+      "bodyCount": "Solo se borra la colección. Sus {count} santos siguen en la biblioteca.",
+      "confirm": "Eliminar colección"
+    },
+    "toast": {
+      "created": "Colección «{name}» creada",
+      "renamed": "Colección renombrada",
+      "deleted": "Colección «{name}» eliminada",
+      "deletedPlain": "Colección eliminada",
+      "saintsKept": "Los santos siguen en la biblioteca.",
+      "deleteFailed": "No se pudo eliminar",
+      "reorderFailed": "No se pudo reordenar",
+      "saveFailed": "No se guardó el cambio"
+    }
+  },
+  "builder": {
+    "previewAria": "Vista previa",
+    "saintsButton": "Santos ({count})",
+    "settingsButton": "Ajustes",
+    "cards": "{count, plural, one {# ficha} other {# fichas}}",
+    "zoom": "Zoom",
+    "zoomOut": "Alejar",
+    "zoomIn": "Acercar",
+    "fit": "Ajustar",
+    "print": "Imprimir",
+    "downloadPdf": "Descargar PDF",
+    "fitOk": "Todo el texto cabe. Listo para imprimir.",
+    "saveFailed": "No se pudieron guardar los ajustes",
+    "measuring": "Comprobando que todo el texto quepa…",
+    "empty": {
+      "title": "No hay santos seleccionados",
+      "description": "Elige una colección o añade santos desde el panel «Santos»."
+    },
+    "openPrintView": "Abrir vista de impresión en otra pestaña",
+    "overflow": {
+      "title": "{count, plural, one {# ficha no cabe} other {# fichas no caben}} en su espacio — el texto se cortaría",
+      "body": "{names}. La impresión y el PDF están bloqueados hasta corregirlo.",
+      "reduce": "Reducir letra y espaciado",
+      "autoFit": "Ajustar automáticamente",
+      "solo": "Una página para {count, plural, one {este santo} other {estos santos}}",
+      "allOnePerPage": "Todo a una por página"
+    },
+    "toast": {
+      "allFits": "Todo cabe",
+      "allFitsDetail": "Letra de {font} pt, {spacing} pt entre viñetas.",
+      "shrinkNotEnough": "Reducir la letra no fue suficiente",
+      "shrinkNotEnoughDetail": "Usa «Una página para estos santos» para que el texto no se corte.",
+      "printBlocked": "No se imprimió: hay fichas que no caben",
+      "printBlockedDetail": "Corrige los avisos e inténtalo de nuevo.",
+      "generatingPdf": "Generando PDF…",
+      "pdfDownloaded": "PDF descargado",
+      "pdfFailed": "No se generó el PDF"
+    },
+    "selection": {
+      "aria": "Selección de santos",
+      "title": "Santos en las fichas",
+      "sheetDescription": "Elige y ordena los santos.",
+      "chooseCollection": "Elegir colección",
+      "useCollection": "Usar una colección…",
+      "replaceSelection": "Reemplazar selección",
+      "appendToEnd": "Añadir al final",
+      "sort": "Ordenar:",
+      "sortBirth": "Nacimiento",
+      "sortCountry": "País",
+      "sortReverse": "Invertir",
+      "empty": "Aún no hay santos. Elige una colección o añádelos desde la lista de abajo.",
+      "orderAria": "Orden de las fichas",
+      "addSaints": "Añadir santos",
+      "addAll": "Añadir todos",
+      "addCount": "Añadir {count}",
+      "searchPlaceholder": "Buscar santo…",
+      "searchAria": "Buscar santos para añadir",
+      "allAdded": "Todos los santos están en las fichas.",
+      "doesNotFit": "(no cabe)",
+      "soloOffAria": "{name}: volver a compartir página",
+      "soloOnAria": "{name}: usar una página completa",
+      "soloOn": "Ocupa una página completa",
+      "soloOff": "Usar una página completa para este santo",
+      "remove": "Quitar {name}"
+    },
+    "settings": {
+      "title": "Ajustes de impresión",
+      "sheetDescription": "Papel, letra y márgenes.",
+      "paper": "Tamaño de papel",
+      "perPage": "Santos por página",
+      "fourPerPage": "Cuatro por página solo funciona con textos cortos; revisa los avisos.",
+      "fontSize": "Tamaño de letra",
+      "bulletSpacing": "Espacio entre viñetas",
+      "margins": "Márgenes",
+      "photoWidth": "Ancho de la foto",
+      "photoFit": "Encuadre de las fotos",
+      "showPortrait": "Mostrar retrato",
+      "showCountry": "Mostrar país de origen",
+      "pageNumbers": "Numerar páginas",
+      "autosave": "Los ajustes se guardan automáticamente en este equipo."
+    },
+    "paper": {
+      "letter": "Carta (8.5 × 11 in)",
+      "letterShort": "Carta",
+      "a4": "A4 (210 × 297 mm)",
+      "a4Short": "A4"
+    },
+    "photoFit": {
+      "saint": "Según cada santo",
+      "contain": "Mostrar completas (sin recortar)",
+      "cover": "Recortar para llenar"
+    },
+    "photoFitHelp": {
+      "saint": "Usa el encuadre elegido en cada santo (por defecto, recortar para llenar).",
+      "contain": "Se ve la foto entera; si su forma no es 3:4 queda espacio en blanco alrededor.",
+      "cover": "Todas llenan el recuadro; los bordes que sobran se recortan."
+    },
+    "printView": {
+      "invalidConfig": "La configuración de impresión no es válida. Vuelve a Crear Fichas e inténtalo de nuevo.",
+      "empty": "No hay santos seleccionados."
+    }
+  },
+  "settings": {
+    "title": "Configuración",
+    "subtitle": "Todo se guarda en esta computadora. No hay cuentas ni servicios en la nube.",
+    "language": {
+      "title": "Idioma de la interfaz",
+      "description": "Idioma de menús, botones y mensajes. Los datos de los santos y las fichas impresas siguen en español.",
+      "error": "No se pudo cambiar el idioma"
+    },
+    "import": {
+      "title": "Importar biblioteca",
+      "description": "Carga un archivo JSON de Santos Studio (por ejemplo santos_studio_43_santos.json) con vista previa y validación completa.",
+      "button": "Importar JSON"
+    },
+    "export": {
+      "title": "Exportar y respaldar",
+      "description": "«Exportar JSON» guarda santos y colecciones en el mismo formato del importador. El respaldo ZIP además incluye los retratos y un manifiesto para restaurar en otra computadora."
+    },
+    "restore": {
+      "title": "Restaurar respaldo",
+      "description": "Primero se valida el ZIP completo (sumas de verificación, imágenes y datos). No se cambia nada hasta que confirmes."
+    },
+    "data": {
+      "title": "Datos locales",
+      "library": "Biblioteca",
+      "counts": "{saints, plural, one {# santo} other {# santos}} · {collections, plural, one {# colección} other {# colecciones}} · {portraits, plural, one {# retrato} other {# retratos}}",
+      "database": "Base de datos",
+      "kb": "{kb, number} KB",
+      "portraits": "Retratos",
+      "uploadLimit": "Límite de subida",
+      "uploadLimitValue": "{mb} MB por imagen (JPG, PNG o WebP)",
+      "changeFolder": "Para cambiar la carpeta de datos, define <code>SANTOS_DATA_DIR</code> en <code>.env.local</code> y reinicia la app."
+    }
+  },
+  "import": {
+    "report": {
+      "fields": {
+        "schemaVersion": "versión del esquema (schemaVersion)",
+        "format": "formato (format)",
+        "language": "idioma (language)",
+        "source": "origen (source)",
+        "saints": "santos",
+        "collections": "colecciones",
+        "id": "id",
+        "name": "nombre",
+        "birthYear": "año de nacimiento (birthYear)",
+        "birthYearDisplay": "año de nacimiento mostrado (birthYearDisplay)",
+        "ageAtDeath": "edad al morir (ageAtDeath)",
+        "ageAtDeathDisplay": "edad mostrada (ageAtDeathDisplay)",
+        "country": "país (country)",
+        "portraitPath": "retrato (portraitPath)",
+        "isMartyr": "mártir (isMartyr)",
+        "categories": "categorías",
+        "patronages": "patronazgos",
+        "canonizationYear": "año de canonización (canonizationYear)",
+        "characteristics": "características",
+        "sources": "fuentes",
+        "reviewStatus": "estado de revisión (reviewStatus)",
+        "text": "texto",
+        "type": "tipo",
+        "saintIds": "santos de la colección (saintIds)"
+      },
+      "quote": "«{value}»",
+      "saintAt": "Santo n.º {n}",
+      "saintAtNamed": "Santo n.º {n} («{name}»)",
+      "collectionAt": "Colección n.º {n}",
+      "collectionAtNamed": "Colección n.º {n} («{name}»)",
+      "characteristicAt": "característica n.º {n}",
+      "itemAt": "elemento n.º {n}",
+      "moreErrors": "{count, plural, one {…y # error más.} other {…y # errores más.}}",
+      "invalidJsonFile": "El archivo no es JSON válido: {message}",
+      "notAnObject": "El archivo debe contener un objeto JSON con schemaVersion, format, language, source, saints y collections.",
+      "duplicateSaintId": "El id de santo «{id}» aparece {count} veces en el archivo.",
+      "duplicateCharacteristicId": "«{saint}»: el id de característica «{id}» está repetido.",
+      "noCharacteristics": "«{saint}» no tiene características.",
+      "portraitUnavailable": "«{saint}»: el retrato «{path}» no está disponible en este equipo; se importará sin foto.",
+      "sharedCharacteristicIds": "{count, plural, one {# id de característica se repite} other {# ids de característica se repiten}} entre santos distintos (p. ej. «{example}»). Se permite porque cada id se guarda por santo.",
+      "possibleDuplicate": "Posible duplicado: los ids {ids} tienen el mismo nombre.",
+      "duplicateCollectionId": "El id de colección «{id}» aparece {count} veces.",
+      "collectionRepeatedSaint": "Colección «{collection}»: el santo «{id}» aparece más de una vez.",
+      "collectionUnknownSaint": "Colección «{collection}»: el santo «{id}» no existe en el archivo."
+    },
+    "summary": {
+      "saintsImported": "{count, plural, one {# santo importado} other {# santos importados}}",
+      "characteristics": "{count, plural, one {# característica} other {# características}}",
+      "collections": "{count, plural, one {# colección} other {# colecciones}}",
+      "membershipsAdded": "{count, plural, one {# santo añadido} other {# santos añadidos}} a {collections, plural, one {# colección existente} other {# colecciones existentes}}",
+      "saintsSkipped": "{count, plural, one {# santo existente saltado} other {# santos existentes saltados}}"
+    },
+    "page": {
+      "back": "Configuración",
+      "title": "Importar biblioteca (JSON)",
+      "description": "Formato <code>santos-studio-library</code>, versión 1. Todo el archivo se valida antes de guardar; si hay un error no se importa nada.",
+      "formatDetails": "Formato del archivo JSON y ejemplo"
+    },
+    "dialog": {
+      "title": "Importar santos desde un archivo JSON",
+      "description": "Añade santos (y colecciones) a tu biblioteca. Se valida todo el archivo y verás una vista previa antes de guardar.",
+      "uploadTab": "Subir archivo",
+      "formatTab": "Formato del JSON"
+    },
+    "modes": {
+      "skip": {
+        "label": "Saltar existentes",
+        "help": "Agrega los santos y colecciones nuevos, y suma los santos nuevos a las colecciones que ya existen. No modifica ni borra nada de lo que ya tienes. (Recomendado)"
+      },
+      "update": {
+        "label": "Actualizar existentes",
+        "help": "Agrega los nuevos y sobrescribe los textos de los que tengan el mismo id. Los retratos que ya subiste se conservan."
+      },
+      "replace": {
+        "label": "Reemplazar biblioteca",
+        "help": "Borra TODOS los santos y colecciones actuales y deja solo lo que trae el archivo. Pide confirmación."
+      }
+    },
+    "replaceWord": "REEMPLAZAR",
+    "invalidJson": "«{name}» no es un JSON válido: {message}",
+    "seedMissing": "No se encontró el archivo en seed/.",
+    "tooLarge": "El archivo es demasiado grande (máx. {mb} MB).",
+    "toast": {
+      "done": "Importación completada",
+      "failed": "No se importó nada"
+    },
+    "steps": {
+      "file": "1. Elige el archivo",
+      "mode": "2. ¿Qué hacer con los registros que ya existen?",
+      "preview": "3. Vista previa (no se ha guardado nada todavía)"
+    },
+    "dropHint": "Arrastra aquí un archivo .json de Santos Studio",
+    "chooseFile": "Elegir archivo…",
+    "useSeed": "Usar seed/santos_studio_43_santos.json",
+    "loadedFile": "Archivo: <strong>{name}</strong> ({kb, number} KB)",
+    "cannotRead": "No se puede leer el archivo",
+    "validating": "Validando",
+    "choosePrompt": "Elige un archivo para ver la vista previa.",
+    "viewLibrary": "Ver biblioteca",
+    "viewCollections": "Ver colecciones",
+    "importAnother": "Importar otro archivo",
+    "replaceButton": "Reemplazar biblioteca…",
+    "importButton": "Importar",
+    "fixErrors": "Corrige los errores del archivo para poder importar.",
+    "nothingToDo": "No hay nada nuevo que importar con este modo.",
+    "confirm": {
+      "title": "¿Reemplazar toda la biblioteca?",
+      "body": "Se eliminarán {saints, plural, one {# santo} other {# santos}} y {collections, plural, one {# colección} other {# colecciones}} actuales, junto con sus ediciones y retratos que no estén en el archivo.",
+      "warning": "Descarga un respaldo en Configuración antes de continuar si tienes dudas."
+    },
+    "preview": {
+      "stats": {
+        "saints": "Santos",
+        "characteristics": "Características",
+        "collections": "Colecciones"
+      },
+      "errors": "{count, plural, one {# error} other {# errores}} — no se importará nada",
+      "onImport": "Al importar:",
+      "plan": {
+        "delete": "Se eliminarán {saints, plural, one {# santo actual} other {# santos actuales}} y {collections, plural, one {# colección} other {# colecciones}}.",
+        "saintsCreate": "{count, plural, one {# santo nuevo} other {# santos nuevos}}",
+        "saintsUpdate": "{count, plural, one {# santo actualizado} other {# santos actualizados}}",
+        "saintsSkip": "{count, plural, one {# santo ya existe y se saltará} other {# santos ya existen y se saltarán}}",
+        "collectionsCreate": "{count, plural, one {# colección nueva} other {# colecciones nuevas}}",
+        "collectionsUpdate": ", {count, plural, one {# actualizada} other {# actualizadas}}",
+        "collectionsSkip": ", {count, plural, one {# ya existente sin cambios} other {# ya existentes sin cambios}}",
+        "membershipsAdded": "{count, plural, one {# santo se añadirá} other {# santos se añadirán}} a {collections, plural, one {# colección existente} other {# colecciones existentes}} (no se quita a nadie)"
+      },
+      "reviewNote": "Estado de revisión: {count, plural, one {# santo pendiente} other {# santos pendientes}} de revisión histórica. Los textos se importan tal cual; no se marcan como verificados.",
+      "notFactChecked": "El archivo indica que los datos no fueron verificados individualmente.",
+      "fileNote": "Nota del archivo: {note}",
+      "warnings": "{count, plural, one {# aviso} other {# avisos}}",
+      "showAll": "Ver los {saints} santos y {collections} colecciones del archivo",
+      "columns": {
+        "saint": "Santo",
+        "characteristics": "Características",
+        "review": "Revisión",
+        "inLibrary": "En tu biblioteca"
+      },
+      "reviewed": "Revisado",
+      "pending": "Pendiente",
+      "exists": "Ya existe",
+      "new": "Nuevo",
+      "existsLower": "ya existe"
+    },
+    "format": {
+      "summary": {
+        "title": "¿Qué archivo necesito?",
+        "file": "Un archivo <code>.json</code> con <code>\"format\": \"santos-studio-library\"</code>, <code>\"schemaVersion\": 1</code> y <code>\"language\": \"es\"</code>.",
+        "saints": "Una lista <code>saints</code>: cada santo con un <code>id</code> único, <code>name</code>, fechas, país y sus <code>characteristics</code> (las viñetas).",
+        "collections": "Opcional: <code>collections</code> para agruparlos. Si una colección ya existe, sus santos nuevos se le añaden.",
+        "existing": "Los santos cuyo id ya está en tu biblioteca se saltan; no se sobrescribe nada a menos que elijas otro modo.",
+        "showFull": "Ver formato completo y ejemplo"
+      },
+      "downloadTemplate": "Descargar plantilla",
+      "columns": {
+        "field": "Campo",
+        "type": "Tipo",
+        "description": "Descripción"
+      },
+      "optional": "(opcional)",
+      "types": {
+        "number": "número",
+        "text": "texto",
+        "object": "objeto",
+        "list": "lista",
+        "numberOrNull": "número o null",
+        "null": "null",
+        "boolean": "true / false",
+        "textList": "lista de textos"
+      },
+      "tables": {
+        "top": "Estructura del archivo",
+        "saint": "Cada santo (saints[])",
+        "characteristic": "Cada característica (characteristics[])",
+        "collection": "Cada colección (collections[])"
+      },
+      "exampleTitle": "Ejemplo completo y válido",
+      "copyFailed": "No se pudo copiar; usa «Descargar plantilla».",
+      "copied": "Copiado",
+      "copyExample": "Copiar ejemplo",
+      "tip": "Consejo: «Exportar JSON» en Configuración genera tu biblioteca actual en este mismo formato; puedes usarla como modelo.",
+      "fields": {
+        "top": {
+          "schemaVersion": "Siempre 1.",
+          "format": "Siempre \"santos-studio-library\".",
+          "language": "Siempre \"es\".",
+          "source": "De dónde salen los datos: document, notes, factCheckedIndividually.",
+          "saints": "Los santos (puede tener cualquier cantidad).",
+          "collections": "Colecciones opcionales que agrupan santos por id."
+        },
+        "saint": {
+          "id": "Identificador único y estable, en minúsculas con guiones: «santa-rosa-de-lima». Si ya existe en tu biblioteca, el santo se salta (modo por defecto).",
+          "name": "Nombre tal como se imprime.",
+          "birthYear": "Año de nacimiento; null si se desconoce. No inventes fechas.",
+          "birthYearDisplay": "Texto que se imprime: «1586», «aprox. 1181–1182».",
+          "ageAtDeath": "Edad al morir; null si se desconoce.",
+          "ageAtDeathDisplay": "Texto que se imprime: «31 años», «aprox. 13–14 años».",
+          "country": "País de origen tal como se imprime.",
+          "portraitPath": "Déjalo en null. Las fotos se suben después con «Importar retratos».",
+          "isMartyr": "Si fue mártir.",
+          "categories": "Etiquetas para filtrar: santos-jovenes, martires, educadores-y-guias, patronos-de-la-juventud… Puede ir vacía [].",
+          "patronages": "Patronazgos. Puede ir vacía [].",
+          "canonizationYear": "Año de canonización; null si no aplica o no se sabe.",
+          "characteristics": "Viñetas de la ficha, en orden (se recomiendan 5–8). Ver abajo.",
+          "sources": "Fuentes o enlaces para la revisión. Puede ir vacía [].",
+          "reviewStatus": "\"needs_review\" (pendiente) o \"reviewed\" (revisado)."
+        },
+        "characteristic": {
+          "id": "Único dentro del santo, p. ej. «santa-rosa-de-lima-c1».",
+          "text": "La viñeta. No puede estar vacía. Para milagros conserva «según testimonios», «se le atribuye»…",
+          "type": "biography, virtue, miracle, patronage, martyrdom, canonization, legacy u other."
+        },
+        "collection": {
+          "id": "Identificador único. Si ya existe, sus santos nuevos se añaden a esa colección.",
+          "name": "Nombre visible.",
+          "saintIds": "Ids de santos en orden. Pueden ser del archivo o que ya estén en tu biblioteca."
+        }
+      }
+    }
+  },
+  "backup": {
+    "report": {
+      "tooLarge": "demasiado grande",
+      "cannotOpenZip": "No se pudo abrir el ZIP: {message}",
+      "noManifest": "El ZIP no contiene manifest.json; no parece un respaldo de Santos Studio.",
+      "invalidJson": "{file} no es JSON válido.",
+      "unknownFormat": "Formato de respaldo desconocido: «{format}».",
+      "unsupportedVersion": "Versión de respaldo no compatible: {version}.",
+      "manifestNoFiles": "manifest.json no lista los archivos del respaldo.",
+      "missingFile": "Falta el archivo «{path}» indicado en el manifiesto.",
+      "damagedFile": "El archivo «{path}» está dañado (la suma de verificación no coincide).",
+      "unexpectedFile": "Archivo inesperado en el respaldo: «{path}».",
+      "badImageName": "Nombre de imagen no permitido: «{path}».",
+      "notJpeg": "«{path}» no es una imagen JPG válida.",
+      "missingMaster": "Falta la imagen principal de «{path}».",
+      "noLibrary": "El respaldo no contiene library.json."
+    },
+    "export": {
+      "json": "Exportar JSON",
+      "zip": "Descargar respaldo ZIP",
+      "preparing": {
+        "json": "Preparando el JSON…",
+        "zip": "Preparando el respaldo…"
+      },
+      "done": "Exportación completada",
+      "doneDetail": "{file} · {kb, number} KB",
+      "failed": {
+        "json": "No se pudo exportar el JSON",
+        "zip": "No se pudo exportar el respaldo"
+      }
+    },
+    "restore": {
+      "choose": "Elegir respaldo .zip…",
+      "done": "Respaldo restaurado",
+      "failed": "No se restauró nada",
+      "cannotRestore": "No se puede restaurar",
+      "summary": "Respaldo",
+      "summaryDated": "Respaldo del {date}",
+      "portraits": "{count, plural, one {# retrato} other {# retratos}}",
+      "restore": "Restaurar",
+      "restoreReplace": "Restaurar y reemplazar biblioteca…",
+      "portraitsCopied": "{count, plural, one {# retrato copiado} other {# retratos copiados}} a esta computadora.",
+      "confirmTitle": "¿Reemplazar la biblioteca con este respaldo?",
+      "confirmBody": "Se borrarán los santos y colecciones actuales y se dejarán exactamente los del respaldo.",
+      "confirmWarning": "Si no estás seguro, descarga primero un respaldo de la biblioteca actual."
+    }
+  },
+  "validation": {
+    "fields": {
+      "birthYear": "Año de nacimiento",
+      "ageAtDeath": "Edad al morir",
+      "canonizationYear": "Año de canonización"
+    },
+    "typeInvalid": "Tipo no válido. Valores permitidos: {values}",
+    "characteristicIdRequired": "Cada característica necesita un id",
+    "characteristicTextRequired": "El texto de la característica no puede estar vacío",
+    "saintIdRequired": "Cada santo necesita un id",
+    "saintNameRequired": "El nombre del santo es obligatorio",
+    "intOrNull": "{field} debe ser un número entero o null",
+    "integerField": "{field} debe ser un número entero",
+    "isMartyrBoolean": "isMartyr debe ser true o false",
+    "characteristicsList": "characteristics debe ser una lista",
+    "reviewStatusInvalid": "reviewStatus debe ser \"needs_review\" o \"reviewed\"",
+    "collectionIdRequired": "Cada colección necesita un id",
+    "collectionNameRequired": "El nombre de la colección es obligatorio",
+    "schemaVersionInvalid": "schemaVersion debe ser {version}",
+    "formatInvalid": "format debe ser \"{format}\"",
+    "languageInvalid": "language debe ser \"es\"",
+    "saintsList": "saints debe ser una lista de santos",
+    "integerOrEmpty": "{label}: escribe un número entero o déjalo vacío",
+    "integerLabel": "{label}: debe ser un número entero",
+    "nameRequired": "El nombre es obligatorio",
+    "ageRange": "Edad al morir debe estar entre 0 y 130",
+    "patronageEmpty": "El patronazgo no puede estar vacío",
+    "sourceEmpty": "La fuente no puede estar vacía",
+    "characteristicEmpty": "La característica no puede estar vacía",
+    "characteristicIdRepeated": "Id de característica repetido",
+    "yearDigits": "{label}: solo números enteros (o vacío). Usa el campo «texto mostrado» para aproximaciones.",
+    "ageDigits": "Edad al morir: solo un número entero (o vacío)",
+    "patronageRequired": "Escribe el patronazgo o elimínalo",
+    "sourceRequired": "Escribe la fuente o elimínala",
+    "characteristicRequired": "La característica no puede estar vacía (elimínala si no la necesitas)",
+    "selectAtLeastOneSaint": "Selecciona al menos un santo."
+  },
+  "errors": {
+    "unexpected": "Error inesperado del servidor: {message}",
+    "invalidJsonBody": "La solicitud no contiene JSON válido.",
+    "invalidData": "Datos no válidos: {details}",
+    "saintNotFound": "El santo no existe o fue eliminado.",
+    "collectionNotFound": "La colección no existe o fue eliminada.",
+    "notFoundPlain": "No encontrado",
+    "editConflict": "Este santo se modificó en otra ventana después de abrirlo. Copia tus cambios, recarga la página y vuelve a intentarlo.",
+    "duplicateSaintsInCollection": "La colección contiene santos repetidos.",
+    "unknownSaintsInCollection": "Santos inexistentes en la colección: {ids}",
+    "collectionNameRequired": "El nombre de la colección es obligatorio.",
+    "emptyFile": "El archivo está vacío.",
+    "imageTooLarge": "La imagen supera el límite de {mb} MB.",
+    "unsupportedFormat": "Formato no admitido. Sube una imagen JPG, PNG o WebP.",
+    "unreadableImage": "No se pudo leer la imagen. El archivo parece estar dañado.",
+    "contentMismatch": "El contenido del archivo no coincide con un JPG, PNG o WebP válido.",
+    "invalidDimensions": "La imagen no tiene dimensiones válidas.",
+    "animatedNotSupported": "No se admiten imágenes animadas.",
+    "processingFailed": "No se pudo procesar la imagen. Prueba con otro archivo.",
+    "noFileReceived": "No se recibió ningún archivo.",
+    "selectAtLeastOneSaint": "Selecciona al menos un santo para crear fichas.",
+    "pdfLocalOnly": "La exportación a PDF solo funciona cuando la app se abre en este equipo (127.0.0.1).",
+    "chromiumMissing": "No se encontró Chromium para generar el PDF. Ejecuta «npm run setup:pdf» en la carpeta del proyecto y vuelve a intentarlo.",
+    "printViewFailed": "La vista de impresión respondió con error {status, select, unknown {desconocido} other {{status}}}.",
+    "cardsOverflow": "Algunas fichas no caben en la página. No se generó el PDF para no cortar texto.",
+    "imagesFailed": "Algunas imágenes no se pudieron cargar. Vuelve a intentarlo.",
+    "noPages": "No hay páginas para exportar.",
+    "importHasErrors": "El archivo tiene errores y no se importó nada.",
+    "replaceNeedsConfirmation": "Reemplazar la biblioteca requiere confirmación explícita.",
+    "noBackupFile": "No se recibió el archivo ZIP del respaldo.",
+    "invalidRestoreMode": "Modo de restauración no válido.",
+    "backupInvalid": "El respaldo no es válido y no se restauró nada.",
+    "backupHasErrors": "El respaldo tiene errores y no se restauró nada.",
+    "backupImageDamaged": "La imagen «{path}» del respaldo está dañada.",
+    "seedMissing": "No existe seed/santos_studio_43_santos.json."
+  }
+}

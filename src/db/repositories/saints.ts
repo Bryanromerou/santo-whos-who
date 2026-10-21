@@ -210,12 +210,9 @@ export function createSaint(input: SaintInput, db: Db = getDb()): SaintRecord {
 export function updateSaint(id: string, input: SaintInput, db: Db = getDb()): SaintRecord {
   return db.transaction((tx) => {
     const current = tx.select().from(saints).where(eq(saints.id, id)).get();
-    if (!current) throw notFound("El santo");
+    if (!current) throw notFound("saint");
     if (input.expectedUpdatedAt && input.expectedUpdatedAt !== current.updatedAt) {
-      throw new AppError(
-        "Este santo se modificó en otra ventana después de abrirlo. Copia tus cambios, recarga la página y vuelve a intentarlo.",
-        409,
-      );
+      throw new AppError("editConflict", { status: 409 });
     }
     const data = inputToData(input, current.portraitPath);
     tx.update(saints).set({ ...scalarColumns(data), updatedAt: nowIso() }).where(eq(saints.id, id)).run();
@@ -228,7 +225,7 @@ export function updateSaint(id: string, input: SaintInput, db: Db = getDb()): Sa
 export function deleteSaint(id: string, db: Db = getDb()): { portraitPath: string | null } {
   return db.transaction((tx) => {
     const current = tx.select({ portraitPath: saints.portraitPath }).from(saints).where(eq(saints.id, id)).get();
-    if (!current) throw notFound("El santo");
+    if (!current) throw notFound("saint");
     tx.delete(saints).where(eq(saints.id, id)).run();
     return { portraitPath: current.portraitPath };
   });
@@ -238,7 +235,7 @@ export function deleteSaint(id: string, db: Db = getDb()): { portraitPath: strin
 export function duplicateSaint(id: string, db: Db = getDb()): SaintRecord {
   return db.transaction((tx) => {
     const original = getSaint(id, tx);
-    if (!original) throw notFound("El santo");
+    if (!original) throw notFound("saint");
     const newId = uniqueId(`${original.id}-copia`, (c) => saintExists(c, tx));
     const data: SaintData = {
       ...original,

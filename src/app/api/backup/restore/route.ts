@@ -10,9 +10,9 @@ export async function POST(req: Request) {
   try {
     const form = await req.formData().catch(() => null);
     const file = form?.get("file");
-    if (!(file instanceof File)) throw new AppError("No se recibió el archivo ZIP del respaldo.");
+    if (!(file instanceof File)) throw new AppError("noBackupFile");
     const mode = String(form!.get("mode") || "replace") as ImportMode;
-    if (!IMPORT_MODES.includes(mode)) throw new AppError("Modo de restauración no válido.");
+    if (!IMPORT_MODES.includes(mode)) throw new AppError("invalidRestoreMode");
     const dryRun = form!.get("dryRun") !== "false";
     const buf = new Uint8Array(await file.arrayBuffer());
     if (dryRun) return Response.json(previewRestore(buf, mode));

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { CollectionsManager } from "@/components/collections/collections-manager";
 import { listCollections } from "@/db/repositories/collections";
 import { listSaints } from "@/db/repositories/saints";
 
-export const metadata: Metadata = { title: "Colecciones" };
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getTranslations("meta"))("collections") };
+}
 
 export default function ColeccionesPage() {
   const names = new Map(listSaints().map((s) => [s.id, s.name]));

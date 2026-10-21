@@ -40,13 +40,13 @@ export function releasePortraitIfUnused(portraitPath: string | null, db: Db = ge
  * (3) only then the previous file is removed if nothing else uses it.
  */
 export async function setSaintPortrait(saintId: string, input: Buffer, db: Db = getDb()): Promise<SaintRecord> {
-  if (!getSaint(saintId, db)) throw notFound("El santo");
+  if (!getSaint(saintId, db)) throw notFound("saint");
   const stored = await storePortraitFiles(input);
   let previous: string | null = null;
   try {
     db.transaction((tx) => {
       const row = tx.select({ portraitPath: saints.portraitPath }).from(saints).where(eq(saints.id, saintId)).get();
-      if (!row) throw notFound("El santo");
+      if (!row) throw notFound("saint");
       previous = row.portraitPath;
       tx.insert(portraits)
         .values({
@@ -80,7 +80,7 @@ export async function setSaintPortrait(saintId: string, input: Buffer, db: Db = 
 
 export function removeSaintPortrait(saintId: string, db: Db = getDb()): SaintRecord {
   const row = db.select({ portraitPath: saints.portraitPath }).from(saints).where(eq(saints.id, saintId)).get();
-  if (!row) throw notFound("El santo");
+  if (!row) throw notFound("saint");
   db.update(saints)
     .set({ portraitPath: null, portraitFocalX: 50, portraitFocalY: 50, portraitZoom: 1, portraitFit: "cover", updatedAt: nowIso() })
     .where(eq(saints.id, saintId))

@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { Check, Copy, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { loose } from "@/i18n/loose";
 import { downloadBlob } from "@/lib/client-api";
 import {
   CHARACTERISTIC_FIELDS,
@@ -15,27 +17,23 @@ import {
 } from "@/lib/imports/example";
 
 /** Short summary shown next to the upload area. */
+const code = (chunks: React.ReactNode) => <code>{chunks}</code>;
+
 export function JsonFormatSummary({ onShowFull }: { onShowFull?: () => void }) {
+  const t = useTranslations("import.format.summary");
   return (
     <div className="space-y-2 rounded-lg border bg-muted/30 p-4 text-sm">
-      <p className="font-medium">¿Qué archivo necesito?</p>
+      <p className="font-medium">{t("title")}</p>
       <ul className="list-disc space-y-1 pl-5 text-muted-foreground">
-        <li>
-          Un archivo <code>.json</code> con <code>&quot;format&quot;: &quot;santos-studio-library&quot;</code>, <code>&quot;schemaVersion&quot;: 1</code> y{" "}
-          <code>&quot;language&quot;: &quot;es&quot;</code>.
-        </li>
-        <li>
-          Una lista <code>saints</code>: cada santo con un <code>id</code> único, <code>name</code>, fechas, país y sus <code>characteristics</code> (las viñetas).
-        </li>
-        <li>
-          Opcional: <code>collections</code> para agruparlos. Si una colección ya existe, sus santos nuevos se le añaden.
-        </li>
-        <li>Los santos cuyo id ya está en tu biblioteca se saltan; no se sobrescribe nada a menos que elijas otro modo.</li>
+        <li>{t.rich("file", { code })}</li>
+        <li>{t.rich("saints", { code })}</li>
+        <li>{t.rich("collections", { code })}</li>
+        <li>{t("existing")}</li>
       </ul>
       <div className="flex flex-wrap gap-2 pt-1">
         {onShowFull && (
           <Button size="sm" variant="outline" onClick={onShowFull}>
-            Ver formato completo y ejemplo
+            {t("showFull")}
           </Button>
         )}
         <TemplateButton />
@@ -45,14 +43,16 @@ export function JsonFormatSummary({ onShowFull }: { onShowFull?: () => void }) {
 }
 
 function TemplateButton() {
+  const t = useTranslations("import.format");
   return (
     <Button size="sm" variant="ghost" onClick={() => downloadBlob(new Blob([EXAMPLE_JSON + "\n"], { type: "application/json" }), "plantilla-santos-studio.json")}>
-      <Download aria-hidden /> Descargar plantilla
+      <Download aria-hidden /> {t("downloadTemplate")}
     </Button>
   );
 }
 
-function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
+function FieldTable({ title, group, fields }: { title: string; group: "top" | "saint" | "characteristic" | "collection"; fields: FieldDoc[] }) {
+  const t = useTranslations("import.format");
   return (
     <section className="space-y-2">
       <h3 className="text-sm font-semibold">{title}</h3>
@@ -60,9 +60,9 @@ function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
         <table className="w-full text-left text-xs">
           <thead className="bg-muted/40 text-muted-foreground">
             <tr>
-              <th className="px-3 py-2 font-medium">Campo</th>
-              <th className="px-3 py-2 font-medium">Tipo</th>
-              <th className="px-3 py-2 font-medium">Descripción</th>
+              <th className="px-3 py-2 font-medium">{t("columns.field")}</th>
+              <th className="px-3 py-2 font-medium">{t("columns.type")}</th>
+              <th className="px-3 py-2 font-medium">{t("columns.description")}</th>
             </tr>
           </thead>
           <tbody className="divide-y">
@@ -70,10 +70,10 @@ function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
               <tr key={f.field} className="align-top">
                 <td className="px-3 py-2 whitespace-nowrap">
                   <code className="font-mono">{f.field}</code>
-                  {!f.required && <span className="ml-1 text-muted-foreground">(opcional)</span>}
+                  {!f.required && <span className="ml-1 text-muted-foreground">{t("optional")}</span>}
                 </td>
-                <td className="px-3 py-2 whitespace-nowrap text-muted-foreground">{f.type}</td>
-                <td className="px-3 py-2">{f.description}</td>
+                <td className="px-3 py-2 whitespace-nowrap text-muted-foreground">{t(`types.${f.type}`)}</td>
+                <td className="px-3 py-2">{loose(t)(`fields.${group}.${f.field}`)}</td>
               </tr>
             ))}
           </tbody>
@@ -85,17 +85,18 @@ function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
 
 /** Full reference: field tables plus a copyable, valid example. */
 export function JsonFormatReference() {
+  const t = useTranslations("import.format");
   const [copied, setCopied] = useState(false);
   return (
     <div className="space-y-6">
-      <FieldTable title="Estructura del archivo" fields={TOP_LEVEL_FIELDS} />
-      <FieldTable title="Cada santo (saints[])" fields={SAINT_FIELDS} />
-      <FieldTable title="Cada característica (characteristics[])" fields={CHARACTERISTIC_FIELDS} />
-      <FieldTable title="Cada colección (collections[])" fields={COLLECTION_FIELDS} />
+      <FieldTable title={t("tables.top")} group="top" fields={TOP_LEVEL_FIELDS} />
+      <FieldTable title={t("tables.saint")} group="saint" fields={SAINT_FIELDS} />
+      <FieldTable title={t("tables.characteristic")} group="characteristic" fields={CHARACTERISTIC_FIELDS} />
+      <FieldTable title={t("tables.collection")} group="collection" fields={COLLECTION_FIELDS} />
 
       <section className="space-y-2">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h3 className="text-sm font-semibold">Ejemplo completo y válido</h3>
+          <h3 className="text-sm font-semibold">{t("exampleTitle")}</h3>
           <div className="flex gap-2">
             <Button
               size="sm"
@@ -106,11 +107,11 @@ export function JsonFormatReference() {
                   setCopied(true);
                   setTimeout(() => setCopied(false), 1500);
                 } catch {
-                  toast.error("No se pudo copiar; usa «Descargar plantilla».");
+                  toast.error(t("copyFailed"));
                 }
               }}
             >
-              {copied ? <Check aria-hidden /> : <Copy aria-hidden />} {copied ? "Copiado" : "Copiar ejemplo"}
+              {copied ? <Check aria-hidden /> : <Copy aria-hidden />} {copied ? t("copied") : t("copyExample")}
             </Button>
             <TemplateButton />
           </div>
@@ -118,9 +119,7 @@ export function JsonFormatReference() {
         <pre className="max-h-96 overflow-auto rounded-lg border bg-muted/40 p-4 font-mono text-xs leading-relaxed" data-testid="json-example">
           {EXAMPLE_JSON}
         </pre>
-        <p className="text-xs text-muted-foreground">
-          Consejo: «Exportar JSON» en Configuración genera tu biblioteca actual en este mismo formato; puedes usarla como modelo.
-        </p>
+        <p className="text-xs text-muted-foreground">{t("tip")}</p>
       </section>
     </div>
   );

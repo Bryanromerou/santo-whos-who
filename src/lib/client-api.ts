@@ -1,8 +1,14 @@
-/** fetch wrapper for the local API: returns JSON or throws an Error with the server's Spanish message. */
+/** fetch wrapper for the local API: returns JSON or throws an Error with the server's message (interface language). */
 export class ApiError extends Error {
   constructor(message: string, public status: number, public details?: unknown) {
     super(message);
   }
+}
+
+// Set by <ClientMessages /> from messages/*.json (common.serverOffline) in the interface language.
+const messages = { offline: "Couldn't connect to the local server. Is “npm run dev” running?" };
+export function setClientApiMessages(m: typeof messages) {
+  Object.assign(messages, m);
 }
 
 export async function api<T = unknown>(url: string, init?: RequestInit & { json?: unknown }): Promise<T> {
@@ -15,7 +21,7 @@ export async function api<T = unknown>(url: string, init?: RequestInit & { json?
       body: json !== undefined ? JSON.stringify(json) : rest.body,
     });
   } catch {
-    throw new ApiError("No se pudo conectar con el servidor local. ¿Está corriendo «npm run dev»?", 0);
+    throw new ApiError(messages.offline, 0);
   }
   const text = await res.text();
   let data: unknown = null;

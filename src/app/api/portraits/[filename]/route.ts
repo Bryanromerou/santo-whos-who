@@ -1,5 +1,8 @@
 import fs from "node:fs/promises";
+import { errorMessage, requestLocale } from "@/lib/errors";
 import { resolveServeFile } from "@/lib/images/storage";
+
+const notFoundResponse = () => new Response(errorMessage(requestLocale(), "notFoundPlain"), { status: 404 });
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -11,7 +14,7 @@ export const dynamic = "force-dynamic";
 export async function GET(_req: Request, ctx: RouteContext<"/api/portraits/[filename]">) {
   const { filename } = await ctx.params;
   const full = resolveServeFile(filename);
-  if (!full) return new Response("No encontrado", { status: 404 });
+  if (!full) return notFoundResponse();
   try {
     const data = await fs.readFile(full);
     return new Response(new Uint8Array(data), {
@@ -24,6 +27,6 @@ export async function GET(_req: Request, ctx: RouteContext<"/api/portraits/[file
       },
     });
   } catch {
-    return new Response("No encontrado", { status: 404 });
+    return notFoundResponse();
   }
 }

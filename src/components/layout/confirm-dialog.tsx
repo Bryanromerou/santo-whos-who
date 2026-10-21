@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import { useTranslations } from "next-intl";
 import { Loader2 } from "lucide-react";
 import {
   AlertDialog,
@@ -29,6 +30,7 @@ type Props = {
 
 /** Confirmation for destructive actions. Stays open (with spinner) until the action finishes. */
 export function ConfirmDialog({ open, onOpenChange, title, description, confirmLabel, destructive, requireText, onConfirm }: Props) {
+  const t = useTranslations("common");
   const [busy, setBusy] = useState(false);
   const [typed, setTyped] = useState("");
   const blocked = !!requireText && typed.trim().toUpperCase() !== requireText.toUpperCase();
@@ -52,13 +54,13 @@ export function ConfirmDialog({ open, onOpenChange, title, description, confirmL
         {requireText && (
           <div className="space-y-2">
             <Label htmlFor="confirm-text">
-              Escribe <strong>{requireText}</strong> para confirmar
+              {t.rich("typeToConfirm", { word: requireText, strong: (chunks) => <strong>{chunks}</strong> })}
             </Label>
             <Input id="confirm-text" autoComplete="off" value={typed} onChange={(e) => setTyped(e.target.value)} />
           </div>
         )}
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={busy}>Cancelar</AlertDialogCancel>
+          <AlertDialogCancel disabled={busy}>{t("cancel")}</AlertDialogCancel>
           <AlertDialogAction
             disabled={busy || blocked}
             className={destructive ? "bg-destructive text-white hover:bg-destructive/90" : undefined}

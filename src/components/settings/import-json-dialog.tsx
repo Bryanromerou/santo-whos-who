@@ -2,6 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Importer } from "./importer";
@@ -10,6 +11,7 @@ import { JsonFormatReference, JsonFormatSummary } from "./json-format-help";
 /** «Importar JSON» as a modal: upload + preview on one tab, the file format on the other. */
 export function ImportJsonDialog({ trigger, seedAvailable }: { trigger: ReactNode; seedAvailable: boolean }) {
   const router = useRouter();
+  const t = useTranslations("import.dialog");
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState("subir");
   return (
@@ -26,15 +28,13 @@ export function ImportJsonDialog({ trigger, seedAvailable }: { trigger: ReactNod
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="max-h-[92vh] overflow-y-auto sm:max-w-4xl">
         <DialogHeader>
-          <DialogTitle>Importar santos desde un archivo JSON</DialogTitle>
-          <DialogDescription>
-            Añade santos (y colecciones) a tu biblioteca. Se valida todo el archivo y verás una vista previa antes de guardar.
-          </DialogDescription>
+          <DialogTitle>{t("title")}</DialogTitle>
+          <DialogDescription>{t("description")}</DialogDescription>
         </DialogHeader>
         <Tabs value={tab} onValueChange={setTab}>
           <TabsList>
-            <TabsTrigger value="subir">Subir archivo</TabsTrigger>
-            <TabsTrigger value="formato">Formato del JSON</TabsTrigger>
+            <TabsTrigger value="subir">{t("uploadTab")}</TabsTrigger>
+            <TabsTrigger value="formato">{t("formatTab")}</TabsTrigger>
           </TabsList>
           <TabsContent value="subir" className="space-y-6 pt-4">
             <JsonFormatSummary onShowFull={() => setTab("formato")} />

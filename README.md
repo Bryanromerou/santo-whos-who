@@ -1,130 +1,148 @@
 # Santos Studio
 
-Aplicación local para organizar santos católicos y crear fichas imprimibles para el grupo juvenil.
-Todo funciona en tu Mac: base de datos SQLite, retratos en una carpeta local, sin cuentas, sin nube y sin servicios de pago.
+Local app for organizing Catholic saints and creating printable worksheets for the youth group.
+Everything runs on your Mac: SQLite database, portraits in a local folder, no accounts, no cloud, no paid services.
 
-> UI and printouts are in Spanish. This README mixes Spanish (usage) and English (development notes).
+> **Languages.** The interface is in **English** by default and can be switched to **Spanish** in **Settings → Interface language**. Saint content (names, bullet points, dates, countries, collections) and the **printed worksheets / PDFs are always in Spanish**.
 
-## Qué incluye
+## What's included
 
-| Área | Ruta | Qué hace |
+| Area | Route | What it does |
 | --- | --- | --- |
-| Biblioteca de Santos | `/santos` | Búsqueda sin acentos (nombre, país, patronazgo, características), filtros por categoría, colección y revisión, selección múltiple → Crear fichas / añadir a colección, duplicar y eliminar con confirmación. |
-| Editor de Santo | `/santos/[id]`, `/santos/nuevo` | Formulario con validación, características ordenables (arrastrar o flechas ↑↓), retrato (subir, reemplazar, quitar, zoom, encuadre, recortar/imagen completa), aviso de cambios sin guardar y vista previa en vivo idéntica a la impresión. |
-| Colecciones | `/colecciones` | Crear, renombrar, eliminar, reordenar; editar santos y su orden con arrastrar y soltar; «Crear fichas con esta colección». |
-| Crear Fichas | `/crear-fichas` | Selección/orden de santos, vista previa multipágina real (zoom, número de páginas), ajustes de papel (Carta/A4), 1/2/4 por página, márgenes, letra, espaciado, ancho de foto, mostrar/ocultar retrato, país y numeración. Detecta fichas que no caben y bloquea la exportación hasta corregirlo. |
-| Imprimir / PDF | botones en Crear Fichas | «Imprimir» usa la vista `/imprimir` (mismo componente y CSS). «Descargar PDF» genera un PDF vectorial con Chromium local a partir de esa misma vista. |
-| Importar JSON | `/configuracion/importar` | Valida todo el archivo antes de escribir, muestra vista previa (santos, características, colecciones, duplicados, errores) y permite Saltar existentes / Actualizar existentes / Reemplazar biblioteca. |
-| Configuración | `/configuracion` | Exportar JSON, descargar respaldo ZIP, restaurar respaldo (validado), ubicación de los datos. |
+| Saints Library | `/santos` | Accent-insensitive search (name, country, patronage, characteristics), filters by category, collection and review status, multi-select → Create worksheets / add to collection, duplicate and delete with confirmation. |
+| Saint editor | `/santos/[id]`, `/santos/nuevo` | Validated form, sortable characteristics (drag or ↑↓ arrows), portrait (upload, replace, remove, zoom, framing, crop/whole image), unsaved-changes warning and a live preview identical to the printout. |
+| Collections | `/colecciones` | Create, rename, delete, reorder; edit members and their order with drag and drop; "Create worksheets with this collection". |
+| Create Worksheets | `/crear-fichas` | Select/order saints, real multipage preview (zoom, page count), paper settings (Letter/A4), 1/2/4 per page, margins, font size, spacing, photo width, show/hide portrait, country and page numbers. Detects cards that don't fit and blocks export until fixed. |
+| Print / PDF | buttons in Create Worksheets | "Print" uses the `/imprimir` view (same component and CSS). "Download PDF" generates a vector PDF with local Chromium from that same view. |
+| Import JSON | `/configuracion/importar` | Validates the whole file before writing, shows a preview (saints, characteristics, collections, duplicates, errors) and offers Skip existing / Update existing / Replace library. |
+| Settings | `/configuracion` | Interface language, export JSON, download ZIP backup, restore backup (validated), data location. |
 
-## Requisitos
+## Requirements
 
-- macOS (probado) con **Node.js 20.9 o superior** (recomendado Node 24) y **npm**.
-- ~150 MB de disco para Chromium (solo para «Descargar PDF»).
+- macOS (tested) with **Node.js 20.9 or later** (Node 24 recommended) and **npm**.
+- ~150 MB of disk for Chromium (only for "Download PDF").
 
-## Instalación
+## Installation
 
 ```bash
 npm install
-npm run setup:pdf      # descarga Chromium local para la exportación a PDF (una sola vez)
-npm run db:migrate     # opcional: la app aplica las migraciones sola al arrancar
+npm run setup:pdf      # downloads local Chromium for PDF export (one time)
+npm run db:migrate     # optional: the app applies migrations on startup
 npm run dev            # http://127.0.0.1:3000
 ```
 
-`npm install` compila/usa módulos nativos (`better-sqlite3`, `sharp`). Las aprobaciones de scripts de instalación ya están en `package.json` (`allowScripts`).
+`npm install` builds/uses native modules (`better-sqlite3`, `sharp`). Install-script approvals are already in `package.json` (`allowScripts`).
 
-Si no ejecutas `npm run setup:pdf`, la app intenta usar Google Chrome instalado; si tampoco existe, el botón «Descargar PDF» muestra un mensaje indicando el comando. «Imprimir» funciona siempre (usa tu navegador).
+If you don't run `npm run setup:pdf`, the app tries to use an installed Google Chrome; if that isn't available either, "Download PDF" shows a message with the command to run. "Print" always works (it uses your browser).
 
-## Importar `santos_studio_43_santos.json`
+## Interface language
 
-1. Copia el archivo a `seed/santos_studio_43_santos.json` (ya está incluido en este repositorio).
-2. Abre la app. Si la biblioteca está vacía verás «Se encontró santos_studio_43_santos.json» → **Revisar e importar**.
-   También puedes ir a **Configuración → Importar JSON** y elegir cualquier archivo.
-3. Revisa la vista previa (no se guarda nada todavía) y pulsa **Importar**.
-   Resultado esperado: **43 santos importados · 258 características · 6 colecciones**.
+- Go to **Settings → Interface language** and choose **English** or **Español**. The change applies immediately.
+- The choice is stored in the local database (`app_settings`, key `ui.locale`), so it's the same in every browser on this computer and is included in ZIP backups (a "Replace library" restore brings it back).
+- Only the interface changes: menus, buttons, forms, dialogs, notifications, import/validation reports and server error messages. Saint data, collection names, the library JSON format (`"language": "es"`) and the printed worksheet stay Spanish.
 
-Notas:
-- El texto se importa exactamente (acentos, puntuación, «aprox.», rangos y expresiones como «según testimonios»). Nada se marca como verificado: se conserva `reviewStatus`.
-- `portraitPath: null` es lo esperado; la app nunca descarga fotos de internet ni crea imágenes falsas.
-- Nunca se sobrescriben registros editados de forma automática. «Reemplazar biblioteca» pide escribir REEMPLAZAR.
+## Importing `santos_studio_43_santos.json`
 
-## Dónde se guardan los datos
+1. Copy the file to `seed/santos_studio_43_santos.json` (already included in this repository).
+2. Open the app. If the library is empty you'll see "Found santos_studio_43_santos.json" → **Review and import**.
+   You can also go to **Settings → Import JSON** and pick any file.
+3. Review the preview (nothing is saved yet) and click **Import**.
+   Expected result: **43 saints imported · 258 characteristics · 6 collections**.
+
+Notes:
+- Text is imported exactly (accents, punctuation, «aprox.», ranges and phrases like «según testimonios»). Nothing is marked as verified: `reviewStatus` is kept.
+- `portraitPath: null` is expected; the app never downloads photos from the internet or creates fake images.
+- Edited records are never overwritten automatically. "Replace library" asks you to type REPLACE (REEMPLAZAR in Spanish).
+
+## Where data is stored
 
 ```
 data/
-  santos.sqlite            # base de datos (SQLite + Drizzle)
-  uploads/saints/          # retratos: <uuid>.jpg (maestro) y <uuid>.thumb.jpg (miniatura)
+  santos.sqlite            # database (SQLite + Drizzle)
+  uploads/saints/          # portraits: <uuid>.jpg (master) and <uuid>.thumb.jpg (thumbnail)
 ```
 
-- La carpeta se puede cambiar con `SANTOS_DATA_DIR` (o la base de datos con `SANTOS_DATABASE_PATH`) en `.env.local`; ver `.env.example`.
-- `data/` está en `.gitignore` y fuera de `public/`; el build de Next.js no la incluye.
-- La base de datos solo guarda la ruta relativa del retrato (`uploads/saints/<uuid>.jpg`) y metadatos; nunca los bytes de la imagen.
+- The folder can be changed with `SANTOS_DATA_DIR` (or the database file with `SANTOS_DATABASE_PATH`) in `.env.local`; see `.env.example`.
+- `data/` is in `.gitignore` and outside `public/`; the Next.js build doesn't include it.
+- The database stores only the portrait's relative path (`uploads/saints/<uuid>.jpg`) and metadata, never the image bytes.
 
-### Retratos
+### Portraits
 
-- JPG, PNG o WebP hasta 10 MB (`SANTOS_MAX_UPLOAD_MB`). Se verifica el contenido real del archivo (no la extensión), se re-codifica con Sharp a JPEG (máx. 2400 px, suficiente para impresión nítida), se eliminan EXIF/GPS y se genera una miniatura. Los nombres son UUID opacos.
-- Se sirven por `/api/portraits/<uuid>.jpg` (lista blanca de nombres; rutas con `..` u otros archivos devuelven 404).
-- Al reemplazar un retrato primero se guarda la imagen nueva y la referencia en la base de datos; solo después se borra la anterior, y solo si ningún otro santo la usa (los duplicados comparten archivo).
-- El encuadre (zoom, posición, recortar/imagen completa) es no destructivo: el archivo original no se modifica.
+- JPG, PNG or WebP up to 10 MB (`SANTOS_MAX_UPLOAD_MB`). The real file content is checked (not the extension), re-encoded with Sharp to JPEG (max 2400 px, enough for sharp printing), EXIF/GPS is stripped and a thumbnail is generated. File names are opaque UUIDs.
+- Served from `/api/portraits/<uuid>.jpg` (allowlisted names; paths with `..` or other files return 404).
+- When a portrait is replaced, the new image and its database reference are saved first; only then is the old one deleted, and only if no other saint uses it (duplicates share the file).
+- Framing (zoom, position, crop/whole image) is non-destructive: the original file is never modified.
 
-## Respaldos
+## Backups
 
-- **Exportar JSON** (`Configuración`): `library.json` con el mismo esquema que el importador (`schemaVersion: 1`, `format: "santos-studio-library"`). Se puede volver a importar sin perder campos.
-- **Respaldo ZIP**: contiene `manifest.json` (versión, conteos y SHA-256 de cada archivo), `library.json`, `settings.json` (ajustes de fichas) y `portraits/*.jpg`.
-- **Restaurar**: en otra computadora, instala la app y ve a **Configuración → Restaurar respaldo**. Se valida el ZIP completo (sumas de verificación, nombres de archivo, imágenes y datos) y se muestra una vista previa; nada cambia hasta que confirmas. Si algo falla, no se escribe nada y las imágenes copiadas se retiran.
+- **Export JSON** (Settings): `library.json` with the same schema as the importer (`schemaVersion: 1`, `format: "santos-studio-library"`). It can be re-imported without losing fields.
+- **ZIP backup**: contains `manifest.json` (version, counts and SHA-256 of every file), `library.json`, `settings.json` (worksheet settings and interface language) and `portraits/*.jpg`.
+- **Restore**: on another computer, install the app and go to **Settings → Restore backup**. The whole ZIP is validated (checksums, file names, images and data) and a preview is shown; nothing changes until you confirm. If anything fails, nothing is written and copied images are removed again.
 
-## Producción local (más rápida)
+## Local production (faster)
 
 ```bash
 npm run build
-npm run start          # next start -H 127.0.0.1 -p 3000 (solo accesible desde esta Mac)
+npm run start          # next start -H 127.0.0.1 -p 3000 (only reachable from this Mac)
 ```
 
-## Pruebas y calidad
+## Tests and quality
 
 ```bash
-npm run typecheck      # TypeScript
+npm run typecheck      # TypeScript (also fails if messages/en.json and es.json have different keys)
 npm run lint           # ESLint
-npm test               # Vitest: esquema, importación de 43 santos, duplicados, colecciones,
-                       # persistencia SQLite, retratos (validación/servido/reemplazo), respaldos, paginación
-npm run test:e2e       # Playwright: build de producción sobre una carpeta de datos vacía (.e2e-data)
+npm test               # Vitest: schema, 43-saint import, duplicates, collections, SQLite persistence,
+                       # portraits (validation/serving/replacement), backups, pagination, i18n catalogs and setting
+npm run test:e2e       # Playwright: production build on an empty data folder (.e2e-data)
 npm run check          # typecheck + lint + test
 ```
 
-Las pruebas usan `seed/santos_studio_43_santos.json` si existe; si no, `tests/fixtures/library-43.json` (datos sintéticos de prueba, no biografías reales — `npm run fixture:test` lo regenera).
+Tests use `seed/santos_studio_43_santos.json` if present; otherwise `tests/fixtures/library-43.json` (synthetic test data, not real biographies — `npm run fixture:test` regenerates it). Unit tests never touch `data/`: each test uses a temporary folder.
 
-La prueba E2E recorre: biblioteca vacía → importar por la UI (43 / 258 / 6) → buscar «José Sánchez del Río» → editar y reordenar viñetas de San Carlo Acutis y comprobar tras recargar → subir retrato → 4 santos = 2 páginas → PDF (2 páginas Carta, imagen incluida) y vista de impresión idéntica → caso de desbordamiento (aviso con el nombre, exportación bloqueada, «Una página para este santo» lo resuelve) → exportar JSON y ZIP, vaciar la biblioteca, restaurar y comparar que todo es idéntico. Los PDF y capturas quedan en `test-results/e2e-artifacts/`.
+The E2E suite switches the interface to Spanish first (it selects elements by their Spanish text) and walks through: empty library → import through the UI (43 / 258 / 6) → search «José Sánchez del Río» → edit and reorder San Carlo Acutis's bullets and check after reload → upload a portrait → 4 saints = 2 pages → PDF (2 Letter pages, image included) and identical print view → overflow case (warning with the name, export blocked, "One page for this saint" fixes it) → export JSON and ZIP, empty the library, restore and compare everything is identical. A final test switches to English, checks navigation, the library, the builder and an English server-error toast, confirms the print view/PDF labels stay Spanish, and switches back. PDFs and screenshots go to `test-results/e2e-artifacts/`.
 
-## Arquitectura (development notes)
+## Architecture (development notes)
 
 ```
 src/
   app/(app)/…            pages (server components read through repositories)
-  app/imprimir/          print-only view used by «Imprimir» and the PDF renderer
+  app/imprimir/          print-only view used by "Print" and the PDF renderer
   app/api/…              route handlers (runtime = "nodejs"): saints, portraits, collections,
-                         import, export/json, backup, backup/restore, worksheet, pdf
+                         import, export/json, backup, backup/restore, worksheet, pdf, settings/locale
   db/schema.ts           Drizzle schema · db/client.ts singleton + auto-migrate
   db/repositories/       saints, collections, settings — the only place that queries SQLite
+  i18n/                  locales, message loading, next-intl request config, server translator
   lib/imports/           Zod validation, dry-run analysis, transactional import
   lib/exports/           JSON export, backup ZIP create/parse/restore
   lib/images/            content sniffing, Sharp processing, safe paths, portrait lifecycle
   lib/worksheet/         settings schema, pagination, card data, config codec
   lib/pdf/               Playwright print-to-PDF
   components/worksheets/ WorksheetDocument + worksheet.css (shared by preview, print and PDF)
+messages/                es.json / en.json interface strings (next-intl, ICU plurals)
 drizzle/                 SQL migrations (npm run db:generate after schema changes)
 ```
 
 - **One renderer**: `WorksheetDocument` + `worksheet.css` (physical units, `@page`, margins inside the page, `margin: 0` so no browser header/footer). Overflow is measured in the browser (`measure.ts`) for the preview, for printing and inside headless Chromium before `page.pdf()`; the server refuses (HTTP 422) to export clipped content.
 - **Data/renderer separation**: card data (`toWorksheetSaint`) and pagination (`paginate`) are pure functions, so a DOCX exporter could reuse them.
-- **Cache Components is disabled** in `next.config.ts`: every page reads live local data (`dynamic = "force-dynamic"`), and route handlers declare `runtime = "nodejs"`, which Cache Components does not allow.
+- **Cache Components is disabled** in `next.config.ts`: every page reads live local data (`dynamic = "force-dynamic"`), and route handlers declare `runtime = "nodejs"`, which Cache Components doesn't allow.
 - Service seams for future features (auth, cloud sync, image search, AI) are the repositories and `lib/*` modules; nothing in v1 needs network access.
 
-## Limitaciones conocidas
+### Internationalization (next-intl)
 
-- **DOCX no está implementado** (solo PDF e impresión). La separación datos/renderizado lo facilita en el futuro.
-- **Recorte no destructivo**: el retrato se encuadra con zoom y posición; no hay recorte libre con rectángulo ni rotación manual (la orientación EXIF sí se aplica).
-- **Cuatro por página** usa una cuadrícula 2×2; con textos largos aparecerán avisos y habrá que reducir la letra o usar 2 por página.
-- **Un solo usuario/ventana**: si editas el mismo santo en dos pestañas, la segunda en guardar recibe un aviso de conflicto (no se pierde lo escrito, pero hay que recargar y volver a aplicar).
-- **Vista de impresión en Safari**: «Imprimir» usa un iframe oculto; si tu navegador lo bloquea, usa el enlace «Abrir vista de impresión en otra pestaña» y `⌘P`.
-- Los ids de característica deben ser únicos dentro de cada santo; si se repiten entre santos distintos se acepta con un aviso.
-- El tipo de letra (Inter y Source Serif 4) va incluido localmente; los PDF se generan con Chromium de Playwright, por lo que la apariencia es idéntica a la vista previa en Chrome. Otros navegadores pueden variar ligeramente al imprimir.
+- **No locale in the URL.** `src/i18n/request.ts` reads the locale from `app_settings` (`ui.locale`, default `en`) for every request; `<html lang>` follows it. The settings page saves it through `PUT /api/settings/locale` and refreshes.
+- **Messages** live in `messages/en.json` and `messages/es.json`, grouped by area (`common`, `nav`, `meta`, `library`, `editor`, `portraits`, `collections`, `builder`, `settings`, `import`, `backup`, `validation`, `errors`). Counts use ICU plurals, e.g. `"{count, plural, one {# saint} other {# saints}}"`.
+- **Type-safe keys**: `src/global.d.ts` types `t()` keys from `es.json`, and `src/i18n/messages.ts` makes `tsc` fail if `en.json` is missing a key (or has an extra one). A unit test checks the same and that every message is valid ICU.
+- **Server messages**: `AppError` takes a message key (`errors.*`) and `errorResponse` renders it in the interface language. Import/backup reports (`lib/imports/validate.ts`, `lib/exports/backup.ts`) and the import summary use the locale stored in the database they work on; pure helpers take an explicit `locale` argument.
+- **Zod**: schemas with custom messages are built per locale (`librarySchemas(locale)`, `saintInputSchemaFor(locale)`, memoized), and Zod's built-in messages are passed per parse (`{ error: zodErrorMap(locale) }`). Nothing mutates Zod's global config, so concurrent requests can't leak each other's language.
+- **Adding a string**: add the key to both JSON files, then use `useTranslations("area")` in client components or `getTranslations("area")` in server components.
+- The printed worksheet's labels («Año de nacimiento», «Edad al morir», «País de origen», «Características», «Página X de Y», «Espacio para foto») are intentionally hard-coded Spanish in `worksheet-document.tsx` / `portrait-frame.tsx`; translating the printout would be a separate feature.
+
+## Known limitations
+
+- **DOCX is not implemented** (PDF and printing only). The data/renderer separation makes it easier later.
+- **Non-destructive crop**: portraits are framed with zoom and position; there's no free-form crop rectangle or manual rotation (EXIF orientation is applied).
+- **Four per page** uses a 2×2 grid; with long texts you'll get warnings and need a smaller font or 2 per page.
+- **One user/window**: if you edit the same saint in two tabs, the second save gets a conflict warning (nothing typed is lost, but you need to reload and re-apply).
+- **Print view in Safari**: "Print" uses a hidden iframe; if your browser blocks it, use "Open print view in another tab" and `⌘P`.
+- Characteristic ids must be unique within each saint; repeats across different saints are accepted with a warning.
+- Fonts (Inter and Source Serif 4) are bundled locally; PDFs are generated with Playwright's Chromium, so they look identical to the preview in Chrome. Other browsers may differ slightly when printing.

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { SaintEditor } from "@/components/saints/saint-editor";
 import { listCollections } from "@/db/repositories/collections";
 import { getSaint, listSaints } from "@/db/repositories/saints";
@@ -10,8 +11,9 @@ import { getWorksheetDraft } from "@/lib/worksheet/server";
 
 export async function generateMetadata({ params }: PageProps<"/santos/[id]">): Promise<Metadata> {
   const { id } = await params;
-  if (id === "nuevo") return { title: "Nuevo santo" };
-  return { title: getSaint(decodeURIComponent(id))?.name ?? "Santo" };
+  const t = await getTranslations("meta");
+  if (id === "nuevo") return { title: t("newSaint") };
+  return { title: getSaint(decodeURIComponent(id))?.name ?? t("saint") };
 }
 
 export default async function SaintPage({ params }: PageProps<"/santos/[id]">) {

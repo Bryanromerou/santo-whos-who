@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLocale, useTranslations } from "next-intl";
 import { Controller, useFieldArray, useForm, useWatch } from "react-hook-form";
 import { toast } from "sonner";
 import { AlertTriangle, CheckCircle2, ChevronLeft, Copy, Loader2, Plus, Printer, Save, Trash2, X } from "lucide-react";
@@ -16,13 +17,15 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import type { SaintRecord } from "@/db/repositories/saints";
-import { useUnsavedGuard, UNSAVED_MESSAGE } from "@/hooks/use-unsaved-guard";
+import { useUnsavedGuard, useUnsavedMessage } from "@/hooks/use-unsaved-guard";
+import { loose } from "@/i18n/loose";
+import { zodErrorMap } from "@/i18n/zod";
 import { api, ApiError } from "@/lib/client-api";
 import { ageDisplay, birthDisplay, type WorksheetSaint } from "@/lib/worksheet/card-data";
-import { PHOTO_FIT_LABELS, type WorksheetSettings } from "@/lib/worksheet/settings";
+import type { WorksheetSettings } from "@/lib/worksheet/settings";
 import { CharacteristicsEditor } from "./characteristics-editor";
 import { PortraitEditor } from "./portrait-editor";
-import { emptyForm, formToInput, recordToForm, saintFormSchema, type SaintFormValues } from "./saint-form";
+import { buildSaintFormSchema, emptyForm, formToInput, recordToForm, type SaintFormValues } from "./saint-form";
 import { TagInput } from "./tag-input";
 
 type Props = {
@@ -36,6 +39,13 @@ type Props = {
 
 export function SaintEditor({ saint: initial, portraitUrl: initialPortraitUrl, categorySuggestions, collectionNames, worksheetSettings, maxUploadMb }: Props) {
   const router = useRouter();
+  const t = useTranslations("editor");
+  const tc = useTranslations("common");
+  const tv = useTranslations("validation");
+  const tb = useTranslations("builder");
+  const locale = useLocale();
+  const unsavedMessage = useUnsavedMessage();
+  const formSchema = useMemo(() => buildSaintFormSchema(loose(tv)), [tv]);
   const [record, setRecord] = useState<SaintRecord | null>(initial);
   const [portraitUrl, setPortraitUrl] = useState(initialPortraitUrl);
   const [saveError, setSaveError] = useState<string | null>(null);
@@ -45,7 +55,7 @@ export function SaintEditor({ saint: initial, portraitUrl: initialPortraitUrl, c
   const isNew = !record;
 
   const form = useForm<SaintFormValues>({
-    resolver: zodResolver(saintFormSchema),
+    resolver: zodResolver(formSchema, { error: zodErrorMap(locale) }),
     defaultValues: initial ? recordToForm(initial) : emptyForm(),
     mode: "onTouched",
   });
@@ -82,17 +92,17 @@ export function SaintEditor({ saint: initial, portraitUrl: initialPortraitUrl, c
         setRecord(saint);
         reset(recordToForm(saint));
         setSavedAt(new Date());
-        toast.success(isNew ? "Santo creado" : "Cambios guardados", { description: saint.name });
+        toast.success(isNew ? t("toast.created") : t("toast.saved"), { description: saint.name });
         if (isNew) router.replace(`/santos/${encodeURIComponent(saint.id)}`);
         else router.refresh();
       } catch (e) {
         // Form values stay as typed so nothing is lost.
         const msg = (e as ApiError).message;
         setSaveError(msg);
-        toast.error("No se pudo guardar", { description: msg });
+        toast.error(t("toast.saveFailed"), { description: msg });
       }
     },
-    () => toast.error("Revisa los campos marcados", { description: "Hay datos que no son válidos." }),
+    () => toast.error(t("toast.checkFields"), { description: t("toast.invalidData") }),
   );
 
   /** Portrait upload/removal save immediately; keep the form's own edits intact. */
@@ -108,14 +118,14 @@ export function SaintEditor({ saint: initial, portraitUrl: initialPortraitUrl, c
 
   async function duplicate() {
     if (!record) return;
-    if (isDirty && !window.confirm(UNSAVED_MESSAGE)) return;
+    if (isDirty && !window.confirm(unsavedMessage)) return;
     try {
       const { saint } = await api<{ saint: SaintRecord }>(`/api/saints/${encodeURIComponent(record.id)}/duplicate`, { method: "POST" });
-      toast.success("Copia creada", { description: saint.name });
+      toast.success(t("toast.copyCreated"), { description: saint.name });
       reset(); // clear dirty state before navigating
       router.push(`/santos/${encodeURIComponent(saint.id)}`);
     } catch (e) {
-      toast.error("No se pudo duplicar", { description: (e as Error).message });
+      toast.error(t("toast.duplicateFailed"), { description: (e as Error).message });
     }
   }
 
@@ -123,12 +133,12 @@ export function SaintEditor({ saint: initial, portraitUrl: initialPortraitUrl, c
     if (!record) return;
     try {
       await api(`/api/saints/${encodeURIComponent(record.id)}`, { method: "DELETE" });
-      toast.success(`«${record.name}» eliminado`);
+      toast.success(t("toast.deleted", { name: record.name }));
       reset(recordToForm(record));
       router.push("/santos");
       router.refresh();
     } catch (e) {
-      toast.error("No se pudo eliminar", { description: (e as Error).message });
+      toast.error(t("toast.deleteFailed"), { description: (e as Error).message });
       throw e;
     }
   }
@@ -138,41 +148,43 @@ export function SaintEditor({ saint: initial, portraitUrl: initialPortraitUrl, c
       {/* Header */}
       <div className="sticky top-14 z-20 -mx-4 mb-6 flex flex-wrap items-center gap-3 border-b bg-background/95 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
         <Link href="/santos" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">
-          <ChevronLeft className="size-4" aria-hidden /> Biblioteca
+          <ChevronLeft className="size-4" aria-hidden /> {tc("library")}
         </Link>
-        <h1 className="min-w-0 flex-1 truncate font-heading text-xl font-semibold">{isNew ? "Nuevo santo" : record!.name}</h1>
+        <h1 className="min-w-0 flex-1 truncate font-heading text-xl font-semibold">{isNew ? t("newSaint") : record!.name}</h1>
         <span className="text-xs text-muted-foreground" aria-live="polite">
-          {isDirty ? "Cambios sin guardar" : savedAt ? `Guardado a las ${savedAt.toLocaleTimeString("es", { hour: "2-digit", minute: "2-digit" })}` : ""}
+          {isDirty ? t("unsaved") : savedAt ? t("savedAt", { time: savedAt.toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" }) }) : ""}
         </span>
         {!isNew && (
           <>
             <Button type="button" variant="ghost" size="sm" asChild>
               <Link href={`/crear-fichas?ids=${encodeURIComponent(record!.id)}`}>
-                <Printer aria-hidden /> Crear ficha
+                <Printer aria-hidden /> {tc("printWorksheet")}
               </Link>
             </Button>
             <Button type="button" variant="ghost" size="sm" onClick={duplicate}>
-              <Copy aria-hidden /> Duplicar
+              <Copy aria-hidden /> {tc("duplicate")}
             </Button>
             <Button type="button" variant="ghost" size="sm" className="text-destructive" onClick={() => setConfirmDelete(true)}>
-              <Trash2 aria-hidden /> Eliminar
+              <Trash2 aria-hidden /> {tc("delete")}
             </Button>
           </>
         )}
         <Button type="button" variant="outline" size="sm" disabled={!isDirty || isSubmitting} onClick={() => reset()}>
-          Descartar
+          {t("discard")}
         </Button>
         <Button type="submit" size="sm" disabled={isSubmitting || (!isDirty && !isNew)}>
           {isSubmitting ? <Loader2 className="animate-spin" aria-hidden /> : <Save aria-hidden />}
-          Guardar
+          {tc("save")}
         </Button>
       </div>
 
       {saveError && (
         <Alert variant="destructive" className="mb-6">
           <AlertTriangle aria-hidden />
-          <AlertTitle>No se guardaron los cambios</AlertTitle>
-          <AlertDescription>{saveError} Tus ediciones siguen en el formulario.</AlertDescription>
+          <AlertTitle>{t("saveErrorTitle")}</AlertTitle>
+          <AlertDescription>
+            {saveError} {t("saveErrorKept")}
+          </AlertDescription>
         </Alert>
       )}
 
@@ -181,9 +193,9 @@ export function SaintEditor({ saint: initial, portraitUrl: initialPortraitUrl, c
           {record?.reviewStatus === "needs_review" && (
             <Alert className="border-warning/40 bg-warning/10 text-warning-foreground">
               <AlertTriangle aria-hidden />
-              <AlertTitle>Pendiente de revisión histórica</AlertTitle>
+              <AlertTitle>{t("review.title")}</AlertTitle>
               <AlertDescription className="text-warning-foreground">
-                <p>Los datos importados no han sido verificados. Cuando compruebes fechas, edad, país y características con una fuente confiable, márcalo como revisado.</p>
+                <p>{t("review.body")}</p>
                 <Button
                   type="button"
                   size="sm"
@@ -196,45 +208,45 @@ export function SaintEditor({ saint: initial, portraitUrl: initialPortraitUrl, c
                   }}
                 >
                   <CheckCircle2 aria-hidden />
-                  {isDirty ? "Marcar como revisado y guardar cambios" : "Marcar como revisado"}
+                  {isDirty ? t("review.markAndSave") : t("review.mark")}
                 </Button>
               </AlertDescription>
             </Alert>
           )}
 
-          <Section title="Datos básicos">
-            <Field label="Nombre" htmlFor="name" error={errors.name?.message} required>
+          <Section title={t("sections.basics")}>
+            <Field label={t("fields.name")} htmlFor="name" error={errors.name?.message} required>
               <Input id="name" {...register("name")} aria-invalid={!!errors.name} autoComplete="off" />
             </Field>
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Año de nacimiento (número)" htmlFor="birthYear" error={errors.birthYear?.message} hint="Vacío si se desconoce.">
+              <Field label={t("fields.birthYear")} htmlFor="birthYear" error={errors.birthYear?.message} hint={t("hints.birthYear")}>
                 <Input id="birthYear" inputMode="numeric" {...register("birthYear")} aria-invalid={!!errors.birthYear} />
               </Field>
-              <Field label="Año de nacimiento (texto mostrado)" htmlFor="birthYearDisplay" hint="Se imprime tal cual: «aprox. 1181–1182».">
+              <Field label={t("fields.birthYearDisplay")} htmlFor="birthYearDisplay" hint={t("hints.birthYearDisplay")}>
                 <Input id="birthYearDisplay" {...register("birthYearDisplay")} />
               </Field>
-              <Field label="Edad al morir (número)" htmlFor="ageAtDeath" error={errors.ageAtDeath?.message}>
+              <Field label={t("fields.ageAtDeath")} htmlFor="ageAtDeath" error={errors.ageAtDeath?.message}>
                 <Input id="ageAtDeath" inputMode="numeric" {...register("ageAtDeath")} aria-invalid={!!errors.ageAtDeath} />
               </Field>
-              <Field label="Edad al morir (texto mostrado)" htmlFor="ageAtDeathDisplay" hint="Ej.: «14 años», «aprox. 13–14 años».">
+              <Field label={t("fields.ageAtDeathDisplay")} htmlFor="ageAtDeathDisplay" hint={t("hints.ageAtDeathDisplay")}>
                 <Input id="ageAtDeathDisplay" {...register("ageAtDeathDisplay")} />
               </Field>
-              <Field label="País de origen" htmlFor="country">
+              <Field label={t("fields.country")} htmlFor="country">
                 <Input id="country" {...register("country")} />
               </Field>
-              <Field label="Año de canonización" htmlFor="canonizationYear" error={errors.canonizationYear?.message} hint="Opcional. Si está vacío no se muestra.">
+              <Field label={t("fields.canonizationYear")} htmlFor="canonizationYear" error={errors.canonizationYear?.message} hint={t("hints.canonizationYear")}>
                 <Input id="canonizationYear" inputMode="numeric" {...register("canonizationYear")} aria-invalid={!!errors.canonizationYear} />
               </Field>
             </div>
           </Section>
 
-          <Section title="Características" description="Lista ordenada que se imprime como viñetas. Arrastra o usa las flechas para reordenar.">
+          <Section title={t("sections.characteristics")} description={t("sections.characteristicsHelp")}>
             <CharacteristicsEditor control={control} register={register} errors={errors} />
           </Section>
 
-          <Section title="Clasificación">
+          <Section title={t("sections.classification")}>
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Estado de revisión" htmlFor="reviewStatus">
+              <Field label={t("fields.reviewStatus")} htmlFor="reviewStatus">
                 <Controller
                   control={control}
                   name="reviewStatus"
@@ -244,8 +256,8 @@ export function SaintEditor({ saint: initial, portraitUrl: initialPortraitUrl, c
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="needs_review">Pendiente de revisión</SelectItem>
-                        <SelectItem value="reviewed">Revisado</SelectItem>
+                        <SelectItem value="needs_review">{t("reviewStatus.needs_review")}</SelectItem>
+                        <SelectItem value="reviewed">{t("reviewStatus.reviewed")}</SelectItem>
                       </SelectContent>
                     </Select>
                   )}
@@ -253,48 +265,48 @@ export function SaintEditor({ saint: initial, portraitUrl: initialPortraitUrl, c
               </Field>
               <div className="flex items-center gap-3 pt-6">
                 <Controller control={control} name="isMartyr" render={({ field }) => <Switch id="isMartyr" checked={field.value} onCheckedChange={field.onChange} />} />
-                <Label htmlFor="isMartyr">Mártir</Label>
+                <Label htmlFor="isMartyr">{t("fields.isMartyr")}</Label>
               </div>
             </div>
-            <Field label="Categorías" htmlFor="categories">
+            <Field label={t("fields.categories")} htmlFor="categories">
               <Controller
                 control={control}
                 name="categories"
-                render={({ field }) => <TagInput id="categories" value={field.value} onChange={field.onChange} suggestions={categorySuggestions} placeholder="Escribe y pulsa Enter" />}
+                render={({ field }) => <TagInput id="categories" value={field.value} onChange={field.onChange} suggestions={categorySuggestions} placeholder={t("hints.categories")} />}
               />
             </Field>
             {collectionNames.length > 0 && (
-              <p className="text-xs text-muted-foreground">En colecciones: {collectionNames.join(" · ")}</p>
+              <p className="text-xs text-muted-foreground">{t("inCollections", { names: collectionNames.join(" · ") })}</p>
             )}
             <ListField
-              label="Patronazgos"
+              label={t("fields.patronages")}
               items={patronages.fields}
               register={(i) => register(`patronages.${i}.value`)}
               errors={(i) => errors.patronages?.[i]?.value?.message}
               onAdd={() => patronages.append({ value: "" })}
               onRemove={patronages.remove}
-              addLabel="Añadir patronazgo"
+              addLabel={t("addPatronage")}
             />
           </Section>
 
-          <Section title="Fuentes" description="Referencias para la revisión histórica (opcional). No se imprimen.">
+          <Section title={t("sections.sources")} description={t("sections.sourcesHelp")}>
             <ListField
-              label="Fuentes"
+              label={t("fields.sources")}
               hideLabel
               items={sources.fields}
               register={(i) => register(`sources.${i}.value`)}
               errors={(i) => errors.sources?.[i]?.value?.message}
               onAdd={() => sources.append({ value: "" })}
               onRemove={sources.remove}
-              addLabel="Añadir fuente"
-              placeholder="URL o referencia bibliográfica"
+              addLabel={t("addSource")}
+              placeholder={t("hints.source")}
             />
           </Section>
         </div>
 
         {/* Right column: portrait + live card preview */}
         <aside className="space-y-6 lg:sticky lg:top-32 lg:self-start">
-          <Section title="Retrato">
+          <Section title={t("sections.portrait")}>
             <PortraitEditor
               saintId={record?.id ?? null}
               portraitUrl={portraitUrl}
@@ -304,17 +316,16 @@ export function SaintEditor({ saint: initial, portraitUrl: initialPortraitUrl, c
               maxUploadMb={maxUploadMb}
             />
           </Section>
-          <Section title="Vista previa de la ficha" description="Mismo diseño que la impresión, a tamaño real de media página.">
+          <Section title={t("sections.preview")} description={t("sections.previewHelp")}>
             <CardPreview saint={preview} settings={{ ...worksheetSettings, perPage: 2, photoFit: "saint" }} onOverflowChange={setOverflow} />
             {portraitUrl && worksheetSettings.photoFit !== "saint" && (
               <p className="mt-2 text-xs text-muted-foreground">
-                En Crear Fichas está activo «{PHOTO_FIT_LABELS[worksheetSettings.photoFit]}», que se aplica a todas las fotos. Este encuadre se usa al
-                elegir «{PHOTO_FIT_LABELS.saint}».
+                {t("photoFitNotice", { active: tb(`photoFit.${worksheetSettings.photoFit}`), saint: tb("photoFit.saint") })}
               </p>
             )}
             {overflow && (
               <p className="mt-2 text-xs text-destructive" role="status">
-                Con la configuración actual ({worksheetSettings.fontSizePt} pt) esta ficha no cabe en media página. Acorta el texto, o en Crear Fichas reduce la letra o usa una ficha por página.
+                {t("overflow", { size: worksheetSettings.fontSizePt })}
               </p>
             )}
           </Section>
@@ -324,14 +335,14 @@ export function SaintEditor({ saint: initial, portraitUrl: initialPortraitUrl, c
       <ConfirmDialog
         open={confirmDelete}
         onOpenChange={setConfirmDelete}
-        title={`¿Eliminar a ${record?.name ?? ""}?`}
+        title={t("delete.title", { name: record?.name ?? "" })}
         description={
           <>
-            <p>Se borrarán sus características{collectionNames.length ? ` y se quitará de ${collectionNames.length} colección(es)` : ""}.</p>
-            <p className="font-medium text-foreground">Esta acción no se puede deshacer.</p>
+            <p>{t("delete.body", { collections: collectionNames.length })}</p>
+            <p className="font-medium text-foreground">{t("delete.warning")}</p>
           </>
         }
-        confirmLabel="Eliminar"
+        confirmLabel={tc("delete")}
         destructive
         onConfirm={doDelete}
       />
@@ -375,14 +386,15 @@ function ListField(props: {
   addLabel: string;
   placeholder?: string;
 }) {
+  const t = useTranslations("editor");
   return (
     <div className="space-y-2">
       {!props.hideLabel && <p className="text-sm font-medium">{props.label}</p>}
       {props.items.map((item, i) => (
         <div key={item.id}>
           <div className="flex gap-2">
-            <Input {...props.register(i)} placeholder={props.placeholder} aria-label={`${props.label} ${i + 1}`} aria-invalid={!!props.errors(i)} />
-            <Button type="button" variant="ghost" size="icon" onClick={() => props.onRemove(i)} aria-label={`Quitar ${props.label.toLowerCase()} ${i + 1}`}>
+            <Input {...props.register(i)} placeholder={props.placeholder} aria-label={t("listItem", { label: props.label, n: i + 1 })} aria-invalid={!!props.errors(i)} />
+            <Button type="button" variant="ghost" size="icon" onClick={() => props.onRemove(i)} aria-label={t("removeListItem", { label: props.label.toLowerCase(), n: i + 1 })}>
               <X aria-hidden />
             </Button>
           </div>

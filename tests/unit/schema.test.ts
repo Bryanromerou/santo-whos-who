@@ -19,21 +19,21 @@ describe("library JSON schema", () => {
     const f = clone(loadFixture()) as Record<string, unknown>;
     f.schemaVersion = 2;
     f.format = "otro";
-    const { errors } = parseLibrary(f);
+    const { errors } = parseLibrary(f, "es");
     expect(errors.join("\n")).toContain("schemaVersion debe ser 1");
     expect(errors.join("\n")).toContain('format debe ser "santos-studio-library"');
   });
 
   it("rejects non-objects and invalid JSON text", () => {
-    expect(parseLibrary([]).errors[0]).toMatch(/objeto JSON/);
-    expect(parseJsonText("{ nope").error).toMatch(/no es JSON válido/);
+    expect(parseLibrary([], "es").errors[0]).toMatch(/objeto JSON/);
+    expect(parseJsonText("{ nope", "es").error).toMatch(/no es JSON válido/);
   });
 
   it("names the saint and field for invalid characteristic types and empty texts", () => {
     const f = clone(loadFixture());
     (f.saints[4].characteristics[1] as { type: string }).type = "rumor";
     f.saints[5].characteristics[0].text = "   ";
-    const { errors } = parseLibrary(f);
+    const { errors } = parseLibrary(f, "es");
     const all = errors.join("\n");
     expect(all).toContain(`Santo n.º 5 («${f.saints[4].name}») › característica n.º 2 › tipo`);
     expect(all).toContain("Valores permitidos");
@@ -44,7 +44,7 @@ describe("library JSON schema", () => {
     const f = clone(loadFixture()) as unknown as { saints: Record<string, unknown>[] };
     f.saints[0].isMartyr = "sí";
     f.saints[1].reviewStatus = "ok";
-    const { errors } = parseLibrary(f);
+    const { errors } = parseLibrary(f, "es");
     expect(errors.some((e) => e.includes("isMartyr debe ser true o false"))).toBe(true);
     expect(errors.some((e) => e.includes("reviewStatus"))).toBe(true);
   });

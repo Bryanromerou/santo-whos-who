@@ -1,17 +1,14 @@
 import { z } from "zod";
 
+/** Labels live in messages/*.json → builder.paper / builder.photoFit. */
 export const PAPER_SIZES = {
-  letter: { label: "Carta (8.5 × 11 in)", widthIn: 8.5, heightIn: 11, css: "8.5in 11in" },
-  a4: { label: "A4 (210 × 297 mm)", widthIn: 210 / 25.4, heightIn: 297 / 25.4, css: "210mm 297mm" },
+  letter: { widthIn: 8.5, heightIn: 11, css: "8.5in 11in" },
+  a4: { widthIn: 210 / 25.4, heightIn: 297 / 25.4, css: "210mm 297mm" },
 } as const;
 export type PaperSize = keyof typeof PAPER_SIZES;
 
-export const PHOTO_FIT_LABELS = {
-  saint: "Según cada santo",
-  contain: "Mostrar completas (sin recortar)",
-  cover: "Recortar para llenar",
-} as const;
-export type PhotoFit = keyof typeof PHOTO_FIT_LABELS;
+export const PHOTO_FITS = ["saint", "contain", "cover"] as const;
+export type PhotoFit = (typeof PHOTO_FITS)[number];
 
 export const PER_PAGE_OPTIONS = [1, 2, 4] as const;
 export type PerPage = (typeof PER_PAGE_OPTIONS)[number];
@@ -32,7 +29,7 @@ export const worksheetSettingsSchema = z.object({
   imageWidthPct: z.number().min(LIMITS.imageWidthPct.min).max(LIMITS.imageWidthPct.max).default(28),
   showPortrait: z.boolean().default(true),
   /** "saint" = each saint's own crop; "contain" = whole photo everywhere; "cover" = fill the box everywhere. */
-  photoFit: z.enum(["saint", "contain", "cover"]).default("saint"),
+  photoFit: z.enum(PHOTO_FITS).default("saint"),
   showCountry: z.boolean().default(true),
   showPageNumbers: z.boolean().default(true),
 });

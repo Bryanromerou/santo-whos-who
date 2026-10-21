@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import { seedFilePath } from "@/lib/config";
+import { errorMessage, requestLocale } from "@/lib/errors";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -10,6 +11,6 @@ export async function GET() {
     const text = await fs.readFile(seedFilePath(), "utf8");
     return new Response(text, { headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" } });
   } catch {
-    return Response.json({ error: "No existe seed/santos_studio_43_santos.json." }, { status: 404 });
+    return Response.json({ error: errorMessage(requestLocale(), "seedMissing") }, { status: 404 });
   }
 }

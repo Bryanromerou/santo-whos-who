@@ -37,24 +37,24 @@ const MAX_INPUT_PIXELS = 60_000_000;
  * onto white) plus a thumbnail.
  */
 export async function processPortrait(input: Buffer, maxBytes: number): Promise<ProcessedPortrait> {
-  if (input.length === 0) throw new AppError("El archivo está vacío.");
+  if (input.length === 0) throw new AppError("emptyFile");
   if (input.length > maxBytes) {
-    throw new AppError(`La imagen supera el límite de ${Math.round(maxBytes / 1024 / 1024)} MB.`, 413);
+    throw new AppError("imageTooLarge", { status: 413, values: { mb: Math.round(maxBytes / 1024 / 1024) } });
   }
   const format = detectImageFormat(input);
-  if (!format) throw new AppError("Formato no admitido. Sube una imagen JPG, PNG o WebP.", 415);
+  if (!format) throw new AppError("unsupportedFormat", { status: 415 });
 
   let meta: Metadata;
   try {
     meta = await sharp(input, { limitInputPixels: MAX_INPUT_PIXELS }).metadata();
   } catch {
-    throw new AppError("No se pudo leer la imagen. El archivo parece estar dañado.", 422);
+    throw new AppError("unreadableImage", { status: 422 });
   }
   if (meta.format !== format) {
-    throw new AppError("El contenido del archivo no coincide con un JPG, PNG o WebP válido.", 415);
+    throw new AppError("contentMismatch", { status: 415 });
   }
-  if (!meta.width || !meta.height) throw new AppError("La imagen no tiene dimensiones válidas.", 422);
-  if ((meta.pages ?? 1) > 1) throw new AppError("No se admiten imágenes animadas.", 415);
+  if (!meta.width || !meta.height) throw new AppError("invalidDimensions", { status: 422 });
+  if ((meta.pages ?? 1) > 1) throw new AppError("animatedNotSupported", { status: 415 });
 
   const base = () =>
     sharp(input, { limitInputPixels: MAX_INPUT_PIXELS, failOn: "error" })
@@ -78,6 +78,6 @@ export async function processPortrait(input: Buffer, maxBytes: number): Promise<
       sourceFormat: format,
     };
   } catch {
-    throw new AppError("No se pudo procesar la imagen. Prueba con otro archivo.", 422);
+    throw new AppError("processingFailed", { status: 422 });
   }
 }

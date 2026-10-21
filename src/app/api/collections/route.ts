@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { createCollection, listCollections, reorderCollections } from "@/db/repositories/collections";
+import { perLocale, translator } from "@/i18n/translator";
 import { readJson } from "@/lib/api";
 import { errorResponse } from "@/lib/errors";
 
@@ -14,7 +15,12 @@ export async function GET() {
   }
 }
 
-const createSchema = z.object({ name: z.string().trim().min(1, { error: "El nombre es obligatorio" }).max(200), saintIds: z.array(z.string()).default([]) });
+const createSchema = perLocale((locale) =>
+  z.object({
+    name: z.string().trim().min(1, { error: translator(locale, "validation")("nameRequired") }).max(200),
+    saintIds: z.array(z.string()).default([]),
+  }),
+);
 
 export async function POST(req: Request) {
   try {

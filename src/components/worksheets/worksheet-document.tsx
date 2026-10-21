@@ -67,10 +67,13 @@ type Props = {
   pageClassName?: string;
 };
 
-/** The full multipage worksheet. Used unchanged for preview, print and PDF. */
+/**
+ * The full multipage worksheet. Used unchanged for preview, print and PDF.
+ * Always Spanish (labels and content), whatever the interface language.
+ */
 export function WorksheetDocument({ pages, saints, settings, overflowIds, className, pageClassName }: Props) {
   return (
-    <div className={["ws-doc", className].filter(Boolean).join(" ")} style={documentStyle(settings)}>
+    <div className={["ws-doc", className].filter(Boolean).join(" ")} style={documentStyle(settings)} lang="es">
       {pages.map((page, i) => (
         <section key={i} className={["ws-page", pageClassName].filter(Boolean).join(" ")} data-ws-page={i + 1} aria-label={`Página ${i + 1}`}>
           <div className="ws-slots" data-per-page={page.perPage}>

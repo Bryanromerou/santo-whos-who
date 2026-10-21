@@ -48,14 +48,14 @@ function nextPosition(conn: Conn): number {
 /** Replaces the ordered membership list. Throws if any saint id is unknown or repeated. */
 export function writeMembers(tx: Conn, collectionId: string, saintIds: string[]) {
   if (new Set(saintIds).size !== saintIds.length) {
-    throw new AppError("La colección contiene santos repetidos.", 400);
+    throw new AppError("duplicateSaintsInCollection");
   }
   if (saintIds.length) {
     const found = new Set(
       tx.select({ id: saints.id }).from(saints).where(inArray(saints.id, saintIds)).all().map((r) => r.id),
     );
     const missing = saintIds.filter((id) => !found.has(id));
-    if (missing.length) throw new AppError(`Santos inexistentes en la colección: ${missing.join(", ")}`, 400);
+    if (missing.length) throw new AppError("unknownSaintsInCollection", { values: { ids: missing.join(", ") } });
   }
   tx.delete(collectionSaints).where(eq(collectionSaints.collectionId, collectionId)).run();
   if (saintIds.length) {
@@ -71,7 +71,7 @@ export function insertCollection(tx: Conn, id: string, name: string, saintIds: s
 
 export function createCollection(name: string, saintIds: string[] = [], db: Db = getDb()): CollectionRecord {
   const clean = name.trim();
-  if (!clean) throw new AppError("El nombre de la colección es obligatorio.");
+  if (!clean) throw new AppError("collectionNameRequired");
   return db.transaction((tx) => {
     const id = uniqueId(slugify(clean), (c) => collectionExists(c, tx));
     insertCollection(tx, id, clean, saintIds);
@@ -85,11 +85,11 @@ export function updateCollection(
   db: Db = getDb(),
 ): CollectionRecord {
   return db.transaction((tx) => {
-    if (!collectionExists(id, tx)) throw notFound("La colección");
+    if (!collectionExists(id, tx)) throw notFound("collection");
     const set: { updatedAt: string; name?: string } = { updatedAt: nowIso() };
     if (patch.name !== undefined) {
       const clean = patch.name.trim();
-      if (!clean) throw new AppError("El nombre de la colección es obligatorio.");
+      if (!clean) throw new AppError("collectionNameRequired");
       set.name = clean;
     }
     tx.update(collections).set(set).where(eq(collections.id, id)).run();
@@ -102,7 +102,7 @@ export function updateCollection(
 export function addToCollection(id: string, saintIds: string[], db: Db = getDb()): CollectionRecord {
   return db.transaction((tx) => {
     const current = getCollection(id, tx);
-    if (!current) throw notFound("La colección");
+    if (!current) throw notFound("collection");
     const merged = [...current.saintIds, ...saintIds.filter((s) => !current.saintIds.includes(s))];
     writeMembers(tx, id, [...new Set(merged)]);
     tx.update(collections).set({ updatedAt: nowIso() }).where(eq(collections.id, id)).run();
@@ -113,7 +113,7 @@ export function addToCollection(id: string, saintIds: string[], db: Db = getDb()
 /** Deletes the collection only; saints are untouched. */
 export function deleteCollection(id: string, db: Db = getDb()) {
   const res = db.delete(collections).where(eq(collections.id, id)).run();
-  if (res.changes === 0) throw notFound("La colección");
+  if (res.changes === 0) throw notFound("collection");
 }
 
 export function reorderCollections(ids: string[], db: Db = getDb()) {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { ImagePlus, Loader2, RefreshCw, Trash2 } from "lucide-react";
 import { ConfirmDialog } from "@/components/layout/confirm-dialog";
@@ -25,6 +26,7 @@ type Props = {
 const ACCEPT = "image/jpeg,image/png,image/webp";
 
 export function PortraitEditor({ saintId, portraitUrl, settings, onSettingsChange, onSaved, maxUploadMb }: Props) {
+  const t = useTranslations("portraits.editor");
   const inputRef = useRef<HTMLInputElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const drag = useRef<{ x: number; y: number; fx: number; fy: number } | null>(null);
@@ -35,11 +37,11 @@ export function PortraitEditor({ saintId, portraitUrl, settings, onSettingsChang
   async function upload(file: File | undefined) {
     if (!file || !saintId) return;
     if (!ACCEPT.split(",").includes(file.type) && !/\.(jpe?g|png|webp)$/i.test(file.name)) {
-      toast.error("Formato no admitido", { description: "Sube una imagen JPG, PNG o WebP." });
+      toast.error(t("unsupportedTitle"), { description: t("unsupportedBody") });
       return;
     }
     if (file.size > maxUploadMb * 1024 * 1024) {
-      toast.error("Imagen demasiado grande", { description: `El límite es ${maxUploadMb} MB.` });
+      toast.error(t("tooLargeTitle"), { description: t("tooLargeBody", { mb: maxUploadMb }) });
       return;
     }
     setBusy("upload");
@@ -49,9 +51,9 @@ export function PortraitEditor({ saintId, portraitUrl, settings, onSettingsChang
       const { saint } = await api<{ saint: SaintRecord }>(`/api/saints/${encodeURIComponent(saintId)}/portrait`, { method: "POST", body });
       setBroken(null);
       onSaved(saint);
-      toast.success(portraitUrl ? "Retrato reemplazado" : "Retrato subido");
+      toast.success(portraitUrl ? t("replaced") : t("uploaded"));
     } catch (e) {
-      toast.error("No se pudo subir la imagen", { description: (e as Error).message });
+      toast.error(t("uploadFailed"), { description: (e as Error).message });
     } finally {
       setBusy(null);
     }
@@ -63,9 +65,9 @@ export function PortraitEditor({ saintId, portraitUrl, settings, onSettingsChang
     try {
       const { saint } = await api<{ saint: SaintRecord }>(`/api/saints/${encodeURIComponent(saintId)}/portrait`, { method: "DELETE" });
       onSaved(saint);
-      toast.success("Retrato quitado");
+      toast.success(t("removed"));
     } catch (e) {
-      toast.error("No se pudo quitar el retrato", { description: (e as Error).message });
+      toast.error(t("removeFailed"), { description: (e as Error).message });
       throw e;
     } finally {
       setBusy(null);
@@ -105,13 +107,13 @@ export function PortraitEditor({ saintId, portraitUrl, settings, onSettingsChang
           onPointerUp={endDrag}
           onPointerCancel={endDrag}
           style={{ cursor: showImage ? "grab" : undefined }}
-          aria-label={showImage ? "Arrastra para mover el encuadre" : undefined}
+          aria-label={showImage ? t("dragToMove") : undefined}
         >
           {showImage ? (
             // eslint-disable-next-line @next/next/no-img-element -- local portrait route
             <img
               src={portraitUrl}
-              alt="Retrato actual"
+              alt={t("currentAlt")}
               draggable={false}
               className="absolute inset-0 h-full w-full"
               style={portraitImageStyle({ ...settings, src: portraitUrl })}
@@ -119,31 +121,31 @@ export function PortraitEditor({ saintId, portraitUrl, settings, onSettingsChang
             />
           ) : (
             <div className="grid h-full place-items-center border-dashed p-2 text-center text-xs text-muted-foreground">
-              {portraitUrl ? "No se encontró el archivo" : "Espacio para foto"}
+              {portraitUrl ? t("fileMissing") : t("placeholder")}
             </div>
           )}
           {busy && (
             <div className="absolute inset-0 grid place-items-center bg-white/70">
-              <Loader2 className="size-5 animate-spin" aria-label="Procesando" />
+              <Loader2 className="size-5 animate-spin" aria-label={t("processing")} />
             </div>
           )}
         </div>
         <div className="flex min-w-0 flex-col gap-2">
           {!saintId ? (
-            <p className="text-sm text-muted-foreground">Guarda el santo por primera vez para poder subir su retrato.</p>
+            <p className="text-sm text-muted-foreground">{t("saveFirst")}</p>
           ) : (
             <>
               <Button type="button" variant="outline" size="sm" disabled={!!busy} onClick={() => inputRef.current?.click()}>
                 {portraitUrl ? <RefreshCw aria-hidden /> : <ImagePlus aria-hidden />}
-                {portraitUrl ? "Reemplazar imagen…" : "Subir imagen…"}
+                {portraitUrl ? t("replace") : t("upload")}
               </Button>
               {portraitUrl && (
                 <Button type="button" variant="ghost" size="sm" disabled={!!busy} onClick={() => setConfirmRemove(true)} className="text-destructive">
-                  <Trash2 aria-hidden /> Quitar retrato
+                  <Trash2 aria-hidden /> {t("remove")}
                 </Button>
               )}
               <p className="text-xs text-muted-foreground">
-                JPG, PNG o WebP · máx. {maxUploadMb} MB. Se guarda de inmediato en este equipo, sin metadatos (EXIF).
+                {t("help", { mb: maxUploadMb })}
               </p>
             </>
           )}
@@ -163,18 +165,18 @@ export function PortraitEditor({ saintId, portraitUrl, settings, onSettingsChang
 
       {showImage && (
         <fieldset className="space-y-3 rounded-lg border p-3">
-          <legend className="px-1 text-xs font-medium text-muted-foreground">Encuadre (se guarda con «Guardar»)</legend>
+          <legend className="px-1 text-xs font-medium text-muted-foreground">{t("framing")}</legend>
           <Tabs value={settings.fit} onValueChange={(v) => onSettingsChange({ ...settings, fit: v as PortraitSettings["fit"] })}>
             <TabsList className="w-full">
-              <TabsTrigger value="cover" className="flex-1">Recortar para llenar</TabsTrigger>
-              <TabsTrigger value="contain" className="flex-1">Imagen completa</TabsTrigger>
+              <TabsTrigger value="cover" className="flex-1">{t("cover")}</TabsTrigger>
+              <TabsTrigger value="contain" className="flex-1">{t("contain")}</TabsTrigger>
             </TabsList>
           </Tabs>
-          <CropSlider label="Zoom" value={settings.zoom} min={1} max={3} step={0.05} format={(v) => `${v.toFixed(2)}×`} onChange={(zoom) => onSettingsChange({ ...settings, zoom })} />
-          <CropSlider label="Posición horizontal" value={settings.focalX} min={0} max={100} step={1} format={(v) => `${v}%`} onChange={(focalX) => onSettingsChange({ ...settings, focalX })} />
-          <CropSlider label="Posición vertical" value={settings.focalY} min={0} max={100} step={1} format={(v) => `${v}%`} onChange={(focalY) => onSettingsChange({ ...settings, focalY })} />
+          <CropSlider id="zoom" label={t("zoom")} value={settings.zoom} min={1} max={3} step={0.05} format={(v) => `${v.toFixed(2)}×`} onChange={(zoom) => onSettingsChange({ ...settings, zoom })} />
+          <CropSlider id="focal-x" label={t("horizontal")} value={settings.focalX} min={0} max={100} step={1} format={(v) => `${v}%`} onChange={(focalX) => onSettingsChange({ ...settings, focalX })} />
+          <CropSlider id="focal-y" label={t("vertical")} value={settings.focalY} min={0} max={100} step={1} format={(v) => `${v}%`} onChange={(focalY) => onSettingsChange({ ...settings, focalY })} />
           <Button type="button" variant="ghost" size="xs" onClick={() => onSettingsChange({ focalX: 50, focalY: 50, zoom: 1, fit: "cover" })}>
-            Restablecer encuadre
+            {t("resetFraming")}
           </Button>
         </fieldset>
       )}
@@ -182,9 +184,9 @@ export function PortraitEditor({ saintId, portraitUrl, settings, onSettingsChang
       <ConfirmDialog
         open={confirmRemove}
         onOpenChange={setConfirmRemove}
-        title="¿Quitar el retrato?"
-        description={<p>La ficha mostrará «Espacio para foto». El archivo se borra si ningún otro santo lo usa.</p>}
-        confirmLabel="Quitar retrato"
+        title={t("removeTitle")}
+        description={<p>{t("removeBody")}</p>}
+        confirmLabel={t("remove")}
         destructive
         onConfirm={remove}
       />
@@ -192,8 +194,8 @@ export function PortraitEditor({ saintId, portraitUrl, settings, onSettingsChang
   );
 }
 
-function CropSlider(props: { label: string; value: number; min: number; max: number; step: number; format: (v: number) => string; onChange: (v: number) => void }) {
-  const id = `crop-${props.label.replace(/\s/g, "-")}`;
+function CropSlider(props: { id: string; label: string; value: number; min: number; max: number; step: number; format: (v: number) => string; onChange: (v: number) => void }) {
+  const id = `crop-${props.id}`;
   return (
     <div className="space-y-1.5">
       <div className="flex justify-between text-xs">

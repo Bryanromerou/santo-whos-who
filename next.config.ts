@@ -1,5 +1,6 @@
 import path from "node:path";
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 // Santos Studio is a local-first app: every page reads live data from SQLite,
 // so Cache Components (static shells + preserved route state) is disabled and
@@ -20,4 +21,7 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// Interface language (es/en) without locale routing; see src/i18n/request.ts.
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
+
+export default withNextIntl(nextConfig);

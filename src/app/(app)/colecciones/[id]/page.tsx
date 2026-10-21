@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { CollectionEditor } from "@/components/collections/collection-editor";
 import { getCollection } from "@/db/repositories/collections";
 import { listSaints } from "@/db/repositories/saints";
 import { portraitFileExists, portraitUrls } from "@/lib/images/storage";
 
 export async function generateMetadata({ params }: PageProps<"/colecciones/[id]">): Promise<Metadata> {
-  return { title: getCollection(decodeURIComponent((await params).id))?.name ?? "Colección" };
+  return { title: getCollection(decodeURIComponent((await params).id))?.name ?? (await getTranslations("meta"))("collection") };
 }
 
 export default async function CollectionPage({ params }: PageProps<"/colecciones/[id]">) {

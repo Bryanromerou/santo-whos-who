@@ -3,13 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { ArrowDown, ArrowUp, FolderOpen, MoreHorizontal, Pencil, Plus, Printer, Trash2 } from "lucide-react";
 import { ConfirmDialog } from "@/components/layout/confirm-dialog";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { api } from "@/lib/client-api";
-import { pluralize } from "@/lib/text";
 import { moveItem } from "@/lib/worksheet/paginate";
 import { NameDialog } from "./name-dialog";
 
@@ -17,6 +17,8 @@ export type CollectionCard = { id: string; name: string; count: number; preview:
 
 export function CollectionsManager({ collections: initial }: { collections: CollectionCard[] }) {
   const router = useRouter();
+  const t = useTranslations("collections");
+  const tc = useTranslations("common");
   const [collections, setCollections] = useState(initial);
   const [creating, setCreating] = useState(false);
   const [renaming, setRenaming] = useState<CollectionCard | null>(null);
@@ -24,7 +26,7 @@ export function CollectionsManager({ collections: initial }: { collections: Coll
 
   async function create(name: string) {
     const { collection } = await api<{ collection: { id: string; name: string } }>("/api/collections", { method: "POST", json: { name } });
-    toast.success(`Colección «${collection.name}» creada`);
+    toast.success(t("toast.created", { name: collection.name }));
     router.push(`/colecciones/${encodeURIComponent(collection.id)}`);
   }
 
@@ -32,7 +34,7 @@ export function CollectionsManager({ collections: initial }: { collections: Coll
     if (!renaming) return;
     await api(`/api/collections/${encodeURIComponent(renaming.id)}`, { method: "PATCH", json: { name } });
     setCollections((cs) => cs.map((c) => (c.id === renaming.id ? { ...c, name } : c)));
-    toast.success("Colección renombrada");
+    toast.success(t("toast.renamed"));
     router.refresh();
   }
 
@@ -41,10 +43,10 @@ export function CollectionsManager({ collections: initial }: { collections: Coll
     try {
       await api(`/api/collections/${encodeURIComponent(deleting.id)}`, { method: "DELETE" });
       setCollections((cs) => cs.filter((c) => c.id !== deleting.id));
-      toast.success(`Colección «${deleting.name}» eliminada`, { description: "Los santos siguen en la biblioteca." });
+      toast.success(t("toast.deleted", { name: deleting.name }), { description: t("toast.saintsKept") });
       router.refresh();
     } catch (e) {
-      toast.error("No se pudo eliminar", { description: (e as Error).message });
+      toast.error(t("toast.deleteFailed"), { description: (e as Error).message });
       throw e;
     }
   }
@@ -57,7 +59,7 @@ export function CollectionsManager({ collections: initial }: { collections: Coll
       await api("/api/collections", { method: "PATCH", json: { order: next.map((c) => c.id) } });
     } catch (e) {
       setCollections(prev);
-      toast.error("No se pudo reordenar", { description: (e as Error).message });
+      toast.error(t("toast.reorderFailed"), { description: (e as Error).message });
     }
   }
 
@@ -65,29 +67,29 @@ export function CollectionsManager({ collections: initial }: { collections: Coll
     <div className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-heading text-3xl font-semibold tracking-tight">Colecciones</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Grupos de santos para preparar fichas. Editar un santo actualiza todas sus colecciones.</p>
+          <h1 className="font-heading text-3xl font-semibold tracking-tight">{t("title")}</h1>
+          <p className="mt-1 text-sm text-muted-foreground">{t("subtitle")}</p>
         </div>
         <Button onClick={() => setCreating(true)}>
-          <Plus aria-hidden /> Nueva colección
+          <Plus aria-hidden /> {t("new")}
         </Button>
       </div>
 
       {collections.length === 0 ? (
         <div className="rounded-lg border border-dashed px-6 py-16 text-center">
           <FolderOpen className="mx-auto size-8 text-muted-foreground" aria-hidden />
-          <p className="mt-3 font-medium">Todavía no hay colecciones</p>
-          <p className="mt-1 text-sm text-muted-foreground">Crea una, o importa tu archivo JSON: trae las colecciones preparadas.</p>
+          <p className="mt-3 font-medium">{t("empty.title")}</p>
+          <p className="mt-1 text-sm text-muted-foreground">{t("empty.description")}</p>
         </div>
       ) : (
         <ul className="divide-y rounded-lg border" data-testid="collections-list">
           {collections.map((c, i) => (
             <li key={c.id} className="flex flex-wrap items-center gap-3 px-4 py-3">
               <div className="flex flex-col">
-                <Button variant="ghost" size="icon-xs" disabled={i === 0} onClick={() => move(i, i - 1)} aria-label={`Subir ${c.name}`}>
+                <Button variant="ghost" size="icon-xs" disabled={i === 0} onClick={() => move(i, i - 1)} aria-label={tc("moveUp", { name: c.name })}>
                   <ArrowUp aria-hidden />
                 </Button>
-                <Button variant="ghost" size="icon-xs" disabled={i === collections.length - 1} onClick={() => move(i, i + 1)} aria-label={`Bajar ${c.name}`}>
+                <Button variant="ghost" size="icon-xs" disabled={i === collections.length - 1} onClick={() => move(i, i + 1)} aria-label={tc("moveDown", { name: c.name })}>
                   <ArrowDown aria-hidden />
                 </Button>
               </div>
@@ -96,33 +98,33 @@ export function CollectionsManager({ collections: initial }: { collections: Coll
                   {c.name}
                 </Link>
                 <p className="truncate text-xs text-muted-foreground">
-                  {pluralize(c.count, "santo", "santos")}
+                  {tc("saints", { count: c.count })}
                   {c.preview.length > 0 && ` · ${c.preview.join(", ")}${c.count > c.preview.length ? "…" : ""}`}
                 </p>
               </div>
               <Button size="sm" variant="outline" asChild disabled={c.count === 0}>
                 <Link href={`/crear-fichas?coleccion=${encodeURIComponent(c.id)}`}>
-                  <Printer aria-hidden /> Crear fichas con esta colección
+                  <Printer aria-hidden /> {t("printWith")}
                 </Link>
               </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="icon-sm" aria-label={`Más acciones para ${c.name}`}>
+                  <Button variant="ghost" size="icon-sm" aria-label={tc("moreActionsFor", { name: c.name })}>
                     <MoreHorizontal aria-hidden />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem asChild>
                     <Link href={`/colecciones/${encodeURIComponent(c.id)}`}>
-                      <FolderOpen aria-hidden /> Editar santos y orden
+                      <FolderOpen aria-hidden /> {t("editMembers")}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem onSelect={() => setRenaming(c)}>
-                    <Pencil aria-hidden /> Renombrar…
+                    <Pencil aria-hidden /> {tc("renameEllipsis")}
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem variant="destructive" onSelect={() => setDeleting(c)}>
-                    <Trash2 aria-hidden /> Eliminar…
+                    <Trash2 aria-hidden /> {tc("deleteEllipsis")}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -131,14 +133,14 @@ export function CollectionsManager({ collections: initial }: { collections: Coll
         </ul>
       )}
 
-      <NameDialog open={creating} onOpenChange={setCreating} title="Nueva colección" submitLabel="Crear" onSubmit={create} />
-      <NameDialog open={!!renaming} onOpenChange={(o) => !o && setRenaming(null)} title="Renombrar colección" initialName={renaming?.name} submitLabel="Guardar" onSubmit={rename} />
+      <NameDialog open={creating} onOpenChange={setCreating} title={t("new")} submitLabel={tc("create")} onSubmit={create} />
+      <NameDialog open={!!renaming} onOpenChange={(o) => !o && setRenaming(null)} title={t("renameTitle")} initialName={renaming?.name} submitLabel={tc("save")} onSubmit={rename} />
       <ConfirmDialog
         open={!!deleting}
         onOpenChange={(o) => !o && setDeleting(null)}
-        title={`¿Eliminar la colección «${deleting?.name ?? ""}»?`}
-        description={<p>Solo se borra la colección. Sus {deleting?.count ?? 0} santos siguen en la biblioteca.</p>}
-        confirmLabel="Eliminar colección"
+        title={t("delete.title", { name: deleting?.name ?? "" })}
+        description={<p>{t("delete.bodyCount", { count: deleting?.count ?? 0 })}</p>}
+        confirmLabel={t("delete.confirm")}
         destructive
         onConfirm={remove}
       />

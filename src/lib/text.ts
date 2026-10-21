@@ -34,7 +34,3 @@ export function uniqueId(base: string, taken: (id: string) => boolean): string {
     if (!taken(candidate)) return candidate;
   }
 }
-
-export function pluralize(n: number, singular: string, plural: string): string {
-  return `${n.toLocaleString("es")} ${n === 1 ? singular : plural}`;
-}

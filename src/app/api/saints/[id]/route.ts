@@ -2,7 +2,7 @@ import { deleteSaint, getSaint, updateSaint } from "@/db/repositories/saints";
 import { readJson } from "@/lib/api";
 import { errorResponse, notFound } from "@/lib/errors";
 import { releasePortraitIfUnused } from "@/lib/images/portrait-service";
-import { saintInputSchema } from "@/lib/schema/saint";
+import { saintInputSchemaFor } from "@/lib/schema/saint";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 export async function GET(_req: Request, ctx: RouteContext<"/api/saints/[id]">) {
   try {
     const saint = getSaint((await ctx.params).id);
-    if (!saint) throw notFound("El santo");
+    if (!saint) throw notFound("saint");
     return Response.json({ saint });
   } catch (e) {
     return errorResponse(e);
@@ -19,7 +19,7 @@ export async function GET(_req: Request, ctx: RouteContext<"/api/saints/[id]">) 
 
 export async function PUT(req: Request, ctx: RouteContext<"/api/saints/[id]">) {
   try {
-    const input = await readJson(req, saintInputSchema);
+    const input = await readJson(req, saintInputSchemaFor);
     return Response.json({ saint: updateSaint((await ctx.params).id, input) });
   } catch (e) {
     return errorResponse(e);

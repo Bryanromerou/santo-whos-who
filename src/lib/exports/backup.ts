@@ -3,7 +3,9 @@ import fs from "node:fs";
 import { strToU8, strFromU8, unzipSync, zipSync, type Zippable } from "fflate";
 import sharp from "sharp";
 import { getDb, type Db } from "@/db/client";
-import { getSetting, setSetting, SETTING_KEYS } from "@/db/repositories/settings";
+import { getSetting, getUiLocale, setSetting, setUiLocale, SETTING_KEYS } from "@/db/repositories/settings";
+import { DEFAULT_LOCALE, isLocale, type Locale } from "@/i18n/config";
+import { loose, translator } from "@/i18n/translator";
 import { AppError } from "@/lib/errors";
 import { importLibrary, type ImportResult } from "@/lib/imports/import-library";
 import { failedReport, validateLibrary, type ImportMode, type ImportReport } from "@/lib/imports/validate";
@@ -40,7 +42,7 @@ const sha256 = (data: Uint8Array) => createHash("sha256").update(data).digest("h
  * ZIP layout:
  *   manifest.json        — format/version, counts, sha256 of every file
  *   library.json         — same schema as "Exportar JSON"
- *   settings.json        — worksheet preferences
+ *   settings.json        — worksheet preferences and interface language
  *   portraits/<uuid>.jpg — master images (+ .thumb.jpg thumbnails)
  */
 export function createBackupZip(db: Db = getDb()): Uint8Array {
@@ -53,7 +55,8 @@ export function createBackupZip(db: Db = getDb()): Uint8Array {
   };
 
   add("library.json", strToU8(JSON.stringify(library, null, 2)));
-  add("settings.json", strToU8(JSON.stringify({ worksheetDraft: getSetting(SETTING_KEYS.worksheetDraft, db) }, null, 2)));
+  const settings = { worksheetDraft: getSetting(SETTING_KEYS.worksheetDraft, db), uiLocale: getUiLocale(db) };
+  add("settings.json", strToU8(JSON.stringify(settings, null, 2)));
 
   const portraitPaths = [...new Set(library.saints.map((s) => s.portraitPath).filter((p): p is string => isValidPortraitPath(p)))];
   let portraitsCount = 0;
@@ -89,13 +92,14 @@ export type ParsedBackup = {
   errors: string[];
   manifest?: BackupManifest;
   libraryRaw?: unknown;
-  settings?: { worksheetDraft?: unknown };
+  settings?: { worksheetDraft?: unknown; uiLocale?: unknown };
   /** master path (uploads/saints/<uuid>.jpg) → { master, thumb? } */
   images: Map<string, { master: Uint8Array; thumb?: Uint8Array }>;
 };
 
-/** Unzips and verifies a backup without touching disk or DB. */
-export function parseBackupZip(buf: Uint8Array): ParsedBackup {
+/** Unzips and verifies a backup without touching disk or DB. Messages are in `locale`. */
+export function parseBackupZip(buf: Uint8Array, locale: Locale = DEFAULT_LOCALE): ParsedBackup {
+  const t = loose(translator(locale, "backup.report"));
   const errors: string[] = [];
   const images: ParsedBackup["images"] = new Map();
   let entries: Record<string, Uint8Array>;
@@ -104,25 +108,25 @@ export function parseBackupZip(buf: Uint8Array): ParsedBackup {
     entries = unzipSync(buf, {
       filter: (f) => {
         total += f.originalSize;
-        if (total > MAX_BACKUP_BYTES) throw new Error("demasiado grande");
+        if (total > MAX_BACKUP_BYTES) throw new Error(t("tooLarge"));
         return !f.name.endsWith("/");
       },
     });
   } catch (e) {
-    return { errors: [`No se pudo abrir el ZIP: ${(e as Error).message}`], images };
+    return { errors: [t("cannotOpenZip", { message: (e as Error).message })], images };
   }
 
   const manifestRaw = entries["manifest.json"];
-  if (!manifestRaw) return { errors: ["El ZIP no contiene manifest.json; no parece un respaldo de Santos Studio."], images };
+  if (!manifestRaw) return { errors: [t("noManifest")], images };
   let manifest: BackupManifest;
   try {
     manifest = JSON.parse(strFromU8(manifestRaw));
   } catch {
-    return { errors: ["manifest.json no es JSON válido."], images };
+    return { errors: [t("invalidJson", { file: "manifest.json" })], images };
   }
-  if (manifest.format !== BACKUP_FORMAT) errors.push(`Formato de respaldo desconocido: «${String(manifest.format)}».`);
-  if (manifest.version !== BACKUP_VERSION) errors.push(`Versión de respaldo no compatible: ${String(manifest.version)}.`);
-  if (!Array.isArray(manifest.files)) errors.push("manifest.json no lista los archivos del respaldo.");
+  if (manifest.format !== BACKUP_FORMAT) errors.push(t("unknownFormat", { format: String(manifest.format) }));
+  if (manifest.version !== BACKUP_VERSION) errors.push(t("unsupportedVersion", { version: String(manifest.version) }));
+  if (!Array.isArray(manifest.files)) errors.push(t("manifestNoFiles"));
   if (errors.length) return { errors, manifest, images };
 
   const listed = new Set<string>();
@@ -130,24 +134,24 @@ export function parseBackupZip(buf: Uint8Array): ParsedBackup {
     listed.add(f.path);
     const data = entries[f.path];
     if (!data) {
-      errors.push(`Falta el archivo «${f.path}» indicado en el manifiesto.`);
+      errors.push(t("missingFile", { path: f.path }));
       continue;
     }
-    if (data.length !== f.bytes || sha256(data) !== f.sha256) errors.push(`El archivo «${f.path}» está dañado (la suma de verificación no coincide).`);
+    if (data.length !== f.bytes || sha256(data) !== f.sha256) errors.push(t("damagedFile", { path: f.path }));
   }
   for (const name of Object.keys(entries)) {
-    if (name !== "manifest.json" && !listed.has(name)) errors.push(`Archivo inesperado en el respaldo: «${name}».`);
+    if (name !== "manifest.json" && !listed.has(name)) errors.push(t("unexpectedFile", { path: name }));
   }
 
   for (const [name, data] of Object.entries(entries)) {
     if (!name.startsWith("portraits/")) continue;
     const file = name.slice("portraits/".length);
     if (!SERVE_FILENAME_RE.test(file)) {
-      errors.push(`Nombre de imagen no permitido: «${name}».`);
+      errors.push(t("badImageName", { path: name }));
       continue;
     }
     if (detectImageFormat(data) !== "jpeg") {
-      errors.push(`«${name}» no es una imagen JPG válida.`);
+      errors.push(t("notJpeg", { path: name }));
       continue;
     }
     const master = `uploads/saints/${file.replace(".thumb.jpg", ".jpg")}`;
@@ -156,15 +160,15 @@ export function parseBackupZip(buf: Uint8Array): ParsedBackup {
     else entry.master = data;
     images.set(master, entry);
   }
-  for (const [p, e] of images) if (e.master.length === 0) errors.push(`Falta la imagen principal de «${p}».`);
+  for (const [p, e] of images) if (e.master.length === 0) errors.push(t("missingMaster", { path: p }));
 
   let libraryRaw: unknown;
-  if (!entries["library.json"]) errors.push("El respaldo no contiene library.json.");
+  if (!entries["library.json"]) errors.push(t("noLibrary"));
   else {
     try {
       libraryRaw = JSON.parse(strFromU8(entries["library.json"]));
     } catch {
-      errors.push("library.json no es JSON válido.");
+      errors.push(t("invalidJson", { file: "library.json" }));
     }
   }
   let settings: ParsedBackup["settings"];
@@ -172,7 +176,7 @@ export function parseBackupZip(buf: Uint8Array): ParsedBackup {
     try {
       settings = JSON.parse(strFromU8(entries["settings.json"]));
     } catch {
-      errors.push("settings.json no es JSON válido.");
+      errors.push(t("invalidJson", { file: "settings.json" }));
     }
   }
   return { errors, manifest, libraryRaw, settings, images };
@@ -181,7 +185,7 @@ export function parseBackupZip(buf: Uint8Array): ParsedBackup {
 export type RestorePreview = { report: ImportReport; manifest?: BackupManifest; portraits: number };
 
 export function previewRestore(buf: Uint8Array, mode: ImportMode, db: Db = getDb()): RestorePreview {
-  const parsed = parseBackupZip(buf);
+  const parsed = parseBackupZip(buf, getUiLocale(db));
   if (parsed.errors.length || parsed.libraryRaw === undefined) {
     return { report: failedReport(parsed.errors, mode), manifest: parsed.manifest, portraits: 0 };
   }
@@ -200,14 +204,14 @@ export async function restoreBackup(
   opts: { confirmReplace?: boolean },
   db: Db = getDb(),
 ): Promise<ImportResult & { portraitsRestored: number }> {
-  const parsed = parseBackupZip(buf);
+  const parsed = parseBackupZip(buf, getUiLocale(db));
   if (parsed.errors.length || parsed.libraryRaw === undefined) {
-    throw new AppError("El respaldo no es válido y no se restauró nada.", 422, failedReport(parsed.errors, mode));
+    throw new AppError("backupInvalid", { status: 422, details: failedReport(parsed.errors, mode) });
   }
   const { report } = validateLibrary(parsed.libraryRaw, mode, { availablePortraits: new Set(parsed.images.keys()) }, db);
-  if (!report.ok) throw new AppError("El respaldo tiene errores y no se restauró nada.", 422, report);
+  if (!report.ok) throw new AppError("backupHasErrors", { status: 422, details: report });
   if (mode === "replace" && !opts.confirmReplace) {
-    throw new AppError("Reemplazar la biblioteca requiere confirmación explícita.", 400, report);
+    throw new AppError("replaceNeedsConfirmation", { details: report });
   }
 
   for (const [p, img] of parsed.images) {
@@ -215,7 +219,7 @@ export async function restoreBackup(
       const m = await sharp(img.master).metadata();
       if (m.format !== "jpeg") throw new Error();
     } catch {
-      throw new AppError(`La imagen «${p}» del respaldo está dañada.`, 422);
+      throw new AppError("backupImageDamaged", { status: 422, values: { path: p } });
     }
   }
 
@@ -233,6 +237,9 @@ export async function restoreBackup(
     if (parsed.settings?.worksheetDraft && (mode === "replace" || !getSetting(SETTING_KEYS.worksheetDraft, db))) {
       setSetting(SETTING_KEYS.worksheetDraft, parsed.settings.worksheetDraft, db);
     }
+    // Same rule for the interface language: a full replace brings it back; otherwise only if never chosen here.
+    const uiLocale = parsed.settings?.uiLocale;
+    if (isLocale(uiLocale) && (mode === "replace" || getSetting(SETTING_KEYS.uiLocale, db) === null)) setUiLocale(uiLocale, db);
     return { ...result, portraitsRestored: written.length };
   } catch (err) {
     for (const p of written) deletePortraitFiles(p);

@@ -2,13 +2,13 @@
 
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { AlertTriangle, CheckCircle2, Download, ExternalLink, ListChecks, Loader2, Maximize, Minus, Plus, Printer, SlidersHorizontal, Wand2 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { api, ApiError, downloadBlob, filenameFromResponse } from "@/lib/client-api";
-import { pluralize } from "@/lib/text";
 import type { WorksheetSaint } from "@/lib/worksheet/card-data";
 import { paginate } from "@/lib/worksheet/paginate";
 import { encodeConfig, LIMITS, PAPER_SIZES, type WorksheetConfig, type WorksheetSettings } from "@/lib/worksheet/settings";
@@ -31,6 +31,8 @@ type Props = {
 
 export function WorksheetBuilder({ cards, picker, allIds, collections, initialConfig, fromUrl }: Props) {
   const router = useRouter();
+  const t = useTranslations("builder");
+  const tc = useTranslations("common");
   const [config, setConfig] = useState<WorksheetConfig>(initialConfig);
   const [overflowIds, setOverflowIds] = useState<Set<string>>(new Set());
   const [measuring, setMeasuring] = useState(true);
@@ -122,7 +124,7 @@ export function WorksheetBuilder({ cards, picker, allIds, collections, initialCo
     if (overflowList.length === 0) {
       // eslint-disable-next-line react-hooks/set-state-in-effect -- finishing the auto-fit loop
       setAutoFit(false);
-      toast.success("Todo cabe", { description: `Letra de ${settings.fontSizePt} pt, ${settings.bulletSpacingPt} pt entre viñetas.` });
+      toast.success(t("toast.allFits"), { description: t("toast.allFitsDetail", { font: settings.fontSizePt, spacing: settings.bulletSpacingPt }) });
       return;
     }
     const s = settings;
@@ -130,9 +132,9 @@ export function WorksheetBuilder({ cards, picker, allIds, collections, initialCo
     else if (s.fontSizePt > 8.5) setConfig((c) => ({ ...c, settings: { ...c.settings, fontSizePt: c.settings.fontSizePt - 0.5 } }));
     else {
       setAutoFit(false);
-      toast.warning("Reducir la letra no fue suficiente", { description: "Usa «Una página para estos santos» para que el texto no se corte." });
+      toast.warning(t("toast.shrinkNotEnough"), { description: t("toast.shrinkNotEnoughDetail") });
     }
-  }, [autoFit, measuring, overflowList, settings]);
+  }, [autoFit, measuring, overflowList, settings, t]);
 
   const updateSettings = (s: WorksheetSettings) => setConfig((c) => ({ ...c, settings: s }));
   const setIds = (next: string[]) => setConfig((c) => ({ ...c, saintIds: next, soloSaintIds: c.soloSaintIds.filter((id) => next.includes(id)) }));
@@ -168,7 +170,7 @@ export function WorksheetBuilder({ cards, picker, allIds, collections, initialCo
     const onMessage = (e: MessageEvent) => {
       if (e.source !== iframe.contentWindow || e.data?.type !== "santos-print") return;
       if (e.data.status === "overflow") {
-        toast.error("No se imprimió: hay fichas que no caben", { description: "Corrige los avisos e inténtalo de nuevo." });
+        toast.error(t("toast.printBlocked"), { description: t("toast.printBlockedDetail") });
         cleanup();
       } else if (e.data.status === "done") cleanup();
     };
@@ -182,7 +184,7 @@ export function WorksheetBuilder({ cards, picker, allIds, collections, initialCo
   async function downloadPdf() {
     if (blocked) return;
     setPdfBusy(true);
-    const t = toast.loading("Generando PDF…", { description: pluralize(pages.length, "página", "páginas") });
+    const toastId = toast.loading(t("toast.generatingPdf"), { description: tc("pages", { count: pages.length }) });
     try {
       await flushSave();
       const res = await fetch("/api/pdf", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(config) });
@@ -194,9 +196,9 @@ export function WorksheetBuilder({ cards, picker, allIds, collections, initialCo
       }
       const blob = await res.blob();
       downloadBlob(blob, filenameFromResponse(res, "fichas-santos.pdf"));
-      toast.success("PDF descargado", { id: t, description: `${pluralize(pages.length, "página", "páginas")} · ${pluralize(ids.length, "santo", "santos")}` });
+      toast.success(t("toast.pdfDownloaded"), { id: toastId, description: `${tc("pages", { count: pages.length })} · ${tc("saints", { count: ids.length })}` });
     } catch (e) {
-      toast.error("No se generó el PDF", { id: t, description: (e as Error).message });
+      toast.error(t("toast.pdfFailed"), { id: toastId, description: (e as Error).message });
     } finally {
       setPdfBusy(false);
     }
@@ -220,24 +222,24 @@ export function WorksheetBuilder({ cards, picker, allIds, collections, initialCo
 
   return (
     <div className="grid h-[calc(100vh-3.5rem)] grid-cols-1 xl:grid-cols-[320px_minmax(0,1fr)_300px]">
-      <aside className="hidden min-h-0 border-r xl:block" aria-label="Selección de santos">
+      <aside className="hidden min-h-0 border-r xl:block" aria-label={t("selection.aria")}>
         {selection}
       </aside>
 
-      <section className="flex min-h-0 flex-col bg-muted/40" aria-label="Vista previa">
+      <section className="flex min-h-0 flex-col bg-muted/40" aria-label={t("previewAria")}>
         {/* Toolbar */}
         <div className="flex flex-wrap items-center gap-2 border-b bg-background px-4 py-2">
           <div className="flex gap-2 xl:hidden">
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="sm">
-                  <ListChecks aria-hidden /> Santos ({ids.length})
+                  <ListChecks aria-hidden /> {t("saintsButton", { count: ids.length })}
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-[340px] p-0 sm:max-w-[340px]">
                 <SheetHeader className="sr-only">
-                  <SheetTitle>Santos en las fichas</SheetTitle>
-                  <SheetDescription>Elige y ordena los santos.</SheetDescription>
+                  <SheetTitle>{t("selection.title")}</SheetTitle>
+                  <SheetDescription>{t("selection.sheetDescription")}</SheetDescription>
                 </SheetHeader>
                 {selection}
               </SheetContent>
@@ -245,40 +247,43 @@ export function WorksheetBuilder({ cards, picker, allIds, collections, initialCo
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="sm">
-                  <SlidersHorizontal aria-hidden /> Ajustes
+                  <SlidersHorizontal aria-hidden /> {t("settingsButton")}
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[320px] overflow-y-auto p-0">
                 <SheetHeader className="sr-only">
-                  <SheetTitle>Ajustes de impresión</SheetTitle>
-                  <SheetDescription>Papel, letra y márgenes.</SheetDescription>
+                  <SheetTitle>{t("settings.title")}</SheetTitle>
+                  <SheetDescription>{t("settings.sheetDescription")}</SheetDescription>
                 </SheetHeader>
                 {settingsPanel}
               </SheetContent>
             </Sheet>
           </div>
           <div className="text-sm" data-testid="page-count" aria-live="polite">
-            <strong>{pluralize(pages.length, "página", "páginas")}</strong>
-            <span className="text-muted-foreground"> · {pluralize(ids.length, "ficha", "fichas")} · {paper.label.split(" (")[0]}</span>
+            <strong>{tc("pages", { count: pages.length })}</strong>
+            <span className="text-muted-foreground">
+              {" "}
+              · {t("cards", { count: ids.length })} · {t(`paper.${settings.paperSize}Short`)}
+            </span>
           </div>
-          <div className="ml-auto flex items-center gap-1" role="group" aria-label="Zoom">
-            <Button variant="ghost" size="icon-sm" onClick={() => setZoom(Math.max(0.25, +(scale - 0.1).toFixed(2)))} aria-label="Alejar">
+          <div className="ml-auto flex items-center gap-1" role="group" aria-label={t("zoom")}>
+            <Button variant="ghost" size="icon-sm" onClick={() => setZoom(Math.max(0.25, +(scale - 0.1).toFixed(2)))} aria-label={t("zoomOut")}>
               <Minus aria-hidden />
             </Button>
             <span className="w-12 text-center text-xs tabular-nums">{Math.round(scale * 100)}%</span>
-            <Button variant="ghost" size="icon-sm" onClick={() => setZoom(Math.min(2, +(scale + 0.1).toFixed(2)))} aria-label="Acercar">
+            <Button variant="ghost" size="icon-sm" onClick={() => setZoom(Math.min(2, +(scale + 0.1).toFixed(2)))} aria-label={t("zoomIn")}>
               <Plus aria-hidden />
             </Button>
             <Button variant={zoom === "fit" ? "secondary" : "ghost"} size="sm" onClick={() => setZoom("fit")}>
-              <Maximize aria-hidden /> Ajustar
+              <Maximize aria-hidden /> {t("fit")}
             </Button>
           </div>
           <div className="flex items-center gap-2">
             <Button variant="outline" size="sm" onClick={print} disabled={blocked || printBusy}>
-              {printBusy ? <Loader2 className="animate-spin" aria-hidden /> : <Printer aria-hidden />} Imprimir
+              {printBusy ? <Loader2 className="animate-spin" aria-hidden /> : <Printer aria-hidden />} {t("print")}
             </Button>
             <Button size="sm" onClick={downloadPdf} disabled={blocked || pdfBusy}>
-              {pdfBusy ? <Loader2 className="animate-spin" aria-hidden /> : <Download aria-hidden />} Descargar PDF
+              {pdfBusy ? <Loader2 className="animate-spin" aria-hidden /> : <Download aria-hidden />} {t("downloadPdf")}
             </Button>
           </div>
         </div>
@@ -289,27 +294,27 @@ export function WorksheetBuilder({ cards, picker, allIds, collections, initialCo
             <Alert variant="destructive" data-testid="overflow-warning">
               <AlertTriangle aria-hidden />
               <AlertTitle>
-                {overflowList.length === 1 ? "1 ficha no cabe" : `${overflowList.length} fichas no caben`} en su espacio — el texto se cortaría
+                {t("overflow.title", { count: overflowList.length })}
               </AlertTitle>
               <AlertDescription>
                 <p>
-                  {overflowList.map((id) => cards[id]?.name).join(", ")}. La impresión y el PDF están bloqueados hasta corregirlo.
+                  {t("overflow.body", { names: overflowList.map((id) => cards[id]?.name).join(", ") })}
                 </p>
                 <div className="mt-2 flex flex-wrap gap-2">
                   <Button size="sm" variant="outline" onClick={reduceOnce} disabled={settings.fontSizePt <= LIMITS.fontSizePt.min}>
-                    Reducir letra y espaciado
+                    {t("overflow.reduce")}
                   </Button>
                   <Button size="sm" variant="outline" onClick={() => setAutoFit(true)} disabled={autoFit}>
-                    {autoFit ? <Loader2 className="animate-spin" aria-hidden /> : <Wand2 aria-hidden />} Ajustar automáticamente
+                    {autoFit ? <Loader2 className="animate-spin" aria-hidden /> : <Wand2 aria-hidden />} {t("overflow.autoFit")}
                   </Button>
                   {settings.perPage > 1 && (
                     <Button size="sm" variant="outline" onClick={soloForOverflowing}>
-                      Una página para {overflowList.length === 1 ? "este santo" : "estos santos"}
+                      {t("overflow.solo", { count: overflowList.length })}
                     </Button>
                   )}
                   {settings.perPage > 1 && (
                     <Button size="sm" variant="ghost" onClick={() => updateSettings({ ...settings, perPage: 1 })}>
-                      Todo a una por página
+                      {t("overflow.allOnePerPage")}
                     </Button>
                   )}
                 </div>
@@ -318,19 +323,19 @@ export function WorksheetBuilder({ cards, picker, allIds, collections, initialCo
           )}
           {ids.length > 0 && overflowList.length === 0 && !measuring && (
             <p className="flex items-center gap-1.5 text-xs text-success-foreground" data-testid="fit-ok">
-              <CheckCircle2 className="size-3.5" aria-hidden /> Todo el texto cabe. Listo para imprimir.
-              <span className="ml-auto text-muted-foreground">{saveState === "saving" ? "Guardando…" : saveState === "error" ? "No se pudieron guardar los ajustes" : ""}</span>
+              <CheckCircle2 className="size-3.5" aria-hidden /> {t("fitOk")}
+              <span className="ml-auto text-muted-foreground">{saveState === "saving" ? tc("saving") : saveState === "error" ? t("saveFailed") : ""}</span>
             </p>
           )}
-          {measuring && ids.length > 0 && <p className="text-xs text-muted-foreground">Comprobando que todo el texto quepa…</p>}
+          {measuring && ids.length > 0 && <p className="text-xs text-muted-foreground">{t("measuring")}</p>}
         </div>
 
         {/* Pages */}
         <div ref={centerRef} className="min-h-0 flex-1 overflow-auto px-6 py-4">
           {ids.length === 0 ? (
             <div className="mx-auto mt-16 max-w-sm text-center">
-              <p className="font-medium">No hay santos seleccionados</p>
-              <p className="mt-1 text-sm text-muted-foreground">Elige una colección o añade santos desde el panel «Santos».</p>
+              <p className="font-medium">{t("empty.title")}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{t("empty.description")}</p>
             </div>
           ) : (
             <div className="mx-auto" style={{ width: pageW * scale, height: totalH * scale }}>
@@ -342,14 +347,14 @@ export function WorksheetBuilder({ cards, picker, allIds, collections, initialCo
           {ids.length > 0 && (
             <p className="mt-4 text-center text-xs text-muted-foreground">
               <a href={`/imprimir?c=${encodeConfig(config)}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 underline-offset-4 hover:underline">
-                Abrir vista de impresión en otra pestaña <ExternalLink className="size-3" aria-hidden />
+                {t("openPrintView")} <ExternalLink className="size-3" aria-hidden />
               </a>
             </p>
           )}
         </div>
       </section>
 
-      <aside className="hidden min-h-0 overflow-y-auto border-l xl:block" aria-label="Ajustes">
+      <aside className="hidden min-h-0 overflow-y-auto border-l xl:block" aria-label={t("settingsButton")}>
         {settingsPanel}
       </aside>
     </div>

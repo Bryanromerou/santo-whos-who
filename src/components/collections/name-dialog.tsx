@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -29,6 +30,7 @@ export function NameDialog({ open, onOpenChange, title, description, initialName
 }
 
 function NameForm({ title, description, initialName, submitLabel, onSubmit, onOpenChange }: Omit<Props, "open">) {
+  const t = useTranslations("common");
   const [name, setName] = useState(initialName ?? "");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -37,7 +39,7 @@ function NameForm({ title, description, initialName, submitLabel, onSubmit, onOp
       onSubmit={async (e) => {
         e.preventDefault();
         if (!name.trim()) {
-          setError("Escribe un nombre.");
+          setError(t("nameDialog.required"));
           return;
         }
         setBusy(true);
@@ -58,13 +60,13 @@ function NameForm({ title, description, initialName, submitLabel, onSubmit, onOp
         {description && <DialogDescription>{description}</DialogDescription>}
       </DialogHeader>
       <div className="space-y-2">
-        <Label htmlFor="collection-name">Nombre</Label>
+        <Label htmlFor="collection-name">{t("nameDialog.label")}</Label>
         <Input id="collection-name" autoFocus value={name} onChange={(e) => setName(e.target.value)} maxLength={200} aria-invalid={!!error} />
         {error && <p className="text-xs text-destructive">{error}</p>}
       </div>
       <DialogFooter>
         <Button type="button" variant="outline" onClick={() => onOpenChange(false)} disabled={busy}>
-          Cancelar
+          {t("cancel")}
         </Button>
         <Button type="submit" disabled={busy}>
           {busy && <Loader2 className="animate-spin" aria-hidden />}

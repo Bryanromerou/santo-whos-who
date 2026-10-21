@@ -1,14 +1,19 @@
 "use client";
 
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
-export const UNSAVED_MESSAGE = "Tienes cambios sin guardar. ¿Salir de todos modos y perderlos?";
+/** The "leave and lose changes?" prompt in the interface language. */
+export function useUnsavedMessage(): string {
+  return useTranslations("common")("unsavedLeave");
+}
 
 /**
  * Warns before leaving with unsaved changes: browser reload/close (beforeunload)
  * and in-app link clicks (captured before Next.js handles navigation).
  */
 export function useUnsavedGuard(dirty: boolean) {
+  const message = useUnsavedMessage();
   useEffect(() => {
     if (!dirty) return;
     const onBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -21,7 +26,7 @@ export function useUnsavedGuard(dirty: boolean) {
       if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
       const url = new URL(a.href, location.href);
       if (url.origin !== location.origin || (url.pathname === location.pathname && url.search === location.search)) return;
-      if (!window.confirm(UNSAVED_MESSAGE)) {
+      if (!window.confirm(message)) {
         e.preventDefault();
         e.stopPropagation();
       }
@@ -32,5 +37,5 @@ export function useUnsavedGuard(dirty: boolean) {
       window.removeEventListener("beforeunload", onBeforeUnload);
       document.removeEventListener("click", onClick, true);
     };
-  }, [dirty]);
+  }, [dirty, message]);
 }

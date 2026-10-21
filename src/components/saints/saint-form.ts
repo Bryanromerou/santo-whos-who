@@ -1,38 +1,40 @@
 import { z } from "zod";
 import { CHARACTERISTIC_TYPES, REVIEW_STATUSES } from "@/db/schema";
 import type { SaintRecord } from "@/db/repositories/saints";
+import type { LooseT } from "@/i18n/loose";
 import type { SaintInput } from "@/lib/schema/saint";
 
-z.config(z.locales.es());
+/**
+ * Form values: numbers are edited as text so empty means null (never 0).
+ * `t` is the "validation" translator, so messages follow the interface language.
+ */
+export function buildSaintFormSchema(t: LooseT) {
+  const yearText = (label: string) => z.string().trim().regex(/^-?\d{0,4}$/, { error: t("yearDigits", { label }) });
+  return z.object({
+    name: z.string().trim().min(1, { error: t("nameRequired") }).max(200),
+    birthYear: yearText(t("fields.birthYear")),
+    birthYearDisplay: z.string().max(120),
+    ageAtDeath: z.string().trim().regex(/^\d{0,3}$/, { error: t("ageDigits") }),
+    ageAtDeathDisplay: z.string().max(120),
+    country: z.string().max(200),
+    canonizationYear: yearText(t("fields.canonizationYear")),
+    isMartyr: z.boolean(),
+    reviewStatus: z.enum(REVIEW_STATUSES),
+    categories: z.array(z.string()),
+    patronages: z.array(z.object({ value: z.string().trim().min(1, { error: t("patronageRequired") }) })),
+    sources: z.array(z.object({ value: z.string().trim().min(1, { error: t("sourceRequired") }) })),
+    characteristics: z.array(
+      z.object({
+        id: z.string().min(1),
+        text: z.string().trim().min(1, { error: t("characteristicRequired") }),
+        type: z.enum(CHARACTERISTIC_TYPES),
+      }),
+    ),
+    portrait: z.object({ focalX: z.number(), focalY: z.number(), zoom: z.number(), fit: z.enum(["cover", "contain"]) }),
+  });
+}
 
-const yearText = (label: string) =>
-  z.string().trim().regex(/^-?\d{0,4}$/, { error: `${label}: solo números enteros (o vacío). Usa el campo «texto mostrado» para aproximaciones.` });
-
-/** Form values: numbers are edited as text so empty means null (never 0). */
-export const saintFormSchema = z.object({
-  name: z.string().trim().min(1, { error: "El nombre es obligatorio" }).max(200),
-  birthYear: yearText("Año de nacimiento"),
-  birthYearDisplay: z.string().max(120),
-  ageAtDeath: z.string().trim().regex(/^\d{0,3}$/, { error: "Edad al morir: solo un número entero (o vacío)" }),
-  ageAtDeathDisplay: z.string().max(120),
-  country: z.string().max(200),
-  canonizationYear: yearText("Año de canonización"),
-  isMartyr: z.boolean(),
-  reviewStatus: z.enum(REVIEW_STATUSES),
-  categories: z.array(z.string()),
-  patronages: z.array(z.object({ value: z.string().trim().min(1, { error: "Escribe el patronazgo o elimínalo" }) })),
-  sources: z.array(z.object({ value: z.string().trim().min(1, { error: "Escribe la fuente o elimínala" }) })),
-  characteristics: z.array(
-    z.object({
-      id: z.string().min(1),
-      text: z.string().trim().min(1, { error: "La característica no puede estar vacía (elimínala si no la necesitas)" }),
-      type: z.enum(CHARACTERISTIC_TYPES),
-    }),
-  ),
-  portrait: z.object({ focalX: z.number(), focalY: z.number(), zoom: z.number(), fit: z.enum(["cover", "contain"]) }),
-});
-
-export type SaintFormValues = z.infer<typeof saintFormSchema>;
+export type SaintFormValues = z.infer<ReturnType<typeof buildSaintFormSchema>>;
 
 const numOrNull = (s: string) => (s.trim() === "" ? null : Number.parseInt(s, 10));
 

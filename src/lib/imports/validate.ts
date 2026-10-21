@@ -1,12 +1,17 @@
 import type { z } from "zod";
 import { getDb, type Db } from "@/db/client";
 import { collectionSaints, collections, saints } from "@/db/schema";
-import { libraryFileSchema, type LibraryFile, type LibrarySource } from "@/lib/schema/library";
+import { getUiLocale } from "@/db/repositories/settings";
+import { DEFAULT_LOCALE, type Locale } from "@/i18n/config";
+import { messages } from "@/i18n/messages";
+import { loose, translator, type LooseT } from "@/i18n/translator";
+import { zodErrorMap } from "@/i18n/zod";
+import { librarySchemas, type LibraryFile, type LibrarySource } from "@/lib/schema/library";
 import { isValidPortraitPath, portraitFileExists } from "@/lib/images/storage";
 import { normalizeForSearch } from "@/lib/text";
 
 import type { ImportMode } from "./modes";
-export { IMPORT_MODES, IMPORT_MODE_LABELS, type ImportMode } from "./modes";
+export { IMPORT_MODES, type ImportMode } from "./modes";
 
 export type ImportReport = {
   ok: boolean;
@@ -23,7 +28,7 @@ export type ImportReport = {
     collectionsUpdate: number;
     collectionsSkip: number;
     collectionsDelete: number;
-    /** "Saltar existentes": existing collections that receive new members (nobody is removed). */
+    /** "skip" mode: existing collections that receive new members (nobody is removed). */
     collectionsMerge: number;
     membershipsAdded: number;
   };
@@ -34,122 +39,103 @@ export type ImportReport = {
   source: LibrarySource | null;
 };
 
-const FIELD_LABELS: Record<string, string> = {
-  schemaVersion: "versión del esquema (schemaVersion)",
-  format: "formato (format)",
-  language: "idioma (language)",
-  source: "origen (source)",
-  saints: "santos",
-  collections: "colecciones",
-  id: "id",
-  name: "nombre",
-  birthYear: "año de nacimiento (birthYear)",
-  birthYearDisplay: "año de nacimiento mostrado (birthYearDisplay)",
-  ageAtDeath: "edad al morir (ageAtDeath)",
-  ageAtDeathDisplay: "edad mostrada (ageAtDeathDisplay)",
-  country: "país (country)",
-  portraitPath: "retrato (portraitPath)",
-  isMartyr: "mártir (isMartyr)",
-  categories: "categorías",
-  patronages: "patronazgos",
-  canonizationYear: "año de canonización (canonizationYear)",
-  characteristics: "características",
-  sources: "fuentes",
-  reviewStatus: "estado de revisión (reviewStatus)",
-  text: "texto",
-  type: "tipo",
-  saintIds: "santos de la colección (saintIds)",
-};
-
 type RawLike = { saints?: { name?: unknown; id?: unknown }[]; collections?: { name?: unknown }[] } | null;
 
-function describePath(path: PropertyKey[], raw: RawLike): string {
+const reportT = (locale: Locale) => loose(translator(locale, "import.report"));
+
+function describePath(path: PropertyKey[], raw: RawLike, t: LooseT): string {
   const parts: string[] = [];
+  const named = (key: string, index: number, name: unknown) =>
+    typeof name === "string" && name ? t(`${key}Named`, { n: index + 1, name }) : t(key, { n: index + 1 });
   for (let i = 0; i < path.length; i++) {
     const key = path[i];
     const next = path[i + 1];
     if (key === "saints" && typeof next === "number") {
-      const n = raw?.saints?.[next]?.name;
-      parts.push(`Santo n.º ${next + 1}${typeof n === "string" && n ? ` («${n}»)` : ""}`);
+      parts.push(named("saintAt", next, raw?.saints?.[next]?.name));
       i++;
     } else if (key === "collections" && typeof next === "number") {
-      const n = raw?.collections?.[next]?.name;
-      parts.push(`Colección n.º ${next + 1}${typeof n === "string" && n ? ` («${n}»)` : ""}`);
+      parts.push(named("collectionAt", next, raw?.collections?.[next]?.name));
       i++;
     } else if (key === "characteristics" && typeof next === "number") {
-      parts.push(`característica n.º ${next + 1}`);
+      parts.push(t("characteristicAt", { n: next + 1 }));
       i++;
     } else if (typeof key === "number") {
-      parts.push(`elemento n.º ${key + 1}`);
+      parts.push(t("itemAt", { n: key + 1 }));
     } else {
-      parts.push(FIELD_LABELS[String(key)] ?? String(key));
+      const field = String(key);
+      parts.push(FIELD_KEYS.has(field) ? t(`fields.${field}`) : field);
     }
   }
   return parts.join(" › ");
 }
 
-export function formatZodIssues(error: z.ZodError, raw: unknown, limit = 60): string[] {
+const FIELD_KEYS = new Set(Object.keys(messages.es.import.report.fields));
+
+export function formatZodIssues(error: z.ZodError, raw: unknown, limit = 60, locale: Locale = DEFAULT_LOCALE): string[] {
+  const t = reportT(locale);
   const msgs = error.issues.map((issue) => {
-    const where = describePath(issue.path, raw as RawLike);
+    const where = describePath(issue.path, raw as RawLike, t);
     return where ? `${where}: ${issue.message}` : issue.message;
   });
-  if (msgs.length > limit) return [...msgs.slice(0, limit), `…y ${msgs.length - limit} errores más.`];
+  if (msgs.length > limit) return [...msgs.slice(0, limit), t("moreErrors", { count: msgs.length - limit })];
   return msgs;
 }
 
-/** Parses JSON text with a Spanish error message. */
-export function parseJsonText(text: string): { value?: unknown; error?: string } {
+/** Parses JSON text with a message in the interface language. */
+export function parseJsonText(text: string, locale: Locale = DEFAULT_LOCALE): { value?: unknown; error?: string } {
   try {
-    return { value: JSON.parse(text.replace(/^﻿/, "")) };
+    return { value: JSON.parse(text.replace(/^\uFEFF/, "")) };
   } catch (e) {
-    return { error: `El archivo no es JSON válido: ${(e as Error).message}` };
+    return { error: reportT(locale)("invalidJsonFile", { message: (e as Error).message }) };
   }
 }
 
-export function parseLibrary(raw: unknown): { data?: LibraryFile; errors: string[] } {
+export function parseLibrary(raw: unknown, locale: Locale = DEFAULT_LOCALE): { data?: LibraryFile; errors: string[] } {
   if (typeof raw !== "object" || raw === null || Array.isArray(raw)) {
-    return { errors: ["El archivo debe contener un objeto JSON con schemaVersion, format, language, source, saints y collections."] };
+    return { errors: [reportT(locale)("notAnObject")] };
   }
-  const result = libraryFileSchema.safeParse(raw);
-  if (!result.success) return { errors: formatZodIssues(result.error, raw) };
+  const result = librarySchemas(locale).file.safeParse(raw, { error: zodErrorMap(locale) });
+  if (!result.success) return { errors: formatZodIssues(result.error, raw, 60, locale) };
   return { data: result.data, errors: [] };
 }
 
 export type AnalyzeOptions = {
   /** Portrait paths that will be available after import (backup restore). */
   availablePortraits?: Set<string>;
+  /** Language for errors and warnings; defaults to the interface language stored in `db`. */
+  locale?: Locale;
 };
 
 /** Cross-reference checks and dry-run plan against the current database. Never mutates. */
 export function analyzeLibrary(data: LibraryFile, mode: ImportMode, opts: AnalyzeOptions = {}, db: Db = getDb()): ImportReport {
   const errors: string[] = [];
   const warnings: string[] = [];
+  const t = reportT(opts.locale ?? getUiLocale(db));
+  const q = (value: string) => t("quote", { value });
 
   // Saint ids unique within the file.
   const saintIdCount = new Map<string, number>();
   for (const s of data.saints) saintIdCount.set(s.id, (saintIdCount.get(s.id) ?? 0) + 1);
-  for (const [id, n] of saintIdCount) if (n > 1) errors.push(`El id de santo «${id}» aparece ${n} veces en el archivo.`);
+  for (const [id, n] of saintIdCount) if (n > 1) errors.push(t("duplicateSaintId", { id, count: n }));
 
   // Characteristic ids unique per saint; nonempty lists recommended.
   const globalCharIds = new Map<string, string[]>();
   for (const s of data.saints) {
     const seen = new Set<string>();
     for (const c of s.characteristics) {
-      if (seen.has(c.id)) errors.push(`«${s.name}»: el id de característica «${c.id}» está repetido.`);
+      if (seen.has(c.id)) errors.push(t("duplicateCharacteristicId", { saint: s.name, id: c.id }));
       seen.add(c.id);
       globalCharIds.set(c.id, [...(globalCharIds.get(c.id) ?? []), s.name]);
     }
-    if (s.characteristics.length === 0) warnings.push(`«${s.name}» no tiene características.`);
+    if (s.characteristics.length === 0) warnings.push(t("noCharacteristics", { saint: s.name }));
     if (s.portraitPath !== null) {
       const ok = isValidPortraitPath(s.portraitPath) && (opts.availablePortraits?.has(s.portraitPath) || portraitFileExists(s.portraitPath));
-      if (!ok) warnings.push(`«${s.name}»: el retrato «${s.portraitPath}» no está disponible en este equipo; se importará sin foto.`);
+      if (!ok) warnings.push(t("portraitUnavailable", { saint: s.name, path: s.portraitPath }));
     }
   }
   const sharedCharIds = [...globalCharIds.entries()].filter(([, owners]) => owners.length > 1);
   if (sharedCharIds.length) {
-    warnings.push(
-      `${sharedCharIds.length} id(s) de característica se repiten entre santos distintos (p. ej. «${sharedCharIds[0][0]}»). Se permite porque cada id se guarda por santo.`,
-    );
+    warnings.push(t("sharedCharacteristicIds", { count: sharedCharIds.length, example: sharedCharIds[0][0] }));
   }
 
   // Possible duplicates by normalized name.
@@ -159,7 +145,7 @@ export function analyzeLibrary(data: LibraryFile, mode: ImportMode, opts: Analyz
     byName.set(k, [...(byName.get(k) ?? []), s.id]);
   }
   for (const ids of byName.values()) {
-    if (ids.length > 1) warnings.push(`Posible duplicado: los ids ${ids.map((i) => `«${i}»`).join(", ")} tienen el mismo nombre.`);
+    if (ids.length > 1) warnings.push(t("possibleDuplicate", { ids: ids.map(q).join(", ") }));
   }
 
   // Existing records in the database.
@@ -172,14 +158,14 @@ export function analyzeLibrary(data: LibraryFile, mode: ImportMode, opts: Analyz
   // Collection checks.
   const collectionIdCount = new Map<string, number>();
   for (const c of data.collections) collectionIdCount.set(c.id, (collectionIdCount.get(c.id) ?? 0) + 1);
-  for (const [id, n] of collectionIdCount) if (n > 1) errors.push(`El id de colección «${id}» aparece ${n} veces.`);
+  for (const [id, n] of collectionIdCount) if (n > 1) errors.push(t("duplicateCollectionId", { id, count: n }));
   for (const c of data.collections) {
     const seen = new Set<string>();
     for (const sid of c.saintIds) {
-      if (seen.has(sid)) errors.push(`Colección «${c.name}»: el santo «${sid}» aparece más de una vez.`);
+      if (seen.has(sid)) errors.push(t("collectionRepeatedSaint", { collection: c.name, id: sid }));
       seen.add(sid);
       const known = fileSaintIds.has(sid) || (mode !== "replace" && dbSaintIds.has(sid));
-      if (!known) errors.push(`Colección «${c.name}»: el santo «${sid}» no existe en el archivo.`);
+      if (!known) errors.push(t("collectionUnknownSaint", { collection: c.name, id: sid }));
     }
   }
 
@@ -263,7 +249,8 @@ export function failedReport(errors: string[], mode: ImportMode): ImportReport {
 }
 
 export function validateLibrary(raw: unknown, mode: ImportMode, opts: AnalyzeOptions = {}, db: Db = getDb()) {
-  const parsed = parseLibrary(raw);
+  const locale = opts.locale ?? getUiLocale(db);
+  const parsed = parseLibrary(raw, locale);
   if (!parsed.data) return { report: failedReport(parsed.errors, mode), data: undefined };
-  return { report: analyzeLibrary(parsed.data, mode, opts, db), data: parsed.data };
+  return { report: analyzeLibrary(parsed.data, mode, { ...opts, locale }, db), data: parsed.data };
 }

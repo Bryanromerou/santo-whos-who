@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import {
   CircleAlert,
@@ -43,13 +44,15 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { categoryLabel, FEATURED_CATEGORIES } from "@/lib/categories";
 import { api } from "@/lib/client-api";
 import type { CollectionSummary, LibraryRow } from "@/lib/library-view";
-import { matchesSearch, pluralize } from "@/lib/text";
+import { matchesSearch } from "@/lib/text";
 import { cn } from "@/lib/utils";
 
 type Props = { rows: LibraryRow[]; collections: CollectionSummary[]; seedAvailable: boolean };
 
 export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
   const router = useRouter();
+  const t = useTranslations("library");
+  const tc = useTranslations("common");
   const [query, setQuery] = useState("");
   const [categories, setCategories] = useState<string[]>([]);
   const [collectionId, setCollectionId] = useState("all");
@@ -107,17 +110,17 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
         method: "PATCH",
         json: { addSaintIds: orderedSelection() },
       });
-      toast.success(`Añadidos a «${collection.name}»`, { description: pluralize(collection.saintIds.length, "santo en total", "santos en total") });
+      toast.success(t("toast.addedTo", { name: collection.name }), { description: t("toast.totalSaints", { count: collection.saintIds.length }) });
       router.refresh();
     } catch (e) {
-      toast.error("No se pudo actualizar la colección", { description: (e as Error).message });
+      toast.error(t("toast.collectionUpdateFailed"), { description: (e as Error).message });
     }
   }
 
   async function createCollectionFromSelection(name: string) {
     const ids = orderedSelection();
     const { collection } = await api<{ collection: CollectionSummary }>("/api/collections", { method: "POST", json: { name, saintIds: ids } });
-    toast.success(`Colección «${collection.name}» creada`, { description: pluralize(ids.length, "santo", "santos") });
+    toast.success(t("toast.collectionCreated", { name: collection.name }), { description: tc("saints", { count: ids.length }) });
     router.refresh();
   }
 
@@ -125,15 +128,11 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
     const ids = orderedSelection();
     try {
       const { updated } = await api<{ updated: number }>("/api/saints", { method: "PATCH", json: { saintIds: ids, reviewStatus: status } });
-      toast.success(
-        status === "reviewed"
-          ? pluralize(updated, "santo marcado como revisado", "santos marcados como revisados")
-          : pluralize(updated, "santo marcado como pendiente", "santos marcados como pendientes"),
-      );
+      toast.success(status === "reviewed" ? t("toast.markedReviewed", { count: updated }) : t("toast.markedPending", { count: updated }));
       setSelected([]);
       router.refresh();
     } catch (e) {
-      toast.error("No se pudo cambiar el estado de revisión", { description: (e as Error).message });
+      toast.error(t("toast.reviewFailed"), { description: (e as Error).message });
       throw e;
     }
   }
@@ -141,13 +140,13 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
   async function duplicate(row: LibraryRow) {
     try {
       const { saint } = await api<{ saint: { id: string; name: string } }>(`/api/saints/${encodeURIComponent(row.id)}/duplicate`, { method: "POST" });
-      toast.success("Copia creada", {
+      toast.success(t("toast.copyCreated"), {
         description: saint.name,
-        action: { label: "Editar", onClick: () => router.push(`/santos/${encodeURIComponent(saint.id)}`) },
+        action: { label: tc("edit"), onClick: () => router.push(`/santos/${encodeURIComponent(saint.id)}`) },
       });
       router.refresh();
     } catch (e) {
-      toast.error("No se pudo duplicar", { description: (e as Error).message });
+      toast.error(t("toast.duplicateFailed"), { description: (e as Error).message });
     }
   }
 
@@ -155,11 +154,11 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
     if (!toDelete) return;
     try {
       await api(`/api/saints/${encodeURIComponent(toDelete.id)}`, { method: "DELETE" });
-      toast.success(`«${toDelete.name}» eliminado`);
+      toast.success(t("toast.deleted", { name: toDelete.name }));
       setSelected((s) => s.filter((x) => x !== toDelete.id));
       router.refresh();
     } catch (e) {
-      toast.error("No se pudo eliminar", { description: (e as Error).message });
+      toast.error(t("toast.deleteFailed"), { description: (e as Error).message });
       throw e;
     }
   }
@@ -170,14 +169,14 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
     <div className="mx-auto w-full max-w-[1400px] px-4 py-6 sm:px-6 sm:py-8">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-heading text-3xl font-semibold tracking-tight">Biblioteca de Santos</h1>
+          <h1 className="font-heading text-3xl font-semibold tracking-tight">{t("title")}</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            {pluralize(rows.length, "santo", "santos")}
+            {tc("saints", { count: rows.length })}
             {needsReview > 0 && (
               <>
                 {" · "}
                 <button type="button" className="underline-offset-4 hover:underline" onClick={() => setReview("needs_review")}>
-                  {pluralize(needsReview, "pendiente de revisión histórica", "pendientes de revisión histórica")}
+                  {t("pendingReview", { count: needsReview })}
                 </button>
               </>
             )}
@@ -188,18 +187,18 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
             seedAvailable={seedAvailable}
             trigger={
               <Button variant="outline">
-                <Upload aria-hidden /> Importar JSON
+                <Upload aria-hidden /> {t("importJson")}
               </Button>
             }
           />
           <Button variant="outline" asChild>
             <Link href="/santos/importar-retratos">
-              <Images aria-hidden /> Importar retratos
+              <Images aria-hidden /> {t("importPortraits")}
             </Link>
           </Button>
           <Button asChild>
             <Link href="/santos/nuevo">
-              <Plus aria-hidden /> Nuevo santo
+              <Plus aria-hidden /> {t("newSaint")}
             </Link>
           </Button>
         </div>
@@ -214,17 +213,17 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Buscar por nombre, país, patronazgo o característica…"
-              aria-label="Buscar santos"
+              placeholder={t("searchPlaceholder")}
+              aria-label={t("searchLabel")}
               className="h-9 pl-8"
             />
           </div>
           <Select value={collectionId} onValueChange={setCollectionId}>
-            <SelectTrigger className="h-9 w-[220px]" aria-label="Filtrar por colección">
+            <SelectTrigger className="h-9 w-[220px]" aria-label={t("filterCollection")}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Todas las colecciones</SelectItem>
+              <SelectItem value="all">{t("allCollections")}</SelectItem>
               {collections.map((c) => (
                 <SelectItem key={c.id} value={c.id}>
                   {c.name} ({c.saintIds.length})
@@ -233,17 +232,17 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
             </SelectContent>
           </Select>
           <Select value={review} onValueChange={setReview}>
-            <SelectTrigger className="h-9 w-[200px]" aria-label="Filtrar por revisión">
+            <SelectTrigger className="h-9 w-[200px]" aria-label={t("filterReview")}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">Cualquier revisión</SelectItem>
-              <SelectItem value="needs_review">Pendientes de revisión</SelectItem>
-              <SelectItem value="reviewed">Revisados</SelectItem>
+              <SelectItem value="all">{t("review.any")}</SelectItem>
+              <SelectItem value="needs_review">{t("review.pending")}</SelectItem>
+              <SelectItem value="reviewed">{t("review.reviewed")}</SelectItem>
             </SelectContent>
           </Select>
         </div>
-        <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label="Filtrar por categoría">
+        <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label={t("filterCategory")}>
           {allCategories.map((c) => {
             const on = categories.includes(c);
             return (
@@ -263,7 +262,7 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
           })}
           {filtersActive ? (
             <Button variant="ghost" size="sm" onClick={clearFilters} className="ml-1 text-xs">
-              <X aria-hidden /> Limpiar filtros
+              <X aria-hidden /> {t("clearFilters")}
             </Button>
           ) : null}
         </div>
@@ -277,19 +276,19 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
         )}
         aria-live="polite"
       >
-        <span className="text-sm font-medium">{pluralize(selected.length, "seleccionado", "seleccionados")}</span>
+        <span className="text-sm font-medium">{tc("selected", { count: selected.length })}</span>
         <div className="ml-auto flex flex-wrap gap-2">
           <Button size="sm" onClick={sendToBuilder}>
-            <Printer aria-hidden /> Crear fichas
+            <Printer aria-hidden /> {tc("printWorksheets")}
           </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button size="sm" variant="outline">
-                <FolderPlus aria-hidden /> Añadir a colección
+                <FolderPlus aria-hidden /> {t("addToCollection")}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-64">
-              <DropdownMenuLabel>Añadir a…</DropdownMenuLabel>
+              <DropdownMenuLabel>{t("addTo")}</DropdownMenuLabel>
               {collections.map((c) => (
                 <DropdownMenuItem key={c.id} onSelect={() => addToCollection(c.id)}>
                   {c.name}
@@ -297,30 +296,30 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
               ))}
               <DropdownMenuSeparator />
               <DropdownMenuItem onSelect={() => setNewCollectionOpen(true)}>
-                <Plus aria-hidden /> Nueva colección…
+                <Plus aria-hidden /> {t("newCollectionEllipsis")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button size="sm" variant="outline">
-                <CircleCheck aria-hidden /> Revisión
+                <CircleCheck aria-hidden /> {t("review.menu")}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-64">
               <DropdownMenuLabel>
-                {selectedPending > 0 ? `${selectedPending} de ${selected.length} pendientes` : "Todos ya están revisados"}
+                {selectedPending > 0 ? t("review.pendingOf", { pending: selectedPending, total: selected.length }) : t("review.allReviewed")}
               </DropdownMenuLabel>
               <DropdownMenuItem onSelect={() => setConfirmReviewed(true)} disabled={selectedPending === 0}>
-                <CircleCheck aria-hidden /> Marcar como revisados…
+                <CircleCheck aria-hidden /> {t("review.markReviewedEllipsis")}
               </DropdownMenuItem>
               <DropdownMenuItem onSelect={() => void bulkSetReview("needs_review").catch(() => undefined)} disabled={selectedPending === selected.length}>
-                <CircleDashed aria-hidden /> Marcar como pendientes
+                <CircleDashed aria-hidden /> {t("review.markPending")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
           <Button size="sm" variant="ghost" onClick={() => setSelected([])}>
-            Quitar selección
+            {t("clearSelection")}
           </Button>
         </div>
       </div>
@@ -328,10 +327,10 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
 
       {filtered.length === 0 ? (
         <div className="rounded-lg border border-dashed px-6 py-16 text-center">
-          <p className="font-medium">Ningún santo coincide con los filtros.</p>
-          <p className="mt-1 text-sm text-muted-foreground">{query ? `No hay resultados para «${query}».` : "Prueba con otra categoría o colección."}</p>
+          <p className="font-medium">{t("noMatches")}</p>
+          <p className="mt-1 text-sm text-muted-foreground">{query ? t("noResultsFor", { query }) : t("tryOtherFilter")}</p>
           <Button variant="outline" size="sm" className="mt-4" onClick={clearFilters}>
-            Limpiar filtros
+            {t("clearFilters")}
           </Button>
         </div>
       ) : (
@@ -343,18 +342,18 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
                   <Checkbox
                     checked={allVisibleSelected ? true : visibleIds.some((id) => selected.includes(id)) ? "indeterminate" : false}
                     onCheckedChange={(v) => setSelected((s) => (v ? [...new Set([...s, ...visibleIds])] : s.filter((id) => !visibleIds.includes(id))))}
-                    aria-label="Seleccionar todos los visibles"
+                    aria-label={t("selectAllVisible")}
                   />
                 </TableHead>
                 <TableHead className="w-14">
-                  <span className="sr-only">Retrato</span>
+                  <span className="sr-only">{t("columns.portrait")}</span>
                 </TableHead>
-                <TableHead>Nombre</TableHead>
-                <TableHead className="hidden md:table-cell">País</TableHead>
-                <TableHead className="hidden lg:table-cell">Nacimiento</TableHead>
-                <TableHead className="hidden sm:table-cell">Edad al morir</TableHead>
-                <TableHead className="hidden xl:table-cell">Categorías</TableHead>
-                <TableHead className="w-[120px] text-right">Acciones</TableHead>
+                <TableHead>{t("columns.name")}</TableHead>
+                <TableHead className="hidden md:table-cell">{t("columns.country")}</TableHead>
+                <TableHead className="hidden lg:table-cell">{t("columns.birth")}</TableHead>
+                <TableHead className="hidden sm:table-cell">{t("columns.age")}</TableHead>
+                <TableHead className="hidden xl:table-cell">{t("columns.categories")}</TableHead>
+                <TableHead className="w-[120px] text-right">{t("columns.actions")}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -363,7 +362,7 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
                 return (
                   <TableRow key={r.id} data-state={isSel ? "selected" : undefined} data-testid="saint-row">
                     <TableCell>
-                      <Checkbox checked={isSel} onCheckedChange={(v) => toggle(r.id, !!v)} aria-label={`Seleccionar ${r.name}`} />
+                      <Checkbox checked={isSel} onCheckedChange={(v) => toggle(r.id, !!v)} aria-label={t("selectSaint", { name: r.name })} />
                     </TableCell>
                     <TableCell className="py-1.5">
                       <Thumb row={r} />
@@ -373,15 +372,15 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
                         {r.name}
                       </Link>
                       <div className="mt-0.5 flex flex-wrap items-center gap-1.5 text-xs text-muted-foreground">
-                        <span>{pluralize(r.characteristicCount, "característica", "características")}</span>
+                        <span>{tc("characteristics", { count: r.characteristicCount })}</span>
                         {r.reviewStatus === "needs_review" && (
                           <Tooltip>
                             <TooltipTrigger asChild>
                               <span className="inline-flex items-center gap-1 rounded border border-warning/40 bg-warning/10 px-1.5 py-px text-[11px] text-warning-foreground">
-                                <CircleAlert className="size-3" aria-hidden /> Revisión pendiente
+                                <CircleAlert className="size-3" aria-hidden /> {t("review.badge")}
                               </span>
                             </TooltipTrigger>
-                            <TooltipContent>Los datos históricos aún no se han verificado.</TooltipContent>
+                            <TooltipContent>{t("review.badgeTooltip")}</TooltipContent>
                           </Tooltip>
                         )}
                       </div>
@@ -401,26 +400,26 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-1">
                         <Button variant="outline" size="sm" asChild>
-                          <Link href={`/santos/${encodeURIComponent(r.id)}`} aria-label={`Editar ${r.name}`}>
-                            <Pencil aria-hidden /> Editar
+                          <Link href={`/santos/${encodeURIComponent(r.id)}`} aria-label={t("editSaint", { name: r.name })}>
+                            <Pencil aria-hidden /> {tc("edit")}
                           </Link>
                         </Button>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon-sm" aria-label={`Más acciones para ${r.name}`}>
+                            <Button variant="ghost" size="icon-sm" aria-label={tc("moreActionsFor", { name: r.name })}>
                               <MoreHorizontal aria-hidden />
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end">
                             <DropdownMenuItem onSelect={() => router.push(`/crear-fichas?ids=${encodeURIComponent(r.id)}`)}>
-                              <Printer aria-hidden /> Crear ficha
+                              <Printer aria-hidden /> {tc("printWorksheet")}
                             </DropdownMenuItem>
                             <DropdownMenuItem onSelect={() => duplicate(r)}>
-                              <Copy aria-hidden /> Duplicar
+                              <Copy aria-hidden /> {tc("duplicate")}
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem variant="destructive" onSelect={() => setToDelete(r)}>
-                              <Trash2 aria-hidden /> Eliminar…
+                              <Trash2 aria-hidden /> {tc("deleteEllipsis")}
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -434,46 +433,44 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
         </div>
       )}
       <p className="mt-3 text-xs text-muted-foreground">
-        Mostrando {pluralize(filtered.length, "santo", "santos")} de {rows.length}.
+        {t("showing", { count: filtered.length, total: rows.length })}
       </p>
 
       <ConfirmDialog
         open={confirmReviewed}
         onOpenChange={setConfirmReviewed}
-        title={`¿Marcar ${pluralize(selectedPending, "santo", "santos")} como revisado${selectedPending === 1 ? "" : "s"}?`}
+        title={t("review.confirmTitle", { count: selectedPending })}
         description={
           <>
-            <p>Confirma que comprobaste sus datos históricos (fechas, edad, país y características) con una fuente confiable.</p>
-            <p>Puedes volver a marcarlos como pendientes en cualquier momento.</p>
+            <p>{t("review.confirmBody")}</p>
+            <p>{t("review.confirmUndo")}</p>
           </>
         }
-        confirmLabel="Marcar como revisados"
+        confirmLabel={t("review.markReviewed")}
         onConfirm={() => bulkSetReview("reviewed")}
       />
 
       <NameDialog
         open={newCollectionOpen}
         onOpenChange={setNewCollectionOpen}
-        title="Nueva colección"
-        description={`Se creará con ${pluralize(selected.length, "santo seleccionado", "santos seleccionados")}.`}
-        submitLabel="Crear colección"
+        title={t("newCollection")}
+        description={t("newCollectionDescription", { count: selected.length })}
+        submitLabel={t("createCollection")}
         onSubmit={createCollectionFromSelection}
       />
 
       <ConfirmDialog
         open={!!toDelete}
         onOpenChange={(o) => !o && setToDelete(null)}
-        title={`¿Eliminar a ${toDelete?.name ?? ""}?`}
+        title={t("delete.title", { name: toDelete?.name ?? "" })}
         description={
           <>
-            <p>Se borrarán sus características y su retrato (si ningún otro santo lo usa).</p>
-            {toDelete && toDelete.collectionIds.length > 0 && (
-              <p>También se quitará de {pluralize(toDelete.collectionIds.length, "colección", "colecciones")}.</p>
-            )}
-            <p className="font-medium text-foreground">Esta acción no se puede deshacer. Considera descargar un respaldo antes.</p>
+            <p>{t("delete.body")}</p>
+            {toDelete && toDelete.collectionIds.length > 0 && <p>{t("delete.collections", { count: toDelete.collectionIds.length })}</p>}
+            <p className="font-medium text-foreground">{t("delete.warning")}</p>
           </>
         }
-        confirmLabel="Eliminar"
+        confirmLabel={tc("delete")}
         destructive
         onConfirm={confirmDelete}
       />
@@ -482,6 +479,7 @@ export function SaintLibrary({ rows, collections, seedAvailable }: Props) {
 }
 
 function Thumb({ row }: { row: LibraryRow }) {
+  const t = useTranslations("library");
   if (row.thumb) {
     // eslint-disable-next-line @next/next/no-img-element -- local thumbnail route
     return <img src={row.thumb} alt="" className="h-12 w-9 rounded-sm border object-cover" loading="lazy" />;
@@ -489,7 +487,7 @@ function Thumb({ row }: { row: LibraryRow }) {
   return (
     <div
       className="grid h-12 w-9 place-items-center rounded-sm border border-dashed text-muted-foreground"
-      title={row.hasMissingPortrait ? "Falta el archivo del retrato" : "Sin retrato"}
+      title={row.hasMissingPortrait ? t("portraitMissing") : t("noPortrait")}
     >
       {row.hasMissingPortrait ? <ImageOff className="size-3.5" aria-hidden /> : null}
     </div>
@@ -497,21 +495,21 @@ function Thumb({ row }: { row: LibraryRow }) {
 }
 
 function EmptyLibrary({ seedAvailable }: { seedAvailable: boolean }) {
+  const t = useTranslations("library.empty");
+  const tl = useTranslations("library");
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col items-center px-6 py-20 text-center">
-      <h1 className="font-heading text-3xl font-semibold tracking-tight">Tu biblioteca está vacía</h1>
-      <p className="mt-3 text-muted-foreground">
-        Importa tu archivo de santos en formato JSON para empezar, o agrega un santo a mano. Todo se guarda en este equipo.
-      </p>
+      <h1 className="font-heading text-3xl font-semibold tracking-tight">{t("title")}</h1>
+      <p className="mt-3 text-muted-foreground">{t("description")}</p>
       {seedAvailable && (
         <div className="mt-8 w-full rounded-lg border bg-muted/30 p-5 text-left">
-          <p className="font-medium">Se encontró santos_studio_43_santos.json</p>
+          <p className="font-medium">{t("seedFound")}</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Está en la carpeta <code className="rounded bg-muted px-1">seed/</code>. Revisa la vista previa antes de importar.
+            {t.rich("seedLocation", { code: (chunks) => <code className="rounded bg-muted px-1">{chunks}</code> })}
           </p>
           <Button className="mt-4" asChild>
             <Link href="/configuracion/importar?seed=1">
-              <FileDown aria-hidden /> Revisar e importar
+              <FileDown aria-hidden /> {t("reviewAndImport")}
             </Link>
           </Button>
         </div>
@@ -521,13 +519,13 @@ function EmptyLibrary({ seedAvailable }: { seedAvailable: boolean }) {
           seedAvailable={seedAvailable}
           trigger={
             <Button variant={seedAvailable ? "outline" : "default"}>
-              <Upload aria-hidden /> Importar JSON
+              <Upload aria-hidden /> {tl("importJson")}
             </Button>
           }
         />
         <Button variant="outline" asChild>
           <Link href="/santos/nuevo">
-            <Plus aria-hidden /> Agregar santo
+            <Plus aria-hidden /> {t("addSaint")}
           </Link>
         </Button>
       </div>

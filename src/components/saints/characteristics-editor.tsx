@@ -4,26 +4,17 @@ import { useId } from "react";
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors, type DragEndEvent } from "@dnd-kit/core";
 import { SortableContext, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useTranslations } from "next-intl";
 import { ArrowDown, ArrowUp, GripVertical, Plus, Trash2 } from "lucide-react";
 import { Controller, useFieldArray, useWatch, type Control, type FieldErrors, type UseFormRegister } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { CHARACTERISTIC_TYPES, type CharacteristicType } from "@/db/schema";
+import { CHARACTERISTIC_TYPES } from "@/db/schema";
 import { cn } from "@/lib/utils";
 import type { SaintFormValues } from "./saint-form";
 
-export const TYPE_LABELS: Record<CharacteristicType, string> = {
-  biography: "Biografía",
-  virtue: "Virtud",
-  miracle: "Milagro (atribuido)",
-  patronage: "Patronazgo",
-  martyrdom: "Martirio",
-  canonization: "Canonización",
-  legacy: "Legado",
-  other: "Otro",
-};
-
+// Characteristic text is Spanish content, so the attribution check stays Spanish in every interface language.
 const ATTRIBUTION = /(seg[uú]n|tradici[oó]n|se (le |les )?atribuye|atribuid|testimoni|se cuenta|cuentan|relat|refier|habr[ií]a|afirm)/i;
 
 type Props = {
@@ -41,6 +32,7 @@ export function CharacteristicsEditor({ control, register, errors }: Props) {
   const values = useWatch({ control, name: "characteristics" });
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 4 } }), useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }));
   const dndId = useId();
+  const t = useTranslations("editor.characteristics");
 
   const onDragEnd = (e: DragEndEvent) => {
     if (!e.over || e.active.id === e.over.id) return;
@@ -54,12 +46,10 @@ export function CharacteristicsEditor({ control, register, errors }: Props) {
     <div className="space-y-3">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <p className={cn("text-xs", n < 5 || n > 8 ? "text-warning-foreground" : "text-muted-foreground")} aria-live="polite">
-          {n} {n === 1 ? "característica" : "características"} · se recomiendan entre 5 y 8 para una ficha clara (no es obligatorio).
+          {t("count", { count: n })}
         </p>
       </div>
-      <p className="text-xs text-muted-foreground">
-        Al describir milagros o experiencias espirituales, conserva la atribución («según testimonios», «la tradición cuenta», «se le atribuye»).
-      </p>
+      <p className="text-xs text-muted-foreground">{t("attributionTip")}</p>
       <DndContext id={dndId} sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
         <SortableContext items={fields.map((f) => f.key)} strategy={verticalListSortingStrategy}>
           <ol className="space-y-2">
@@ -75,7 +65,7 @@ export function CharacteristicsEditor({ control, register, errors }: Props) {
                           type="button"
                           {...handle}
                           className="cursor-grab rounded p-1 text-muted-foreground hover:bg-muted active:cursor-grabbing"
-                          aria-label={`Arrastrar característica ${index + 1}`}
+                          aria-label={t("drag", { n: index + 1 })}
                         >
                           <GripVertical className="size-4" aria-hidden />
                         </button>
@@ -86,16 +76,14 @@ export function CharacteristicsEditor({ control, register, errors }: Props) {
                           {...register(`characteristics.${index}.text`)}
                           rows={2}
                           className="min-h-[3.25rem] resize-y text-sm"
-                          aria-label={`Texto de la característica ${index + 1}`}
+                          aria-label={t("text", { n: index + 1 })}
                           aria-invalid={!!errors.characteristics?.[index]?.text}
                         />
                         {errors.characteristics?.[index]?.text && (
                           <p className="text-xs text-destructive">{errors.characteristics[index]?.text?.message}</p>
                         )}
                         {missingAttribution && (
-                          <p className="text-xs text-warning-foreground">
-                            Este texto describe un milagro sin atribución. Considera indicar la fuente (p. ej. «según testimonios»).
-                          </p>
+                          <p className="text-xs text-warning-foreground">{t("missingAttribution")}</p>
                         )}
                         <div className="flex flex-wrap items-center gap-1">
                           <Controller
@@ -103,13 +91,13 @@ export function CharacteristicsEditor({ control, register, errors }: Props) {
                             name={`characteristics.${index}.type`}
                             render={({ field: f }) => (
                               <Select value={f.value} onValueChange={f.onChange}>
-                                <SelectTrigger size="sm" className="h-7 w-[180px] text-xs" aria-label={`Tipo de la característica ${index + 1}`}>
+                                <SelectTrigger size="sm" className="h-7 w-[180px] text-xs" aria-label={t("type", { n: index + 1 })}>
                                   <SelectValue />
                                 </SelectTrigger>
                                 <SelectContent>
-                                  {CHARACTERISTIC_TYPES.map((t) => (
-                                    <SelectItem key={t} value={t}>
-                                      {TYPE_LABELS[t]}
+                                  {CHARACTERISTIC_TYPES.map((type) => (
+                                    <SelectItem key={type} value={type}>
+                                      {t(`types.${type}`)}
                                     </SelectItem>
                                   ))}
                                 </SelectContent>
@@ -117,13 +105,13 @@ export function CharacteristicsEditor({ control, register, errors }: Props) {
                             )}
                           />
                           <div className="ml-auto flex gap-0.5">
-                            <Button type="button" variant="ghost" size="icon-xs" disabled={index === 0} onClick={() => move(index, index - 1)} aria-label={`Subir característica ${index + 1}`}>
+                            <Button type="button" variant="ghost" size="icon-xs" disabled={index === 0} onClick={() => move(index, index - 1)} aria-label={t("moveUp", { n: index + 1 })}>
                               <ArrowUp aria-hidden />
                             </Button>
-                            <Button type="button" variant="ghost" size="icon-xs" disabled={index === n - 1} onClick={() => move(index, index + 1)} aria-label={`Bajar característica ${index + 1}`}>
+                            <Button type="button" variant="ghost" size="icon-xs" disabled={index === n - 1} onClick={() => move(index, index + 1)} aria-label={t("moveDown", { n: index + 1 })}>
                               <ArrowDown aria-hidden />
                             </Button>
-                            <Button type="button" variant="ghost" size="icon-xs" onClick={() => remove(index)} aria-label={`Eliminar característica ${index + 1}`} className="text-destructive">
+                            <Button type="button" variant="ghost" size="icon-xs" onClick={() => remove(index)} aria-label={t("remove", { n: index + 1 })} className="text-destructive">
                               <Trash2 aria-hidden />
                             </Button>
                           </div>
@@ -138,7 +126,7 @@ export function CharacteristicsEditor({ control, register, errors }: Props) {
         </SortableContext>
       </DndContext>
       <Button type="button" variant="outline" size="sm" onClick={() => append({ id: newCharacteristicId(), text: "", type: "biography" })}>
-        <Plus aria-hidden /> Añadir característica
+        <Plus aria-hidden /> {t("add")}
       </Button>
     </div>
   );

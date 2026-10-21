@@ -2,14 +2,14 @@ import { eq } from "drizzle-orm";
 import sharp from "sharp";
 import { getDb, type Db } from "@/db/client";
 import { collectionExists, getCollection, insertCollection, writeMembers } from "@/db/repositories/collections";
-import { getSetting, setSetting, SETTING_KEYS } from "@/db/repositories/settings";
+import { getSetting, getUiLocale, setSetting, SETTING_KEYS } from "@/db/repositories/settings";
 import { insertSaint, nextSortOrder, nowIso, saintExists, scalarColumns, writeSaintChildren, type SaintData } from "@/db/repositories/saints";
 import { collections, portraits, saints } from "@/db/schema";
 import { AppError } from "@/lib/errors";
 import { cleanupOrphanPortraits } from "@/lib/images/portrait-service";
 import { isValidPortraitPath, masterFilename, portraitFileExists, resolveServeFile, thumbFilename } from "@/lib/images/storage";
 import type { LibrarySaint } from "@/lib/schema/library";
-import { pluralize } from "@/lib/text";
+import { translator } from "@/i18n/translator";
 import { validateLibrary, type ImportMode, type ImportReport } from "./validate";
 
 export type ImportResult = {
@@ -79,10 +79,10 @@ export async function importLibrary(
 ): Promise<ImportResult> {
   const { report, data } = validateLibrary(raw, mode, { availablePortraits: opts.availablePortraits }, db);
   if (!data || !report.ok) {
-    throw new AppError("El archivo tiene errores y no se importó nada.", 422, report);
+    throw new AppError("importHasErrors", { status: 422, details: report });
   }
   if (mode === "replace" && !opts.confirmReplace) {
-    throw new AppError("Reemplazar la biblioteca requiere confirmación explícita.", 400, report);
+    throw new AppError("replaceNeedsConfirmation", { details: report });
   }
 
   // Portrait files referenced by the file must already exist on disk (backup restore writes them first).
@@ -177,16 +177,13 @@ export async function importLibrary(
 
   const importedSaints = counts.saintsCreated + counts.saintsUpdated;
   const importedCollections = counts.collectionsCreated + counts.collectionsUpdated;
+  const t = translator(getUiLocale(db), "import.summary");
   const parts = [
-    `${pluralize(importedSaints, "santo importado", "santos importados")}`,
-    pluralize(counts.characteristics, "característica", "características"),
-    pluralize(importedCollections, "colección", "colecciones"),
+    t("saintsImported", { count: importedSaints }),
+    t("characteristics", { count: counts.characteristics }),
+    t("collections", { count: importedCollections }),
   ];
-  if (counts.membershipsAdded) {
-    parts.push(
-      `${pluralize(counts.membershipsAdded, "santo añadido", "santos añadidos")} a ${pluralize(counts.collectionsMerged, "colección existente", "colecciones existentes")}`,
-    );
-  }
-  if (counts.saintsSkipped) parts.push(`${pluralize(counts.saintsSkipped, "santo existente saltado", "santos existentes saltados")}`);
+  if (counts.membershipsAdded) parts.push(t("membershipsAdded", { count: counts.membershipsAdded, collections: counts.collectionsMerged }));
+  if (counts.saintsSkipped) parts.push(t("saintsSkipped", { count: counts.saintsSkipped }));
   return { report, counts, summary: parts.join(" · ") };
 }

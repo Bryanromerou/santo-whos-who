@@ -15,7 +15,13 @@ const FOUR = [JOSE.id, CARLO.id, library.saints[0].id, library.saints[2].id];
 
 test.describe.configure({ mode: "serial" });
 
-test.beforeAll(() => fs.mkdirSync(OUT, { recursive: true }));
+test.beforeAll(async ({ playwright }, testInfo) => {
+  fs.mkdirSync(OUT, { recursive: true });
+  // The interface defaults to English; these tests select elements by their Spanish text.
+  const api = await playwright.request.newContext({ baseURL: testInfo.project.use.baseURL });
+  expect((await api.put("/api/settings/locale", { data: { locale: "es" } })).ok()).toBe(true);
+  await api.dispose();
+});
 
 function pdfPageCount(buf: Buffer): number {
   return (buf.toString("latin1").match(/\/Type\s*\/Page[^s]/g) ?? []).length;
@@ -366,4 +372,71 @@ test("import modal: shows the JSON format, adds a second file's saints and merge
 
   const after = await libraryExport(page);
   expect(after.collections.find((c: { id: string }) => c.id === youth.id).saintIds).toEqual([...youth.saintIds, "santo-extra-uno", "santo-extra-dos"]);
+});
+
+test("interface language: English UI, server errors in English, printed worksheet stays Spanish, then back to Spanish", async ({ page }) => {
+  // Switch from Configuración.
+  await page.goto("/configuracion");
+  await page.waitForLoadState("networkidle");
+  await page.getByTestId("locale-select").click();
+  await page.getByRole("option", { name: "English" }).click();
+  await expect(page.getByRole("heading", { level: 1, name: "Settings" })).toBeVisible();
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  expect((await (await page.request.get("/api/settings/locale")).json()).locale).toBe("en");
+
+  // Navigation and library.
+  const nav = page.getByRole("navigation", { name: "Main" });
+  for (const name of ["Saints Library", "Create Worksheets", "Collections", "Settings"]) await expect(nav.getByRole("link", { name })).toBeVisible();
+  await page.goto("/santos");
+  await expect(page.getByRole("heading", { level: 1, name: "Saints Library" })).toBeVisible();
+  await expect(page.getByText(/^\d+ saints · \d+ awaiting historical review$/)).toBeVisible();
+  await expect(page.getByRole("button", { name: "Import JSON" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "San José Sánchez del Río", exact: true })).toBeVisible(); // content unchanged
+
+  // Builder buttons are English; the worksheet itself stays Spanish.
+  await page.goto(`/crear-fichas?ids=${FOUR.join(",")}`);
+  await expect(page.getByTestId("page-count")).toContainText("2 pages");
+  await expect(page.getByRole("button", { name: "Print" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Download PDF" })).toBeVisible();
+  await expect(page.getByTestId("fit-ok")).toContainText("All text fits");
+  const card = page.locator(".ws-card").first();
+  for (const label of ["Año de nacimiento", "Edad al morir", "País de origen", "Características"]) await expect(card).toContainText(label);
+
+  // Print view (used by «Imprimir» and the PDF): Spanish labels and page numbers.
+  await page.waitForTimeout(800); // builder autosave (debounced)
+  await page.goto("/imprimir");
+  await page.waitForSelector("html[data-ws-ready='true']");
+  await expect(page.locator(".ws-page-number").first()).toHaveText("Página 1 de 2");
+  await expect(page.locator(".ws-doc")).toHaveAttribute("lang", "es");
+  await expect(page.locator(".ws-card").first()).toContainText("País de origen");
+  await expect(page.locator(".ws-portrait-empty").first()).toHaveText("Espacio para foto");
+  const draft = (await (await page.request.get("/api/worksheet")).json()).config;
+  const pdf = await page.request.post("/api/pdf", { data: draft });
+  expect(pdf.status()).toBe(200);
+  expect((await pdf.body()).subarray(0, 5).toString()).toBe("%PDF-");
+
+  // A server error shown in a toast is in English: save after the saint changed elsewhere.
+  await page.goto(`/santos/${CARLO.id}`);
+  await page.waitForLoadState("networkidle");
+  const saint = (await (await page.request.get(`/api/saints/${CARLO.id}`)).json()).saint;
+  expect((await page.request.put(`/api/saints/${CARLO.id}`, { data: { ...saint, expectedUpdatedAt: saint.updatedAt } })).ok()).toBe(true);
+  await page.getByLabel("Country of origin").fill(`${saint.country} (test)`);
+  await page.getByRole("button", { name: "Save", exact: true }).click();
+  await expect(page.getByText("Couldn't save")).toBeVisible();
+  await expect(page.getByText(/This saint was changed in another window/).first()).toBeVisible();
+  // Server-side validation messages follow the language too.
+  const bad = await page.request.post("/api/collections", { data: { name: " " } });
+  expect((await bad.json()).error).toMatch(/^Invalid data: name: Name is required/);
+  await page.getByRole("button", { name: "Discard" }).click();
+  await expect(page.getByText("Unsaved changes")).toBeHidden();
+
+  // Back to Spanish.
+  await page.goto("/configuracion");
+  await page.waitForLoadState("networkidle");
+  await page.getByTestId("locale-select").click();
+  await page.getByRole("option", { name: "Español" }).click();
+  await expect(page.getByRole("heading", { level: 1, name: "Configuración" })).toBeVisible();
+  await expect(page.locator("html")).toHaveAttribute("lang", "es");
+  await page.goto("/santos");
+  await expect(page.getByRole("heading", { level: 1, name: "Biblioteca de Santos" })).toBeVisible();
 });

@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { WorksheetBuilder } from "@/components/worksheets/worksheet-builder";
 import { listCollections } from "@/db/repositories/collections";
 import { listSaints } from "@/db/repositories/saints";
 import { getWorksheetDraft, worksheetSaintMap } from "@/lib/worksheet/server";
 
-export const metadata: Metadata = { title: "Crear Fichas" };
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: (await getTranslations("meta"))("builder") };
+}
 
 export default async function CrearFichasPage({ searchParams }: PageProps<"/crear-fichas">) {
   const sp = await searchParams;

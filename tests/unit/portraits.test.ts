@@ -43,6 +43,7 @@ describe("image validation", () => {
   });
 
   it("rejects disguised, truncated, empty and oversized files", async () => {
+    freshDb(); // error messages follow the interface language stored in the DB (Spanish here)
     await expect(processPortrait(Buffer.from("not an image at all"), 10 * MB)).rejects.toThrow(/Formato no admitido/);
     const png = await makeImage("png");
     await expect(processPortrait(png.subarray(0, 40), 10 * MB)).rejects.toThrow();
